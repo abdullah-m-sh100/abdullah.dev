@@ -1,0 +1,14 @@
+{
+  "hero": {
+    "eyebrow": "Services",
+    "title": "Front-end development services, scoped around outcomes",
+    "description": "From a single interface layer to a full React or Next.js rebuild — each engagement is scoped around what the product actually needs, not a fixed package."
+  },
+  "listing": {
+    "coreEyebrow": "Core services",
+    "coreTitle": "What I focus on",
+    "supportingEyebrow": "Also available",
+    "supportingTitle": "Additional expertise",
+    "supportingDescription": "Narrower engagements that often come up alongside the services above."
+  }
+}

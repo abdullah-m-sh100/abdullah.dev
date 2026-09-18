@@ -1,0 +1,43 @@
+{
+  "hero": {
+    "technologiesLabel": "Core stack"
+  },
+  "expertise": {
+    "title": "Where I go deep",
+    "description": "Grouped by what it does for the product, not by a self-assigned score."
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "Front-end engineering with a product mindset",
+    "action": "More about how I work"
+  },
+  "stats": {
+    "title": "Experience at a glance"
+  },
+  "services": {
+    "eyebrow": "Services",
+    "title": "What I can build for you",
+    "description": "From a single interface to a complete front-end rebuild, I deliver the right solution based on the outcome you want to achieve.",
+    "action": "All services"
+  },
+  "featuredWork": {
+    "eyebrow": "Selected work",
+    "title": "Case studies",
+    "description": "A closer look at the problem, the decision, and what changed as a result.",
+    "action": "All work",
+    "badge": "Featured",
+    "caseStudy": "Read the case study"
+  },
+  "latestWork": {
+    "eyebrow": "Also recent",
+    "title": "More from the workbench",
+    "description": "Shorter engagements and smaller builds."
+  },
+  "certificates": {
+    "eyebrow": "Credentials",
+    "title": "Certificates and programs",
+    "description": "Structured training that backs up the day-to-day work.",
+    "action": "All certificates",
+    "issued": "Issued"
+  }
+}

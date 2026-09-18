@@ -1,0 +1,40 @@
+{
+  "brand": {
+    "name": "عبد الله",
+    "tagline": "من الفكرة إلى الواجهة."
+  },
+  "actions": {
+    "viewWork": "اطّلع على أعمالي",
+    "contactMe": "تواصل معي",
+    "readMore": "اقرأ المزيد",
+    "viewAll": "عرض الكل",
+    "viewProject": "عرض المشروع",
+    "viewCertificate": "عرض الشهادة",
+    "openPdf": "فتح ملف PDF",
+    "backHome": "العودة إلى الرئيسية",
+    "skipToContent": "تخطَّ إلى المحتوى",
+    "retry": "إعادة المحاولة"
+  },
+  "theme": {
+    "label": "المظهر",
+    "toggle": "تبديل المظهر",
+    "light": "فاتح",
+    "dark": "داكن",
+    "system": "النظام"
+  },
+  "language": {
+    "label": "اللغة",
+    "switchTo": "التبديل إلى {language}"
+  },
+  "states": {
+    "emptyTitle": "لا يوجد محتوى بعد",
+    "emptyDescription": "سيتم تحديث هذا القسم قريبًا.",
+    "errorTitle": "حدث خطأ ما",
+    "errorDescription": "يرجى المحاولة مرة أخرى بعد قليل.",
+    "loading": "جارٍ التحميل"
+  },
+  "labels": {
+    "technologies": "التقنيات المستخدمة",
+    "opensNewTab": "يفتح في تبويب جديد"
+  }
+}

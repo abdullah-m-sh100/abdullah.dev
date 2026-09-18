@@ -1,0 +1,265 @@
+/**
+ * Design tokens.
+ *
+ * Three layers:
+ *   1. Brand tokens    (--brand-*)   — the fixed identity palette. Never themed.
+ *   2. Semantic tokens (--background, --primary, …) — what components consume.
+ *   3. System tokens   (radius, spacing, motion, focus) — shared structure.
+ *
+ * Components must use semantic tokens. Raw brand values belong here and in
+ * decorative gradients only, so re-theming stays a one-file change.
+ */
+
+:root {
+  /* ---------------------------------------------------------------- brand */
+  --brand-navy: #0f172a;
+  --brand-blue: #3b82f6;
+  --brand-teal: #14b8a6;
+  --brand-gray: #e5e7eb;
+  --brand-off-white: #f8fafc;
+
+  /* ------------------------------------------------------ surfaces (light) */
+  /*
+   * Off White reads as the page; white is reserved for lifted surfaces, so
+   * the interface separates by surface rather than by shadow alone.
+   *
+   * The page sits a few percent below the brand Off White (#F8FAFC) on
+   * purpose. At the brand value a white card is only ~2% lighter than the page
+   * behind it, which is under the threshold where an edge reads as an edge, and
+   * the whole theme flattens. Stepping the page down restores that separation
+   * while staying unmistakably Off White; #F8FAFC lives on as the scrolled
+   * header fill and the top of the card gradient.
+   */
+  --background: #f4f7fb;
+  --foreground: #0f172a;
+  --surface: #ffffff;
+  --surface-muted: #e9eff7;
+  --surface-elevated: #ffffff;
+  --surface-sunken: #dfe7f1;
+  --border: #dbe3ee;
+  --border-strong: #bccadb;
+  --muted-foreground: #475569;
+  /* Darkened alongside the page. The old #64748b falls to 4.43:1 on the new
+     background, and this clears 4.5:1 on all four light surfaces — including
+     the sunken band, which is the darkest thing subtle text ever sits on. */
+  --subtle-foreground: #566577;
+
+  /*
+   * Vertical sheen for card surfaces. A flat fill reads as paper; a 1–2% top
+   * to bottom fall gives the surface a light direction that agrees with the
+   * shadows below. `none` in dark, where the surface steps already carry
+   * elevation and a sheen would only muddy them.
+   */
+  --surface-gradient: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  /*
+   * One soft brand wash at the top of every page, faded out well before the
+   * fold ends so long pages never band. This is the only site-wide gradient.
+   */
+  --page-gradient: linear-gradient(
+    180deg,
+    rgb(59 130 246 / 0.05) 0%,
+    rgb(20 184 166 / 0.022) 340px,
+    transparent 820px
+  );
+
+  /* ----------------------------------------------------------- interactive */
+  /*
+   * `--primary` is the accessible CTA fill: brand blue #3B82F6 against white
+   * text reaches only 3.95:1, below the 4.5:1 that WCAG 2.2 AA requires for
+   * button labels, so the fill uses blue-600 and brand blue lives on as
+   * `--accent-blue` for rings, gradients and decoration.
+   */
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-active: #1e40af;
+  --primary-foreground: #ffffff;
+  --primary-subtle: #eff6ff;
+
+  --secondary: #0f766e;
+  --secondary-hover: #115e59;
+  --secondary-foreground: #ffffff;
+  --secondary-subtle: #f0fdfa;
+
+  --accent-blue: #3b82f6;
+  --accent-teal: #14b8a6;
+
+  --ring: #3b82f6;
+  --overlay: rgb(15 23 42 / 0.45);
+
+  /* ---------------------------------------------------------------- status */
+  --success: #15803d;
+  --danger: #b91c1c;
+  --warning: #b45309;
+
+  /* -------------------------------------------------------- decoration only */
+  /* Used by the orbit, grid and glow layers. Never for text or borders. */
+  /* Raised from near-invisible: at 0.055 on the old page the grid registered
+     as noise rather than structure. */
+  --grid-line: rgb(15 23 42 / 0.072);
+  --orbit-stroke: rgb(59 130 246 / 0.32);
+  --orbit-stroke-soft: rgb(20 184 166 / 0.24);
+  --glow-blue: rgb(59 130 246 / 0.2);
+  --glow-teal: rgb(20 184 166 / 0.17);
+  /* Translucent header fill for the scrolled state — brand Off White. */
+  --header-surface: rgb(248 250 252 / 0.85);
+
+  /* --------------------------------------------------------------- shadows */
+  /*
+   * Two layers each: a tight contact shadow that pins the element to the page,
+   * and a wide ambient one that gives it height. A single mid-blur layer — the
+   * previous approach — reads as a smudge at any strength and is why the light
+   * theme looked printed rather than layered.
+   *
+   * Tinted with the navy foreground rather than neutral black, so shadows stay
+   * in the same cool family as the surfaces they fall on.
+   */
+  --shadow-subtle: 0 1px 1px rgb(15 23 42 / 0.04), 0 2px 4px -2px rgb(15 23 42 / 0.05);
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.06), 0 10px 24px -10px rgb(15 23 42 / 0.16);
+  --shadow-raised: 0 2px 6px rgb(15 23 42 / 0.07), 0 20px 44px -18px rgb(15 23 42 / 0.24);
+  --shadow-header: 0 1px 0 0 var(--border), 0 10px 28px -18px rgb(15 23 42 / 0.3);
+  /*
+   * Resting elevation for surfaces that previously had none. Light only: in
+   * dark it is `none`, so every card there keeps the exact box-shadow it has
+   * today and the dark theme is untouched.
+   */
+  --shadow-rest: 0 1px 2px rgb(15 23 42 / 0.05), 0 4px 10px -5px rgb(15 23 42 / 0.08);
+  --shadow-elevated: 0 1px 2px rgb(15 23 42 / 0.06), 0 8px 18px -8px rgb(15 23 42 / 0.13);
+
+  /* ---------------------------------------------- radii (18px base per brand) */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* --------------------------------------------- spacing (8pt grid, in rem) */
+  --space-1: 0.5rem; /* 8  */
+  --space-2: 1rem; /* 16 */
+  --space-3: 1.5rem; /* 24 */
+  --space-4: 2rem; /* 32 */
+  --space-5: 2.5rem; /* 40 */
+  --space-6: 3rem; /* 48 */
+  --space-8: 4rem; /* 64 */
+  --space-10: 5rem; /* 80 */
+  --space-12: 6rem; /* 96 */
+  --space-15: 7.5rem; /* 120 */
+
+  /* ---------------------------------------------------------------- motion */
+  --duration-fast: 180ms;
+  --duration-base: 240ms;
+  --duration-slow: 320ms;
+  /* Decorative reveals run longer than interaction feedback on purpose. */
+  --duration-reveal: 620ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --stagger-step: 70ms;
+  /* Flipped under [dir='rtl'] so "start/end" motion follows reading order. */
+  --reveal-dir: 1;
+
+  /* ----------------------------------------------------------------- focus */
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+
+  /* ------------------------------------------------------------- structure */
+  --container-gutter: 1.5rem;
+  --header-height: 4.5rem;
+
+  /* --------------------------------------------- typographic rhythm (Latin) */
+  --tracking-display: -0.035em;
+  --tracking-heading: -0.022em;
+  --tracking-label: 0.09em;
+  --leading-display: 1.04;
+  --leading-heading: 1.16;
+  --leading-body: 1.7;
+}
+
+/*
+ * Arabic rhythm.
+ *
+ * Noto Sans Arabic needs more leading and must never receive Latin-style
+ * letter-spacing — tracking a connected script breaks the joins. These
+ * variables feed the type scale, so every heading utility adapts by language
+ * without a single duplicated font-size.
+ */
+html[lang='ar'] {
+  --tracking-display: 0;
+  --tracking-heading: 0;
+  --tracking-label: 0;
+  --leading-display: 1.28;
+  --leading-heading: 1.45;
+  --leading-body: 1.85;
+}
+
+[dir='rtl'] {
+  --reveal-dir: -1;
+}
+
+.dark {
+  /* ------------------------------------------------------- surfaces (dark) */
+  /* Deep Navy is the base; each level lifts by a measured amount so elevation
+     reads without glow or heavy shadow. */
+  --background: #07101f;
+  --foreground: #f8fafc;
+  --surface: #0f172a;
+  --surface-muted: #162033;
+  --surface-elevated: #1b2740;
+  --surface-sunken: #050c18;
+  --border: #263348;
+  --border-strong: #33425c;
+  --muted-foreground: #94a3b8;
+  --subtle-foreground: #7d8ca5;
+
+  /*
+   * On dark surfaces brand blue is the fill and near-navy is the label
+   * (4.68:1), which keeps the identity colour prominent without losing AA.
+   */
+  --primary: #3b82f6;
+  --primary-hover: #60a5fa;
+  --primary-active: #93c5fd;
+  --primary-foreground: #06101f;
+  --primary-subtle: #12213b;
+
+  --secondary: #14b8a6;
+  --secondary-hover: #2dd4bf;
+  --secondary-foreground: #052e2b;
+  --secondary-subtle: #0e2b2b;
+
+  --accent-blue: #60a5fa;
+  --accent-teal: #2dd4bf;
+
+  --ring: #60a5fa;
+  --overlay: rgb(2 6 16 / 0.66);
+
+  --success: #4ade80;
+  --danger: #f87171;
+  --warning: #fbbf24;
+
+  /* Luminous, not neon: the decorative alphas stay low in dark mode. */
+  --grid-line: rgb(148 163 184 / 0.07);
+  --orbit-stroke: rgb(96 165 250 / 0.3);
+  --orbit-stroke-soft: rgb(45 212 191 / 0.22);
+  --glow-blue: rgb(59 130 246 / 0.2);
+  --glow-teal: rgb(20 184 166 / 0.16);
+  --header-surface: rgb(7 16 31 / 0.78);
+
+  --shadow-subtle: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-card: 0 4px 16px -6px rgb(0 0 0 / 0.5);
+  --shadow-raised: 0 12px 32px -12px rgb(0 0 0 / 0.6);
+  --shadow-header: 0 1px 0 0 var(--border), 0 8px 24px -16px rgb(0 0 0 / 0.6);
+
+  /*
+   * The light theme's definition pass introduced these three. Dark already
+   * separates by surface step, so all three are neutralized here and the dark
+   * theme renders exactly as it did before that pass. Anything added to the
+   * light block above must be answered here.
+   */
+  /* A transparent shadow, not `none`: Tailwind composes box-shadow as a comma
+     list, and a bare `none` inside that list is invalid CSS that only lands on
+     `none` by way of the declaration being dropped. This paints nothing and
+     stays valid. */
+  --shadow-rest: 0 0 #0000;
+  /* Exactly the `--shadow-subtle` the elevated card carried before. */
+  --shadow-elevated: 0 1px 2px rgb(0 0 0 / 0.4);
+  --surface-gradient: none;
+  --page-gradient: none;
+}

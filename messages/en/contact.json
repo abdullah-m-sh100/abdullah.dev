@@ -1,0 +1,37 @@
+{
+  "hero": {
+    "eyebrow": "Contact",
+    "title": "Let's build something useful",
+    "description": "Tell me about the website, front-end rebuild or Next.js product you are planning. I reply within one business day with a clear, scoped plan."
+  },
+  "form": {
+    "title": "Send a message",
+    "fields": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "tooShort": "Must be at least {min, plural, one {# character} other {# characters}}.",
+      "tooLong": "Must be no more than {max, plural, one {# character} other {# characters}}.",
+      "invalidEmail": "Enter a valid email address."
+    },
+    "submit": "Send message",
+    "submitting": "Sending…",
+    "success": {
+      "title": "Message sent",
+      "description": "Thanks for reaching out — I usually reply within one business day."
+    },
+    "error": "Something went wrong on my end. Please try again, or email me directly.",
+    "rateLimited": "Too many messages were sent from here recently. Please try again later."
+  },
+  "details": {
+    "title": "Other ways to reach me",
+    "emailLabel": "Email",
+    "availabilityLabel": "Availability",
+    "locationLabel": "Location",
+    "socialLabel": "Find me online"
+  }
+}

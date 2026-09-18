@@ -1,0 +1,59 @@
+{
+  "hero": {
+    "eyebrow": "Selected work",
+    "title": "Front-end projects and case studies",
+    "description": "A closer look at what I have built with React.js and Next.js — the problem each project solved, the technical decisions behind it, and what shipped to production."
+  },
+  "listing": {
+    "countLabel": "{count, plural, one {# project} other {# projects}}"
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "work": "Work"
+  },
+  "caseStudy": {
+    "featuredBadge": "Featured",
+    "overview": {
+      "title": "Overview",
+      "factsTitle": "Project facts",
+      "category": "Category",
+      "year": "Year",
+      "technologies": "Technologies",
+      "links": "Links",
+      "liveLink": "View live project",
+      "githubLink": "View source on GitHub"
+    },
+    "challenge": {
+      "title": "The challenge"
+    },
+    "solution": {
+      "title": "The solution"
+    },
+    "technicalApproach": {
+      "title": "Technical approach"
+    },
+    "responsibilities": {
+      "title": "My responsibilities"
+    },
+    "results": {
+      "title": "Outcome"
+    },
+    "features": {
+      "title": "Key features",
+      "description": "What the finished interface actually does."
+    },
+    "gallery": {
+      "title": "Gallery"
+    },
+    "adjacent": {
+      "previous": "Previous project",
+      "next": "Next project"
+    },
+    "cta": {
+      "eyebrow": "Next step",
+      "title": "Have a similar idea?",
+      "description": "Tell me what you're building — I'll reply with a clear, scoped plan.",
+      "action": "Start a project"
+    }
+  }
+}

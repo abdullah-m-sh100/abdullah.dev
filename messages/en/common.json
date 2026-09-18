@@ -1,0 +1,40 @@
+{
+  "brand": {
+    "name": "Abdullah",
+    "tagline": "Ideas into Interfaces."
+  },
+  "actions": {
+    "viewWork": "View my work",
+    "contactMe": "Contact me",
+    "readMore": "Read more",
+    "viewAll": "View all",
+    "viewProject": "View project",
+    "viewCertificate": "View certificate",
+    "openPdf": "Open PDF",
+    "backHome": "Back to home",
+    "skipToContent": "Skip to content",
+    "retry": "Try again"
+  },
+  "theme": {
+    "label": "Theme",
+    "toggle": "Switch theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "language": {
+    "label": "Language",
+    "switchTo": "Switch to {language}"
+  },
+  "states": {
+    "emptyTitle": "Nothing here yet",
+    "emptyDescription": "This section will be updated soon.",
+    "errorTitle": "Something went wrong",
+    "errorDescription": "Please try again in a moment.",
+    "loading": "Loading"
+  },
+  "labels": {
+    "technologies": "Technologies used",
+    "opensNewTab": "opens in a new tab"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "hero": {
+    "eyebrow": "Credentials",
+    "title": "Certificates and continued learning",
+    "description": "Verified credentials and structured programs in front-end development, React and modern web fundamentals — kept current as the ecosystem changes."
+  },
+  "listing": {
+    "countLabel": "{count, plural, one {# certificate} other {# certificates}}"
+  },
+  "card": {
+    "credentialId": "Credential ID",
+    "expires": "Expires",
+    "doesNotExpire": "Does not expire"
+  }
+}

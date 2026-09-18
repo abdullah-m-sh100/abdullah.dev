@@ -1,0 +1,11 @@
+{
+  "notFound": {
+    "code": "404",
+    "title": "This page does not exist",
+    "description": "The link may be outdated, or the page may have moved."
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "builtWith": "Built with Next.js"
+  }
+}

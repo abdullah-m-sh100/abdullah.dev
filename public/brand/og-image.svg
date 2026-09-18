@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Abdullah — Front-End Developer">
+  <defs>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#14B8A6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0F172A"/>
+  <ellipse cx="960" cy="315" rx="330" ry="132" transform="rotate(-22 960 315)" fill="none" stroke="url(#accent)" stroke-width="3" opacity="0.5"/>
+  <ellipse cx="960" cy="315" rx="230" ry="92" transform="rotate(-22 960 315)" fill="none" stroke="#3B82F6" stroke-width="2" opacity="0.3"/>
+  <circle cx="1263" cy="191" r="10" fill="#14B8A6"/>
+  <text x="96" y="286" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="42" font-weight="600" fill="#94A3B8" letter-spacing="1">FRONT-END DEVELOPER</text>
+  <text x="96" y="378" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="76" font-weight="800" fill="#F8FAFC" letter-spacing="-2">Ideas into Interfaces.</text>
+  <text x="96" y="450" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="34" font-weight="500" fill="#CBD5E1">React.js &amp; Next.js — Abdullah</text>
+  <rect x="96" y="492" width="132" height="5" rx="2.5" fill="url(#accent)"/>
+</svg>

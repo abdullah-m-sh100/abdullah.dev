@@ -1,0 +1,59 @@
+{
+  "hero": {
+    "eyebrow": "أعمال مختارة",
+    "title": "مشاريع ودراسات حالة في الواجهات الأمامية",
+    "description": "نظرة أقرب على ما بنيته بـ React.js و Next.js — المشكلة التي حلّها كل مشروع، والقرارات التقنية خلفه، وما وصل فعليًا إلى بيئة الإنتاج."
+  },
+  "listing": {
+    "countLabel": "{count, plural, one {مشروع واحد} two {مشروعان} few {# مشاريع} many {# مشروعًا} other {# مشروع}}"
+  },
+  "breadcrumbs": {
+    "home": "الرئيسية",
+    "work": "الأعمال"
+  },
+  "caseStudy": {
+    "featuredBadge": "مميّز",
+    "overview": {
+      "title": "نظرة عامة",
+      "factsTitle": "بيانات المشروع",
+      "category": "التصنيف",
+      "year": "السنة",
+      "technologies": "التقنيات",
+      "links": "الروابط",
+      "liveLink": "عرض المشروع مباشرة",
+      "githubLink": "عرض الكود على GitHub"
+    },
+    "challenge": {
+      "title": "التحدّي"
+    },
+    "solution": {
+      "title": "الحل"
+    },
+    "technicalApproach": {
+      "title": "المقاربة التقنية"
+    },
+    "responsibilities": {
+      "title": "مسؤولياتي"
+    },
+    "results": {
+      "title": "النتيجة"
+    },
+    "features": {
+      "title": "أبرز الميزات",
+      "description": "ما تقوم به الواجهة النهائية فعليًا."
+    },
+    "gallery": {
+      "title": "معرض الصور"
+    },
+    "adjacent": {
+      "previous": "المشروع السابق",
+      "next": "المشروع التالي"
+    },
+    "cta": {
+      "eyebrow": "الخطوة التالية",
+      "title": "لديك فكرة مشابهة؟",
+      "description": "أخبرني بما تبنيه، وسأرد بخطة واضحة ومحدّدة النطاق.",
+      "action": "ابدأ مشروعًا"
+    }
+  }
+}

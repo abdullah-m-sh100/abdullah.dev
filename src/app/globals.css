@@ -1,0 +1,461 @@
+@import 'tailwindcss';
+@import '../styles/tokens.css';
+
+/* next-themes toggles the `dark` class on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/**
+ * Semantic tokens exposed as Tailwind utilities: `bg-surface`,
+ * `text-muted-foreground`, `border-border`, `rounded-lg`, `text-h2`, …
+ * `inline` keeps the variables live so they re-resolve when the theme, the
+ * language or the direction changes.
+ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-subtle: var(--primary-subtle);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-subtle: var(--secondary-subtle);
+
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-teal: var(--accent-teal);
+  --color-ring: var(--ring);
+  --color-overlay: var(--overlay);
+
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --color-warning: var(--warning);
+
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-teal: var(--brand-teal);
+  --color-brand-gray: var(--brand-gray);
+  --color-brand-off-white: var(--brand-off-white);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-pill: var(--radius-pill);
+
+  --shadow-subtle: var(--shadow-subtle);
+  --shadow-card: var(--shadow-card);
+  --shadow-raised: var(--shadow-raised);
+  --shadow-header: var(--shadow-header);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: var(--font-noto-sans-arabic), var(--font-inter), ui-sans-serif, sans-serif;
+
+  --ease-out: var(--ease-out);
+  --ease-in-out: var(--ease-in-out);
+
+  /* Container widths — `max-w-content`, `max-w-wide`, `max-w-prose-comfortable`. */
+  --container-content: 80rem;
+  --container-wide: 90rem;
+  --container-prose-comfortable: 44rem;
+
+  /*
+   * One extra breakpoint below Tailwind's `sm` (40rem).
+   *
+   * The four phone widths the site is verified at — 320, 360, 390, 430 — all
+   * sit below `sm`, so without a stop in that range every one of them has to
+   * share a single set of base styles. `xs` splits it at the point where a
+   * two-up card row stops being readable and a full-width action stops being
+   * necessary. Used sparingly: base styles still target the 320px case, and
+   * `xs` is only reached for where the extra ~100px genuinely changes the
+   * right layout.
+   */
+  --breakpoint-xs: 26rem;
+
+  /*
+   * Type scale.
+   *
+   * Every step is fluid, and its tracking/leading point at the rhythm tokens
+   * so Arabic re-tunes automatically — there is no second Arabic type scale.
+   *
+   * The three large steps are tuned by *slope*, not by their floor. Their
+   * earlier curves were steep enough that the floor only ever engaged below
+   * ~215px, which meant a 320px phone still received near-tablet type: the
+   * display step landed at 44px inside a 272px column, about twelve characters
+   * to a line. Each now starts lower and climbs faster, so the desktop end of
+   * every step is unchanged — display still reaches 72px by ~920px, h1 56px
+   * and h2 40px by ~1100px — while a small phone gets type it can set more
+   * than three words of.
+   */
+  --text-display: clamp(2.25rem, 1.05rem + 6vw, 4.5rem);
+  --text-display--line-height: var(--leading-display);
+  --text-display--letter-spacing: var(--tracking-display);
+  --text-display--font-weight: 800;
+
+  --text-h1: clamp(1.875rem, 1rem + 3.6vw, 3.5rem);
+  --text-h1--line-height: var(--leading-display);
+  --text-h1--letter-spacing: var(--tracking-display);
+  --text-h1--font-weight: 800;
+
+  --text-h2: clamp(1.5rem, 1.05rem + 2.2vw, 2.5rem);
+  --text-h2--line-height: var(--leading-heading);
+  --text-h2--letter-spacing: var(--tracking-heading);
+  --text-h2--font-weight: 700;
+
+  --text-h3: clamp(1.25rem, 1.1rem + 0.65vw, 1.5rem);
+  --text-h3--line-height: var(--leading-heading);
+  --text-h3--letter-spacing: var(--tracking-heading);
+  --text-h3--font-weight: 600;
+
+  --text-lead: clamp(1.0625rem, 1rem + 0.42vw, 1.25rem);
+  --text-lead--line-height: var(--leading-body);
+
+  --text-body: 1rem;
+  --text-body--line-height: var(--leading-body);
+
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.25;
+  --text-label--letter-spacing: var(--tracking-label);
+  --text-label--font-weight: 600;
+
+  /* Decorative loops. Both are gated behind `motion-safe:` at every call site. */
+  --animate-grid-drift: grid-drift 44s linear infinite;
+  --animate-orbit-outer: orbit-travel 54s linear infinite;
+  --animate-orbit-inner: orbit-travel 36s linear infinite reverse;
+}
+
+@keyframes grid-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    /* Exactly one grid cell, so the loop is seamless. */
+    transform: translate3d(72px, 72px, 0);
+  }
+}
+
+@keyframes orbit-travel {
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-block-start: calc(var(--header-height) + var(--space-2));
+  }
+
+  body {
+    background-color: var(--background);
+    /* Brand wash over the flat fill; `none` in dark. Fixed to the body box, so
+       it stays a header-height gradient instead of repeating down the page. */
+    background-image: var(--page-gradient);
+    background-repeat: no-repeat;
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv11', 'ss01';
+    line-height: var(--leading-body);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html[lang='ar'] body {
+    font-family: var(--font-arabic);
+  }
+
+  :is(h1, h2, h3, h4, h5, h6) {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /*
+   * One focus system for the whole site. A visible ring is mandatory and is
+   * never removed without a replacement.
+   */
+  :focus-visible {
+    outline: var(--focus-ring-width) solid var(--ring);
+    outline-offset: var(--focus-ring-offset);
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background-color: var(--accent-blue);
+    color: #ffffff;
+  }
+
+  /*
+   * Scrollbar, brand-aware in both engines.
+   *
+   * Every colour is a semantic token, so the thumb and hover state re-resolve
+   * with the theme exactly like any other surface — there is no separate dark
+   * scrollbar to keep in sync. `scrollbar-color` covers Firefox; the
+   * `::-webkit-scrollbar*` pseudo-elements cover Chromium and Safari. Applied
+   * on the bare pseudo-elements rather than scoped to `html`, so a scrolling
+   * card, gallery or code block picks up the same treatment as the page.
+   *
+   * `scrollbar-gutter: stable` reserves the track's width on `html` up front,
+   * so the one moment the page's own scrollbar can appear or disappear — the
+   * mobile drawer's scroll lock releasing — never shifts the page sideways.
+   */
+  html {
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--border-strong);
+    border-radius: var(--radius-pill);
+    /*
+     * A transparent border padded inside the thumb, clipped to its own
+     * background, keeps the thumb narrower than the track it rides in —
+     * the "thumb floats off the edges" look a native theme-aware scrollbar
+     * has, without a second element.
+     */
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: background-color var(--duration-base) var(--ease-out);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent-blue);
+  }
+
+  ::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+
+  /*
+   * Keep long technology names, credential IDs, email addresses and URLs from
+   * overflowing narrow screens. `dd`, `a` and `time` are included because the
+   * unbreakable strings on this site — the contact address in the footer and
+   * the CTA, the monospaced credential id on a certificate card — live in
+   * exactly those elements, inside columns that are only ~270px wide at 320px.
+   */
+  :is(h1, h2, h3, h4, p, li, td, dd, a, time) {
+    overflow-wrap: break-word;
+  }
+
+  /* Decorative layers must never intercept pointer or assistive-tech focus. */
+  [data-decoration] {
+    pointer-events: none;
+    user-select: none;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Scroll reveal                                                              */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Reveals are pure CSS. `components/motion/reveal.tsx` only flips
+ * `data-visible` from an IntersectionObserver — no per-frame JavaScript, and
+ * only `opacity` and `transform` are animated.
+ */
+@layer components {
+  [data-reveal] {
+    opacity: 0;
+    transition-property: opacity, transform;
+    transition-duration: var(--duration-reveal);
+    transition-timing-function: var(--ease-out);
+    transition-delay: calc(var(--reveal-index, 0) * var(--stagger-step));
+  }
+
+  [data-reveal='fade-up'] {
+    transform: translate3d(0, 1.5rem, 0);
+  }
+
+  [data-reveal='fade-down'] {
+    transform: translate3d(0, -1rem, 0);
+  }
+
+  [data-reveal='scale-in'] {
+    transform: scale(0.965);
+  }
+
+  /*
+   * Logical: "start" enters from the side the text begins on, in both
+   * directions.
+   *
+   * `--reveal-slide` is 0 by default, so on a stacked layout these two behave
+   * as a plain fade-up. A 28px horizontal offset applied to an element that
+   * already spans the full column pushes its resting position past the
+   * viewport edge, and since a `transform` still counts toward the document's
+   * scroll width, every phone got a few pixels of horizontal scroll before a
+   * single reveal had fired — measurably 4px on Home and on each case study.
+   * Below `sm` the two columns these variants animate between are stacked
+   * anyway, so there is no side for the content to arrive from and nothing to
+   * express; the offset is restored at `sm`, where the layout is wide enough
+   * to absorb it.
+   */
+  [data-reveal='slide-start'],
+  [data-reveal='slide-end'] {
+    /* Stacked: no side to arrive from, so it rises like `fade-up` instead. */
+    --reveal-slide: 0rem;
+    --reveal-rise: 1.5rem;
+
+    @variant sm {
+      --reveal-slide: 1.75rem;
+      --reveal-rise: 0rem;
+    }
+  }
+
+  [data-reveal='slide-start'] {
+    transform: translate3d(calc(var(--reveal-dir) * var(--reveal-slide) * -1), var(--reveal-rise), 0);
+  }
+
+  [data-reveal='slide-end'] {
+    transform: translate3d(calc(var(--reveal-dir) * var(--reveal-slide)), var(--reveal-rise), 0);
+  }
+
+  [data-reveal][data-visible='true'] {
+    opacity: 1;
+    transform: none;
+  }
+
+  /**
+   * Call-to-action arrow.
+   *
+   * Mirrored in RTL, and nudged along the reading direction on hover — in RTL
+   * the translate is applied after the mirror, so "forward" stays forward.
+   * Written as plain rules rather than Tailwind variants because the behaviour
+   * depends on an ancestor's direction *and* hover state.
+   */
+  .cta-arrow {
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+
+  [dir='rtl'] .cta-arrow {
+    transform: scaleX(-1);
+  }
+
+  .group:hover .cta-arrow {
+    transform: translateX(0.2rem);
+  }
+
+  [dir='rtl'] .group:hover .cta-arrow {
+    transform: scaleX(-1) translateX(0.2rem);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Utilities                                                                  */
+/* -------------------------------------------------------------------------- */
+
+/* Subtle blue → teal emphasis. Reserved for a single phrase or edge per view. */
+@utility text-gradient-brand {
+  background-image: linear-gradient(100deg, var(--accent-blue) 0%, var(--accent-teal) 100%);
+  background-clip: text;
+  color: transparent;
+  /* The gradient replaces the text colour, so restore a legible fallback
+     wherever background-clip is unsupported. */
+  @supports not (background-clip: text) {
+    color: var(--primary);
+  }
+}
+
+/* Fine grid motif. Sized by `--grid-size` so the drift keyframe stays in sync. */
+@utility grid-surface {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+/* Animated underline for inline links, drawn from the reading-start edge. */
+@utility link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position-x: var(--link-underline-origin, 0%);
+  background-position-y: 100%;
+  background-size: 0% 1px;
+  transition: background-size var(--duration-base) var(--ease-out);
+
+  &:hover,
+  &:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Orbit node motion path                                                     */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * The orbiting node travels an elliptical `offset-path`, which the compositor
+ * handles as a transform. The SVG `transform` attribute positions the node for
+ * browsers without motion-path support; inside `@supports` it is cleared so the
+ * two placements never stack.
+ */
+@supports (offset-path: path('M 0 0 L 1 1')) {
+  .orbit-node {
+    transform: none;
+    offset-rotate: 0deg;
+    offset-distance: 0%;
+  }
+
+  .orbit-node--outer {
+    offset-path: path('M 570 200 A 270 108 0 1 1 30 200 A 270 108 0 1 1 570 200');
+  }
+
+  .orbit-node--inner {
+    offset-path: path('M 490 200 A 190 76 0 1 1 110 200 A 190 76 0 1 1 490 200');
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Motion preferences                                                         */
+/* -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /*
+   * Reveals resolve to their final state immediately rather than flashing
+   * through a shortened transition, and decorative loops simply stop.
+   */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Without scripting the observer never runs, so content must not stay hidden. */
+@media (scripting: none) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
