@@ -66,7 +66,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       suppressHydrationWarning
       className={`${inter.variable} ${notoSansArabic.variable}`}
     >
-      <body className="flex min-h-dvh flex-col">
+      <body className="flex min-h-dvh flex-col overflow-x-hidden">
         {/* Person + WebSite entity graph — one script, reused on every page. */}
         <script
           type="application/ld+json"
