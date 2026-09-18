@@ -149,7 +149,7 @@ export const projects: Project[] = [
     featured: true,
     date: "2026-09-18",
     // Set to e.g. '/Work/smartspend.png' once a screenshot is ready.
-    image: "/Work/smartspend.png",
+    image: "/Work/SmartSpend.png",
     title: {
       en: "SmartSpend",
       ar: "SmartSpend",

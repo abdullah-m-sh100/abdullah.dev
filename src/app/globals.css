@@ -209,12 +209,18 @@
    * on the bare pseudo-elements rather than scoped to `html`, so a scrolling
    * card, gallery or code block picks up the same treatment as the page.
    *
-   * `scrollbar-gutter: stable` reserves the track's width on `html` up front,
-   * so the one moment the page's own scrollbar can appear or disappear — the
-   * mobile drawer's scroll lock releasing — never shifts the page sideways.
+   * Deliberately no `scrollbar-gutter: stable` here. Reserving the gutter
+   * looks harmless but breaks two things at once, both only visible while the
+   * mobile drawer is open. The gutter is carved out of the viewport, so the
+   * initial containing block shrinks by its width and a `position: fixed`
+   * overlay with `inset-0` can no longer reach the viewport edge — the drawer
+   * and its backdrop stopped 10px short, leaving a lit strip down the side of
+   * the screen in light mode. It also disturbs the `overflow` propagation the
+   * drawer's scroll lock depends on, which silently stopped holding the page
+   * still. The lock in `mobile-nav.tsx` compensates for the scrollbar's width
+   * itself, which keeps the page from shifting without either side effect.
    */
   html {
-    scrollbar-gutter: stable;
     scrollbar-width: thin;
     scrollbar-color: var(--border-strong) transparent;
   }
