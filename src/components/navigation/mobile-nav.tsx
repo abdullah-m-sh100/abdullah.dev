@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import { SocialIcon } from '@/components/brand/social-icon';
 import { LanguageSwitcher } from '@/components/navigation/language-switcher';
@@ -10,6 +11,7 @@ import { ThemeToggle } from '@/components/navigation/theme-toggle';
 import { ButtonArrow, ButtonLink } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { IconButton, IconLink } from '@/components/ui/icon-button';
+import { useIsMounted } from '@/hooks/use-is-mounted';
 import type { AppRoute, SocialPlatform } from '@/types/content';
 
 type MobileNavItem = {
@@ -54,6 +56,7 @@ export function MobileNav({ items, socialLinks, contactLabel, email }: MobileNav
   const t = useTranslations('navigation');
   const tCommon = useTranslations('common');
   const [isOpen, setIsOpen] = useState(false);
+  const isMounted = useIsMounted();
   const panelId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -152,19 +155,23 @@ export function MobileNav({ items, socialLinks, contactLabel, email }: MobileNav
     }
   }, [isOpen]);
 
-  return (
+  /*
+   * The overlay is portalled to `<body>` rather than rendered where it sits in
+   * the tree, and that is load-bearing.
+   *
+   * `MobileNav` lives inside `<header>`, which picks up `backdrop-blur-xl` once
+   * the page is scrolled. A `backdrop-filter` — like `filter`, `transform`,
+   * `perspective` and `contain` — makes an element the containing block for
+   * every fixed-position descendant. So on a scrolled page the drawer's
+   * `fixed inset-0` stopped resolving against the viewport and resolved
+   * against the header instead, collapsing a full-height panel into the 72px
+   * header strip: the drawer worked at the top of a page and was crushed
+   * anywhere else. Rendering it as a child of `<body>` puts it outside that
+   * containing block for good, and keeps it immune to any filter or transform
+   * added to the header later.
+   */
+  const overlay = (
     <>
-      <IconButton
-        ref={triggerRef}
-        label={isOpen ? t('closeMenu') : t('openMenu')}
-        aria-expanded={isOpen}
-        aria-controls={panelId}
-        onClick={() => setIsOpen((open) => !open)}
-        className="lg:hidden"
-      >
-        <Icon name={isOpen ? 'x' : 'menu'} />
-      </IconButton>
-
       {/*
         `overflow-hidden` is what keeps the parked panel from widening the
         page. The panel sits at `translate-x: ±100%` while closed, and a
@@ -281,6 +288,28 @@ export function MobileNav({ items, socialLinks, contactLabel, email }: MobileNav
           </div>
         </div>
       </div>
+    </>
+  );
+
+  return (
+    <>
+      <IconButton
+        ref={triggerRef}
+        label={isOpen ? t('closeMenu') : t('openMenu')}
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+        onClick={() => setIsOpen((open) => !open)}
+        className="lg:hidden"
+      >
+        <Icon name={isOpen ? 'x' : 'menu'} />
+      </IconButton>
+
+      {/*
+        A portal has no server-rendered form, so the overlay joins the document
+        on mount. It is closed, `inert` and transparent until then, so there is
+        nothing to see arriving and no hydration mismatch to answer for.
+      */}
+      {isMounted ? createPortal(overlay, document.body) : null}
     </>
   );
 }
