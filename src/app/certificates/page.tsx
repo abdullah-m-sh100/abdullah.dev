@@ -45,10 +45,13 @@ export default async function CertificatesPage() {
     issued: t('home.certificates.issued'),
     viewCertificate: t('common.actions.viewCertificate'),
     opensNewTab: t('common.labels.opensNewTab'),
+    viewFullImage: t('certificates.card.viewFullImage'),
+    closeImage: t('certificates.card.closeImage'),
     credentialId: t('certificates.card.credentialId'),
     expires: t('certificates.card.expires'),
     doesNotExpire: t('certificates.card.doesNotExpire'),
     openPdf: t('common.actions.openPdf'),
+    skills: t('certificates.card.skills'),
   };
 
   return (

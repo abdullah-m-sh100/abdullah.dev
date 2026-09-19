@@ -10,6 +10,9 @@
   "card": {
     "credentialId": "Credential ID",
     "expires": "Expires",
-    "doesNotExpire": "Does not expire"
+    "doesNotExpire": "Does not expire",
+    "skills": "Skills covered",
+    "viewFullImage": "View full certificate image",
+    "closeImage": "Close"
   }
 }

@@ -1,8 +1,13 @@
 import { portfolioData } from '@/data/portfolio-data';
 import type { Certificate } from '@/types/content';
 
-const byNewest = (a: Certificate, b: Certificate): number =>
-  new Date(b.issueDate).getTime() - new Date(a.issueDate).getTime();
+/** Newest first. Certificates without a verified `issueDate` sort last rather than at a fake position. */
+const byNewest = (a: Certificate, b: Certificate): number => {
+  if (!a.issueDate && !b.issueDate) return 0;
+  if (!a.issueDate) return 1;
+  if (!b.issueDate) return -1;
+  return new Date(b.issueDate).getTime() - new Date(a.issueDate).getTime();
+};
 
 /** Featured first, then the explicit `order` field, then newest. */
 const byFeaturedThenOrder = (a: Certificate, b: Certificate): number => {

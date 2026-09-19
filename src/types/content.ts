@@ -190,13 +190,20 @@ export type Certificate = {
   title: LocalizedText;
   issuer: LocalizedText;
   description?: LocalizedText;
-  issueDate: IsoDate;
+  /**
+   * Optional because some real certificates do not print an issue date.
+   * Never invent one — the card hides the "Issued" line when this is unset,
+   * and sorting pushes undated certificates after dated ones.
+   */
+  issueDate?: IsoDate;
   expiryDate?: IsoDate;
   doesNotExpire?: boolean;
   credentialId?: string;
   credentialUrl?: string;
   image?: ImageAsset;
   pdf?: string;
+  /** Topics/skills covered — rendered as tags, distinct from `Project.technologies`. */
+  skills?: string[];
   featured: boolean;
   order: number;
 };
@@ -205,15 +212,22 @@ export type Certificate = {
 /* Experience                                                                  */
 /* -------------------------------------------------------------------------- */
 
-export type EmploymentType = 'full-time' | 'part-time' | 'freelance' | 'contract';
+/** `training` covers structured programs, bootcamps and internships — never mislabeled as employment. */
+export type EmploymentType = 'full-time' | 'part-time' | 'freelance' | 'contract' | 'training';
 
 export type Experience = {
   id: string;
   role: LocalizedText;
   company: LocalizedText;
   employmentType: EmploymentType;
-  location: LocalizedText;
-  startDate: IsoDate;
+  /** Optional — omit rather than guess when a program's location isn't verifiable. */
+  location?: LocalizedText;
+  /**
+   * Optional — some real training programs (e.g. hour-based courses without a
+   * published calendar) do not have a verifiable start date. Never invent one;
+   * the timeline hides the date row and sorts undated entries after dated ones.
+   */
+  startDate?: IsoDate;
   endDate?: IsoDate;
   current: boolean;
   summary: LocalizedText;
@@ -225,7 +239,14 @@ export type Experience = {
 /* Contact & social                                                            */
 /* -------------------------------------------------------------------------- */
 
-export type SocialPlatform = 'github' | 'linkedin' | 'upwork' | 'x' | 'email';
+export type SocialPlatform =
+  | 'github'
+  | 'linkedin'
+  | 'upwork'
+  | 'x'
+  | 'facebook'
+  | 'whatsapp'
+  | 'email';
 
 export type SocialLink = {
   id: string;

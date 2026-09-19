@@ -24,6 +24,9 @@ export async function CertificatesPreview() {
     issued: t('home.certificates.issued'),
     viewCertificate: t('common.actions.viewCertificate'),
     opensNewTab: t('common.labels.opensNewTab'),
+    viewFullImage: t('certificates.card.viewFullImage'),
+    closeImage: t('certificates.card.closeImage'),
+    skills: t('certificates.card.skills'),
   };
 
   return (

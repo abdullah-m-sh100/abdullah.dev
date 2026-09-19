@@ -48,7 +48,7 @@ export async function SiteFooter() {
             </p>
 
             {socialLinks.length > 0 ? (
-              <ul aria-label={t('navigation.socialLabel')} className="mt-6 flex items-center gap-2">
+              <ul aria-label={t('navigation.socialLabel')} className="mt-6 flex items-center gap-2 flex-wrap">
                 {socialLinks.map((link) => (
                   <li key={link.id}>
                     <IconLink

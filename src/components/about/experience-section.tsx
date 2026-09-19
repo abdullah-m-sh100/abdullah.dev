@@ -39,9 +39,18 @@ export async function ExperienceSection() {
         <ol className="mt-12 flex flex-col">
           {items.map((item, index) => {
             const isLast = index === items.length - 1;
-            const period = `${formatMonthYear(item.startDate, locale)} – ${
-              item.current || !item.endDate ? t('present') : formatMonthYear(item.endDate, locale)
-            }`;
+            // `startDate` is optional — some real training programs have no
+            // verifiable calendar dates. Never invent one: the row is hidden
+            // instead. A start date with no end and not current (e.g. a
+            // single-day training completion) renders as one month, not a
+            // fake range or a misleading "Present".
+            const period = !item.startDate
+              ? null
+              : item.current
+                ? `${formatMonthYear(item.startDate, locale)} – ${t('present')}`
+                : item.endDate
+                  ? `${formatMonthYear(item.startDate, locale)} – ${formatMonthYear(item.endDate, locale)}`
+                  : formatMonthYear(item.startDate, locale);
 
             return (
               <Reveal key={item.id} as="li" index={index} className="grid grid-cols-[auto_1fr] gap-x-6">
@@ -55,7 +64,9 @@ export async function ExperienceSection() {
                     <h3 className="text-h3">{localize(item.role, locale)}</h3>
                     <span className="text-muted-foreground text-sm">{localize(item.company, locale)}</span>
                   </div>
-                  <p className="text-subtle-foreground text-label mt-1 ltr:uppercase">{period}</p>
+                  {period ? (
+                    <p className="text-subtle-foreground text-label mt-1 ltr:uppercase">{period}</p>
+                  ) : null}
                   <p className="text-muted-foreground mt-4 max-w-prose-comfortable leading-relaxed">
                     {localize(item.summary, locale)}
                   </p>

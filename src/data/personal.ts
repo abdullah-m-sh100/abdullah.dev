@@ -35,6 +35,8 @@ export const personal: PersonalInfo = {
     ar: 'فلسطين — أعمل مع عملاء حول العالم',
   },
   email: 'abdullah.m.sh100@gmail.com',
+  /* Readable form. The `wa.me` digits live in `social-links.ts`. */
+  phone: '+972 59-923-6195',
   /*
    * Hero portrait. The source photo already carries the brand treatment — a
    * deep navy backdrop with a blue-to-teal orbit arc — so the frame around it

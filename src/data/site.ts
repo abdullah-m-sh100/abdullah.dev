@@ -21,6 +21,7 @@ export const navigation: NavItem[] = [
 
 export const contact: ContactInfo = {
   email: personal.email,
+  phone: personal.phone,
   location: personal.location,
   responseTime: {
     en: "Usually replies within one business day",

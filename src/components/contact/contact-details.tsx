@@ -19,8 +19,16 @@ import { getSocialLinks } from '@/lib/content/profile';
 export async function ContactDetails() {
   const locale = await getLocale();
   const t = await getTranslations('contact.details');
+  const tLabels = await getTranslations('common.labels');
   const { contact } = portfolioData;
   const socialLinks = getSocialLinks();
+  /*
+   * WhatsApp earns its own row as well as its place in the icon list: it is a
+   * direct line rather than a profile to browse. The `wa.me` URL is read back
+   * out of the social data instead of being written a second time here, so the
+   * number lives in exactly one place.
+   */
+  const whatsapp = socialLinks.find((link) => link.platform === 'whatsapp');
 
   return (
     <Reveal variant="slide-start" index={1}>
@@ -39,6 +47,27 @@ export async function ContactDetails() {
               </TextLink>
             </dd>
           </div>
+
+          {whatsapp && contact.phone ? (
+            <div>
+              <dt className="text-subtle-foreground flex items-center gap-2 text-label ltr:uppercase">
+                <Icon name="smartphone" className="size-4" />
+                {t('whatsappLabel')}
+              </dt>
+              <dd className="mt-1.5">
+                <TextLink
+                  href={whatsapp.url}
+                  external
+                  externalLabel={tLabels('opensNewTab')}
+                  tone="foreground"
+                  className="text-sm"
+                >
+                  {/* A phone number reads left-to-right in Arabic too. */}
+                  <span dir="ltr">{contact.phone}</span>
+                </TextLink>
+              </dd>
+            </div>
+          ) : null}
 
           <div>
             <dt className="text-subtle-foreground flex items-center gap-2 text-label ltr:uppercase">
@@ -63,8 +92,7 @@ export async function ContactDetails() {
 
         {socialLinks.length > 0 ? (
           <div className="border-border mt-8 border-t pt-6">
-            <h3 className="text-subtle-foreground text-label ltr:uppercase">{t('socialLabel')}</h3>
-            <ul aria-label={t('socialLabel')} className="mt-4 flex items-center gap-2">
+            <ul aria-label={t('socialLabel')} className="mt-4 flex items-center gap-2 flex-wrap">
               {socialLinks.map((link) => (
                 <li key={link.id}>
                   <IconLink

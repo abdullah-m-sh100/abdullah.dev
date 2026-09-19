@@ -10,6 +10,9 @@
   "card": {
     "credentialId": "رقم الاعتماد",
     "expires": "تنتهي في",
-    "doesNotExpire": "بلا تاريخ انتهاء"
+    "doesNotExpire": "بلا تاريخ انتهاء",
+    "skills": "المهارات المكتسبة",
+    "viewFullImage": "عرض صورة الشهادة كاملة",
+    "closeImage": "إغلاق"
   }
 }

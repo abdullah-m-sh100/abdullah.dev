@@ -61,11 +61,14 @@ export function getWorkflowSteps(): WorkflowStep[] {
 
 /* ---------------------------------------------------------------- experience */
 
-/** Most recent role first. */
+/** Most recent role first. Entries without a verified start date sort last rather than at a fake position. */
 export function getExperience(): Experience[] {
-  return [...portfolioData.experience].sort(
-    (a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime(),
-  );
+  return [...portfolioData.experience].sort((a, b) => {
+    if (!a.startDate && !b.startDate) return 0;
+    if (!a.startDate) return 1;
+    if (!b.startDate) return -1;
+    return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
+  });
 }
 
 /* --------------------------------------------------------------- social links */

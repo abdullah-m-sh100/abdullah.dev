@@ -31,6 +31,7 @@ export function buildSiteJsonLd(locale: Locale): JsonLdGraph {
         jobTitle: localize(personal.role, locale),
         description: localize(personal.intro, locale),
         email: `mailto:${personal.email}`,
+        ...(personal.phone ? { telephone: personal.phone } : {}),
         url: siteConfig.url,
         /*
          * Both of these restate facts the pages already show — the skill list
@@ -41,10 +42,16 @@ export function buildSiteJsonLd(locale: Locale): JsonLdGraph {
         knowsAbout: getAllSkills().map((skill) => skill.name),
         address: {
           '@type': 'PostalAddress',
-          addressCountry: 'EG',
+          addressCountry: 'PS',
         },
+        /*
+         * `sameAs` is for URLs that identify the same person elsewhere, so it
+         * carries the profiles only. Email and WhatsApp are ways to reach him
+         * rather than places he exists, and they are already stated above as
+         * `email` and `telephone`.
+         */
         sameAs: getSocialLinks()
-          .filter((link) => link.platform !== 'email')
+          .filter((link) => link.platform !== 'email' && link.platform !== 'whatsapp')
           .map((link) => link.url),
       },
       {
