@@ -19,8 +19,8 @@
 
   <text x="96" y="232" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="26" font-weight="700" fill="#A9B6C6" letter-spacing="3.6">ABDULLAH — FULL-STACK DEVELOPER</text>
 
-  <text x="96" y="330" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="72" font-weight="600" fill="#F3EEE6" letter-spacing="-1.4">Ideas into</text>
-  <text x="96" y="408" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="72" font-weight="600" fill="#F3EEE6" letter-spacing="-1.4">Web Applications.</text>
+  <text x="96" y="330" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="72" font-weight="600" fill="#F3EEE6" letter-spacing="-1.4">Turning ideas into</text>
+  <text x="96" y="408" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="72" font-weight="600" fill="#F3EEE6" letter-spacing="-1.4">web applications.</text>
 
   <text x="96" y="478" font-family="Tajawal, ui-sans-serif, system-ui, sans-serif" font-size="28" font-weight="500" fill="#A9B6C6">MongoDB &#183; Express.js &#183; React.js &#183; Node.js</text>
 

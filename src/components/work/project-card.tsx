@@ -97,12 +97,6 @@ export function ProjectCard({ project, locale, labels, layout = 'card' }: Projec
           {localize(project.summary, locale)}
         </p>
 
-        {isFeature && project.challenge ? (
-          <p className="border-border text-muted-foreground mt-5 border-s-2 ps-4 text-sm">
-            {localize(project.challenge, locale)}
-          </p>
-        ) : null}
-
         <TechnologyList
           technologies={project.technologies}
           label={labels.technologies}

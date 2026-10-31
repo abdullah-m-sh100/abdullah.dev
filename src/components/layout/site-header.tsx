@@ -40,10 +40,17 @@ export async function SiteHeader() {
   return (
     <HeaderShell>
       <Container>
-        <div className="flex h-(--header-height) items-center justify-between gap-3 lg:gap-6">
+        {/*
+          Below `lg` the row is a flex line: brand on one side, actions on the
+          other. From `lg` it becomes a three-column grid with the middle column
+          sized to the nav and the outer two equal, so the nav is centred on the
+          page whatever the widths of the brand and the actions — with
+          `justify-between` it only sat near the middle and drifted with them.
+        */}
+        <div className="flex h-(--header-height) items-center justify-between gap-3 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-6">
           <Link
             href="/"
-            className="min-w-0 shrink-0 rounded-md focus-visible:outline-(length:--focus-ring-width) focus-visible:outline-offset-(--focus-ring-offset) focus-visible:outline-ring"
+            className="min-w-0 shrink-0 rounded-md focus-visible:outline-(length:--focus-ring-width) focus-visible:outline-offset-(--focus-ring-offset) focus-visible:outline-ring lg:justify-self-start"
           >
             <Logo name={localize(personal.name, locale)} />
             <span className="sr-only">{localize(personal.role, locale)}</span>
@@ -52,18 +59,20 @@ export async function SiteHeader() {
           {/*
             The inline bar appears at `lg`, not `md`.
 
-            Six links plus the two switchers plus the lockup need about 720px of
-            a 768px viewport's 704px of usable width in English, so at `md` the
-            row was already over-subscribed: the flex items compressed, the
-            brand mark collapsed to 12px, and the gaps fell to the 8px minimum.
-            Arabic fit only because its labels are shorter — the same bar was
-            one long translation away from doing the same thing. `lg` is the
-            first width where all six labels sit in the row with real space
-            around them (~180px spare), in both languages, so the drawer covers
-            everything below it.
+            Six links plus the switchers plus the lockup need about 720px, and a
+            768px viewport has 704px of usable width, so at `md` the row was
+            over-subscribed. `lg` is the first width where all six labels sit in
+            the row with real space around them, in both languages, so the drawer
+            covers everything below it.
+
+            The links are a single pill group — a hairline capsule with the
+            current page filled in — rather than loose text with a copper
+            underline. The fill states the current page without spending copper
+            on it, which keeps the header's one warm element for the contact
+            button.
           */}
           <nav aria-label={t('navigation.primaryLabel')} className="hidden min-w-0 lg:block">
-            <ul className="flex items-center gap-0.5 xl:gap-1">
+            <ul className="border-hairline border-border bg-surface/50 flex items-center gap-1 rounded-pill p-1">
               {items.map((item) => (
                 <li key={item.id}>
                   <NavLink
@@ -76,17 +85,16 @@ export async function SiteHeader() {
             </ul>
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 lg:justify-self-end">
             {/*
-              The language switcher appears at `lg` — the same breakpoint where
-              the inline nav takes over and the drawer's trigger disappears.
-              Showing it any earlier would duplicate the drawer's own language
-              row while the hamburger is still visible.
+              The language switch is in the header at every width. It used to
+              hide below `lg` and live only inside the drawer, which put the one
+              control a bilingual site's visitors most often need two taps away.
+              At 320px the row still has room: ~115px brand, ~64px switch,
+              44px menu button.
             */}
-            <div className="hidden lg:block">
-              <LanguageSwitcher />
-            </div>
-            <ButtonLink href="/contact" size="sm" className="hidden xl:inline-flex">
+            <LanguageSwitcher />
+            <ButtonLink href="/contact" size="sm" className="hidden sm:inline-flex">
               {t('common.actions.contactMe')}
               <ButtonArrow />
             </ButtonLink>
@@ -94,6 +102,7 @@ export async function SiteHeader() {
             <MobileNav
               items={items}
               socialLinks={socialLinks}
+              brand={localize(personal.name, locale)}
               contactLabel={t('common.actions.contactMe')}
               email={personal.email}
             />

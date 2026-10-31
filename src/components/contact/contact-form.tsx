@@ -198,6 +198,7 @@ export function ContactForm({ renderedAt, responseTime }: ContactFormProps) {
         <Field
           id="message"
           label={t("fields.message")}
+          hint={t("messageHint")}
           error={errorMessage(fieldErrors.message)}
         >
           <Textarea
@@ -207,7 +208,9 @@ export function ContactForm({ renderedAt, responseTime }: ContactFormProps) {
             maxLength={contactLimits.message.max}
             defaultValue={values?.message}
             hasError={Boolean(fieldErrors.message)}
-            aria-describedby={fieldErrors.message ? "message-error" : undefined}
+            aria-describedby={
+              fieldErrors.message ? "message-hint message-error" : "message-hint"
+            }
           />
         </Field>
 
@@ -248,17 +251,24 @@ export function ContactForm({ renderedAt, responseTime }: ContactFormProps) {
 type FieldProps = {
   id: string;
   label: string;
+  /** Guidance shown under the label, before the control. Wired by the caller with `aria-describedby`. */
+  hint?: string;
   error?: string;
   children: ReactNode;
 };
 
-/** Label + control + associated error, wired with `aria-describedby` once per field. */
-function Field({ id, label, error, children }: FieldProps) {
+/** Label + optional hint + control + associated error, wired with `aria-describedby` once per field. */
+function Field({ id, label, hint, error, children }: FieldProps) {
   return (
     <div>
       <label htmlFor={id} className="text-sm font-semibold">
         {label}
       </label>
+      {hint ? (
+        <p id={`${id}-hint`} className="text-muted-foreground mt-1 text-sm">
+          {hint}
+        </p>
+      ) : null}
       <div className="mt-2">{children}</div>
       {error ? (
         <p id={`${id}-error`} className="text-danger mt-1.5 text-sm">

@@ -1,5 +1,7 @@
 import { portfolioData } from '@/data/portfolio-data';
 import { coreStack } from '@/data/skills';
+import { type Locale } from '@/i18n/config';
+import { localize } from '@/i18n/localize';
 import type {
   Experience,
   Service,
@@ -62,6 +64,14 @@ export function getCoreStack(): Skill[] {
   return coreStack
     .map((id) => byId.get(id))
     .filter((skill): skill is Skill => skill !== undefined);
+}
+
+/**
+ * The text a skill chip shows. Descriptive skills carry a `label` with a real
+ * Arabic form; technology and brand names have none and render as `name`.
+ */
+export function getSkillLabel(skill: Skill, locale: Locale): string {
+  return skill.label ? localize(skill.label, locale) : skill.name;
 }
 
 /* --------------------------------------------------------------------- stats */

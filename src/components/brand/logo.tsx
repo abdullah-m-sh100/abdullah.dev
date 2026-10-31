@@ -3,8 +3,11 @@ import { cn } from '@/lib/utils/cn';
 type LogoMarkProps = {
   className?: string;
   /**
-   * Drops the enclosing circle. The guide requires this below 32px, where the
-   * ring closes up against the line and the three nodes stop being readable.
+   * The small-size mark, required below 32px. It is not the circular mark with
+   * the ring removed: with no ring to fill the box, the curve is drawn larger,
+   * with a heavier line and bigger nodes, exactly as `flow-mark-bare.svg`
+   * specifies. Taking the ring off the circular geometry instead leaves a curve
+   * a quarter of the box wide, which at header size reads as a stray squiggle.
    */
   bare?: boolean;
 };
@@ -26,6 +29,31 @@ type LogoMarkProps = {
  * Never rotate it, stretch it, change the curve, or drop a node.
  */
 export function LogoMark({ className, bare = false }: LogoMarkProps) {
+  if (bare) {
+    return (
+      <svg
+        viewBox="0 0 48 48"
+        className={cn('size-9', className)}
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path
+          d="M 14 9 C 26.5 12.5, 31 20, 24 24 C 17 28, 21.5 35.5, 34 39"
+          fill="none"
+          stroke="var(--accent)"
+          strokeWidth="2.6"
+          strokeLinecap="round"
+        />
+        {/* Interface. */}
+        <circle cx="14" cy="9" r="3" fill="currentColor" />
+        {/* Server — copper, and the largest. */}
+        <circle cx="24" cy="24" r="4.4" fill="var(--accent)" />
+        {/* Data. */}
+        <circle cx="34" cy="39" r="3" fill="currentColor" />
+      </svg>
+    );
+  }
+
   return (
     <svg
       viewBox="0 0 48 48"
@@ -33,17 +61,15 @@ export function LogoMark({ className, bare = false }: LogoMarkProps) {
       aria-hidden="true"
       focusable="false"
     >
-      {bare ? null : (
-        <circle
-          cx="24"
-          cy="24"
-          r="21"
-          fill="none"
-          stroke="var(--accent)"
-          strokeWidth="1.5"
-          opacity="0.45"
-        />
-      )}
+      <circle
+        cx="24"
+        cy="24"
+        r="21"
+        fill="none"
+        stroke="var(--accent)"
+        strokeWidth="1.5"
+        opacity="0.45"
+      />
 
       {/* The flowing path, passing through all three node centres. */}
       <path
@@ -81,20 +107,24 @@ type LogoProps = {
  */
 export function Logo({ name, markOnly = false, className }: LogoProps) {
   return (
-    <span className={cn('inline-flex items-center gap-2.5', className)}>
+    <span className={cn('inline-flex items-center gap-1.5', className)}>
       {/*
         `shrink-0` and a fixed box are load-bearing, not decoration. The header
         is a flex row, and a bare mark is a shrinkable flex item: once the row
-        ran out of width — which it did at 768px, before the breakpoint in
-        `SiteHeader` moved the inline nav up to `lg` — the mark was the first
-        thing to give, compressing from 30px to 12px and squashing the lockup. A
+        ran out of width it was the first thing to give, squashing the lockup. A
         fixed box means the row runs out of room somewhere the layout can answer
         for, never inside the logo.
 
-        The mark also sits under the guide's 32px threshold at this size, so it
-        renders `bare` — without the enclosing circle — as the guide requires.
+        The mark is under the guide's 32px threshold, so it renders `bare` — its
+        own geometry, not the circular mark minus the ring (see `LogoMark`).
+
+        The box is 36px, not 30: the bare curve spans about 55% of it, so 30px
+        drew a mark ~16px tall next to 18px type. `-ms-2` pulls the box back by
+        the empty margin around the curve (~8px), so the visible mark — not the
+        invisible box — lines up with the page gutter, and the 6px gap above
+        then reads as the real distance to the name.
       */}
-      <LogoMark bare className="size-[30px] shrink-0" />
+      <LogoMark bare className="-ms-2 size-9 shrink-0" />
 
       {markOnly ? (
         <span className="sr-only">{name}</span>

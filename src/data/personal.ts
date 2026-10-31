@@ -8,10 +8,10 @@ import type { PersonalInfo } from '@/types/content';
  * caption and the `jobTitle` in the Person JSON-LD, so changing it here changes
  * it everywhere — never restate the title inside a component or a message file.
  *
- * `headline` and `tagline` are rendered as one `<h1>` on Home, with `tagline`
- * in copper. `tagline` is also used standalone — the About pull-quote, the
- * Home stats-panel quote, the footer line and the WebSite JSON-LD description —
- * so it has to read as a complete thought on its own.
+ * `heroTitle` is the Home `<h1>`. `tagline` is the standalone brand line — the
+ * About pull-quote, the Home stats-panel quote, the footer line and the
+ * WebSite JSON-LD description — so it has to read as a complete thought on its
+ * own.
  */
 export const personal: PersonalInfo = {
   name: {
@@ -27,24 +27,33 @@ export const personal: PersonalInfo = {
     ar: 'MERN Stack — MongoDB و Express.js و React.js و Node.js',
   },
   tagline: {
-    en: 'Ideas into Web Applications.',
+    en: 'Turning ideas into web applications.',
     ar: 'من الفكرة إلى تطبيق ويب.',
   },
   /*
-   * Kept to roughly the length of the line it replaced. `headline` and
-   * `tagline` are set as one display-size `<h1>` in a seven-column hero, so
-   * every extra ten characters costs a line — and at 1280x900 a fourth line
-   * pushed both calls to action below the fold. "MERN" is deliberately not
-   * repeated here: it is already in `role`, in the core-stack line under the
-   * hero, and in `intro` directly below this heading.
+   * The Home `<h1>`. It names what a visitor gets (websites and web
+   * applications, built for their business) instead of the technique, and the
+   * stack is stated once directly below in `intro`. Two parts so the closing
+   * phrase can take the page's single copper emphasis; each part sits on its
+   * own line, so the break is the sentence rather than the column width.
    */
-  headline: {
-    en: 'Full-stack web development.',
-    ar: 'تطوير ويب متكامل.',
+  heroTitle: {
+    lead: {
+      en: 'Websites and web applications',
+      ar: 'أحوّل فكرتك إلى موقع أو تطبيق ويب',
+    },
+    emphasis: {
+      en: 'built for your business.',
+      ar: 'يخدم مشروعك.',
+    },
   },
   intro: {
-    en: 'I help businesses turn ideas into web applications with React.js, Node.js, Express.js and MongoDB — from responsive interfaces to back-end APIs and databases.',
-    ar: 'أساعد الشركات وأصحاب المشاريع على تحويل أفكارهم إلى تطبيقات ويب باستخدام React.js و Node.js و Express.js و MongoDB — من الواجهات المتجاوبة إلى الباك إند وواجهات API وقواعد البيانات.',
+    en: "I'm Abdullah, a full-stack developer specializing in the MERN stack. I help businesses build user-friendly websites, dashboards, and web applications, from defining requirements to deployment.",
+    ar: 'أنا عبدالله، مطور ويب متكامل متخصص في MERN Stack. أساعد الشركات وأصحاب المشاريع على بناء مواقع ولوحات تحكم وتطبيقات ويب سهلة الاستخدام، من تحديد المتطلبات حتى النشر.',
+  },
+  footerIntro: {
+    en: 'Abdullah, a full-stack MERN developer helping businesses build websites and web applications and improve existing projects.',
+    ar: 'عبدالله، مطور ويب متكامل متخصص في MERN Stack. أساعد الشركات وأصحاب المشاريع على بناء مواقع وتطبيقات ويب وتطوير مشاريعهم الحالية.',
   },
   location: {
     en: 'Palestine — working with clients worldwide',

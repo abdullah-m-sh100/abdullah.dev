@@ -44,6 +44,9 @@ const FLOW_PATH = 'M 520 80 C 640 130, 700 230, 640 300 C 580 370, 640 470, 520 
 
 const pct = (value: number, of: number) => `${(value / of) * 100}%`;
 
+/** Custom properties on an inline style, which `CSSProperties` does not type. */
+const vars = (properties: Record<string, string>) => properties as CSSProperties;
+
 /**
  * The Home hero's visual: the Flow mark, built around Abdullah.
  *
@@ -70,27 +73,44 @@ const pct = (value: number, of: number) => `${(value / of) * 100}%`;
  * header beside it and the role is the headline, so a fourth floating card only
  * repeated them and covered the photo; three labelled tiers are the content.
  *
- * Below `sm` the tier chips are hidden: at phone width they would cover the
- * curve. The nodes still carry the motif, and the stack is named in text right
- * under the hero.
+ * Below `sm` there is no room for a curve with cards hanging off it, so the
+ * same content is laid out as a column: the portrait in its ring on one side,
+ * the three tiers beside it on a vertical hairline. Both layouts are one set
+ * of elements, restyled at `sm`, so nothing is rendered or downloaded twice.
  */
 export function HeroVisual({ image, locale, nodes, className }: HeroVisualProps) {
   return (
-    <div className={cn('relative mx-auto aspect-[720/600] w-full max-w-xl lg:max-w-none', className)}>
-      {/* Portrait, clipped to the mark's circle. */}
+    <div
+      className={cn(
+        'relative mx-auto flex w-full max-w-sm items-center gap-6',
+        'sm:block sm:aspect-[720/600] sm:max-w-xl lg:max-w-none',
+        className,
+      )}
+    >
+      {/*
+        Portrait, clipped to the mark's circle. Below `sm` it is an ordinary
+        flex item with a ring; from `sm` it is placed on the SVG's grid by the
+        three custom properties — one element serves both layouts, so the image
+        is requested once.
+      */}
       <div
-        className="group bg-surface absolute aspect-square overflow-hidden rounded-full"
-        style={{
-          insetInlineStart: pct(PORTRAIT.cx - PORTRAIT.r, VIEW.w),
-          top: pct(PORTRAIT.cy - PORTRAIT.r, VIEW.h),
-          width: pct(PORTRAIT.r * 2, VIEW.w),
-        }}
+        className={cn(
+          // `m-1.5` keeps the ring (2px + 4px offset) inside the page gutter.
+          'group bg-surface relative m-1.5 aspect-square w-[46%] shrink-0 overflow-hidden rounded-full sm:m-0',
+          'ring-accent/35 ring-offset-background ring-2 ring-offset-4',
+          'sm:absolute sm:inset-s-(--px) sm:top-(--py) sm:w-(--pw) sm:ring-0 sm:ring-offset-0',
+        )}
+        style={vars({
+          '--px': pct(PORTRAIT.cx - PORTRAIT.r, VIEW.w),
+          '--py': pct(PORTRAIT.cy - PORTRAIT.r, VIEW.h),
+          '--pw': pct(PORTRAIT.r * 2, VIEW.w),
+        })}
       >
         <Image
           src={image.src}
           alt={localize(image.alt, locale)}
           fill
-          sizes="(min-width: 1024px) 20rem, 56vw"
+          sizes="(min-width: 1024px) 20rem, (min-width: 640px) 56vw, 46vw"
           quality={85}
           preload
           className="object-cover object-top transition-transform duration-(--duration-slow) ease-out motion-safe:group-hover:scale-[1.03]"
@@ -102,7 +122,7 @@ export function HeroVisual({ image, locale, nodes, className }: HeroVisualProps)
         aria-hidden="true"
         focusable="false"
         data-decoration=""
-        className="absolute inset-0 size-full overflow-visible rtl:-scale-x-100"
+        className="absolute inset-0 hidden size-full overflow-visible sm:block rtl:-scale-x-100"
       >
         {/* The mark's circle, and a quieter dashed orbit outside it. */}
         <circle
@@ -160,30 +180,55 @@ export function HeroVisual({ image, locale, nodes, className }: HeroVisualProps)
         </circle>
       </svg>
 
-      {/* Tier chips, each on the portrait side of its node. */}
-      {NODE_POINTS.map((point, index) => {
-        const node = nodes[index];
-        if (!node) return null;
-        const style: CSSProperties = {
-          insetInlineEnd: pct(VIEW.w - point.x, VIEW.w),
-          top: pct(point.y, VIEW.h),
-        };
+      {/*
+        The three tiers. Below `sm` they are a short vertical list beside the
+        portrait, joined by a hairline with a dot per tier (copper and larger for
+        the server, as in the mark). From `sm` the wrapper is `display: contents`
+        and each tier becomes a card on its own node of the curve.
+      */}
+      <div
+        className={cn(
+          'relative flex min-w-0 flex-1 flex-col gap-6 ps-5',
+          'before:bg-border-strong before:absolute before:inset-s-[3px] before:inset-y-2 before:w-px',
+          'sm:contents sm:before:hidden',
+        )}
+      >
+        {NODE_POINTS.map((point, index) => {
+          const node = nodes[index];
+          if (!node) return null;
+          const isServer = index === 1;
 
-        return (
-          <div
-            key={node.tier}
-            style={style}
-            className="border-hairline border-border bg-surface shadow-raised absolute me-5 hidden -translate-y-1/2 rounded-lg px-3.5 py-2 sm:block"
-          >
-            <p className="text-subtle-foreground text-label whitespace-nowrap ltr:uppercase">
-              {String(index + 1).padStart(2, '0')} · {node.tier}
-            </p>
-            <p dir="ltr" className="text-foreground mt-0.5 text-sm font-semibold whitespace-nowrap rtl:text-end">
-              {node.tech}
-            </p>
-          </div>
-        );
-      })}
+          return (
+            <div
+              key={node.tier}
+              style={vars({
+                '--cx': pct(VIEW.w - point.x, VIEW.w),
+                '--cy': pct(point.y, VIEW.h),
+              })}
+              className={cn(
+                'relative',
+                'sm:border-hairline sm:border-border sm:bg-surface sm:shadow-raised sm:absolute sm:inset-e-(--cx) sm:top-(--cy) sm:me-5 sm:-translate-y-1/2 sm:rounded-lg sm:px-3.5 sm:py-2',
+              )}
+            >
+              <span
+                aria-hidden="true"
+                className={cn(
+                  'absolute rounded-full sm:hidden',
+                  isServer ? 'bg-(--flow-node) -start-[22px] top-0.5 size-3' : 'bg-(--flow-node-outer) -start-5 top-1 size-2',
+                )}
+              />
+              <p className="text-subtle-foreground text-label ltr:uppercase sm:whitespace-nowrap">
+                {/* The ordinal is dropped on a phone, where the column is too narrow to keep "01 · INTERFACE" on one line. */}
+                <span className="hidden sm:inline">{String(index + 1).padStart(2, '0')} · </span>
+                {node.tier}
+              </p>
+              <p dir="ltr" className="text-foreground mt-0.5 text-sm font-semibold sm:whitespace-nowrap rtl:text-end">
+                {node.tech}
+              </p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

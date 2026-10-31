@@ -31,8 +31,10 @@ export async function SiteFooter() {
   const socialLinks = getSocialLinks();
   const year = new Date().getFullYear();
 
+  // The 1px shadow on the footer covers the sub-pixel gap a fractional section
+  // height can leave above it, which showed as a Bone hairline on phones.
   return (
-    <footer className="tone-midnight bg-background text-foreground relative mt-auto overflow-hidden">
+    <footer className="tone-midnight bg-background text-foreground relative mt-auto overflow-hidden shadow-[0_-1px_0_0_var(--background)]">
       {/* Static: the footer is rarely in view, so it need not hold an animation. */}
       <FlowBackground
         lines={2}
@@ -49,7 +51,7 @@ export async function SiteFooter() {
               {localize(personal.tagline, locale)}
             </p>
             <p className="text-muted-foreground mt-2 text-sm">
-              {localize(personal.intro, locale)}
+              {localize(personal.footerIntro, locale)}
             </p>
 
             {socialLinks.length > 0 ? (

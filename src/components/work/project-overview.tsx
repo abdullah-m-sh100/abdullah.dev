@@ -45,9 +45,14 @@ export function ProjectOverview({ project, locale, labels }: ProjectOverviewProp
             <h2 id="case-study-overview" className="text-h3">
               {labels.title}
             </h2>
-            <p className="text-muted-foreground mt-4 max-w-prose-comfortable leading-relaxed">
-              {localize(project.description, locale)}
-            </p>
+            {/* A description can be two short paragraphs, separated by a blank line. */}
+            <div className="text-muted-foreground mt-4 flex max-w-prose-comfortable flex-col gap-4 leading-relaxed">
+              {localize(project.description, locale)
+                .split('\n\n')
+                .map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+            </div>
           </Reveal>
 
           <Reveal index={1} variant="slide-start" className="lg:col-span-5">

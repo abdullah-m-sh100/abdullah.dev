@@ -17,6 +17,12 @@ export const defaultLocale: Locale = 'en';
 /** Cookie that stores the visitor's explicit language preference. */
 export const LOCALE_COOKIE_NAME = 'NEXT_LOCALE';
 
+/**
+ * Channel other tabs are told on when this one changes the language, so they
+ * re-render their layout straight away instead of on their next navigation.
+ */
+export const LOCALE_SYNC_CHANNEL = 'locale-sync';
+
 /** One year, in seconds. */
 export const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 

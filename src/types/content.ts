@@ -45,13 +45,18 @@ export type PersonalInfo = {
   role: LocalizedText;
   specialization: LocalizedText;
   /**
-   * The core brand line: "Ideas into Web Applications." Rendered both as the
-   * emphasised half of the Home `<h1>` and standalone as a pull-quote, so it
-   * has to read as a complete thought on its own.
+   * The standalone brand line: "Turning ideas into web applications." Used as
+   * the About and Home pull-quote, the footer line and the WebSite JSON-LD
+   * description, so it has to read as a complete thought on its own.
    */
   tagline: LocalizedText;
-  /** Leads the Home `<h1>`, with `tagline` following it in copper. */
-  headline: LocalizedText;
+  /**
+   * The Home `<h1>`, in two parts so the second can carry the one copper
+   * emphasis: `lead` then `emphasis`, set on separate lines.
+   */
+  heroTitle: { lead: LocalizedText; emphasis: LocalizedText };
+  /** Short bio used by the footer, where the full `intro` is too long. */
+  footerIntro: LocalizedText;
   /** Supporting hero paragraph. */
   intro: LocalizedText;
   location: LocalizedText;
@@ -111,6 +116,13 @@ export type Skill = {
   id: string;
   /** Technology names are not translated. */
   name: string;
+  /**
+   * Set on descriptive skills ("Responsive Design", "Testing") that read as
+   * plain words and so need a real Arabic form. Technology and brand names
+   * (React.js, MongoDB, Git) leave it unset and render as `name` in both
+   * languages.
+   */
+  label?: LocalizedText;
   level: SkillLevel;
   /** Shown in the Home technology strip. */
   highlighted?: boolean;
@@ -169,6 +181,11 @@ export type Project = {
   githubUrl?: string;
   challenge?: LocalizedText;
   solution?: LocalizedText;
+  /**
+   * Work that is planned but not built. Shown under its own heading, so a
+   * future capability can never read as a current one.
+   */
+  plannedWork?: LocalizedText;
   responsibilities?: LocalizedText[];
   /**
    * Notable product/engineering decisions worth calling out — e.g. why

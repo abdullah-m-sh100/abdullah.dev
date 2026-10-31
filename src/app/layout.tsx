@@ -4,6 +4,7 @@ import { getLocale, getMessages, getTranslations } from 'next-intl/server';
 import type { ReactNode } from 'react';
 
 import { elMessiri, fraunces, spaceMono, tajawal } from '@/app/fonts';
+import { LocaleSync } from '@/components/layout/locale-sync';
 import { SiteFooter } from '@/components/layout/site-footer';
 import { SiteHeader } from '@/components/layout/site-header';
 import { SkipLink } from '@/components/layout/skip-link';
@@ -77,6 +78,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           dangerouslySetInnerHTML={{ __html: serializeJsonLd(buildSiteJsonLd(locale)) }}
         />
         <NextIntlClientProvider messages={clientMessages}>
+          <LocaleSync />
           <SkipLink />
           <SiteHeader />
           <main id="main-content" className="flex-1">

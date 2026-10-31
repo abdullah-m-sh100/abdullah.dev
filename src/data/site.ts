@@ -24,8 +24,8 @@ export const contact: ContactInfo = {
   phone: personal.phone,
   location: personal.location,
   responseTime: {
-    en: "Usually replies within one business day",
-    ar: "أرد عادةً خلال يوم عمل واحد",
+    en: "I usually reply within one business day.",
+    ar: "أرد عادةً خلال يوم عمل واحد.",
   },
   availability: {
     en: "Open to freelance projects and long-term collaborations",
@@ -36,21 +36,22 @@ export const contact: ContactInfo = {
 /**
  * The closing invitation reused by the Home page and internal pages.
  *
- * Phrased around the whole application rather than an interface, so a visitor
- * who needs an API or a database does not read this as out of scope.
+ * Phrased around the visitor's project rather than a technique, so someone
+ * with an idea, a link to a site they already have, or an improvement in mind
+ * all read it as written for them.
  */
 export const cta: CallToAction = {
   eyebrow: { en: "Next step", ar: "الخطوة التالية" },
   title: {
-    en: "Have a web application to build?",
-    ar: "لديك تطبيق ويب تريد بناءه؟",
+    en: "Have a project or an improvement in mind?",
+    ar: "هل لديك مشروع أو تطوير تحتاجه؟",
   },
   description: {
-    en: "A full web application, an API, a database, or a fix to something you already have — tell me what you are building and what it needs to achieve, and I will reply with a clear plan.",
-    ar: "تطبيق ويب كامل أو واجهة API أو قاعدة بيانات أو إصلاح لمشروع قائم — أخبرني بما تبنيه وما تريد تحقيقه، وسأرد عليك بخطة واضحة.",
+    en: "Share your idea or a link to your current project so we can discuss what you need and the next step.",
+    ar: "شارك معي فكرتك أو رابط مشروعك الحالي، لنناقش المطلوب والخطوة المناسبة للبدء.",
   },
   primary: {
-    label: { en: "Start a project", ar: "ابدأ مشروعًا" },
+    label: { en: "Discuss your project", ar: "ناقش مشروعك معي" },
     href: "/contact",
   },
   secondary: {

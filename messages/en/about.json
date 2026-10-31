@@ -1,17 +1,17 @@
 {
   "hero": {
     "eyebrow": "About",
-    "title": "The developer behind the interface and the API",
-    "description": "How I approach full-stack work, the MERN stack I rely on, and the experience behind it — building interfaces, the APIs they run on, and the data layer underneath."
+    "title": "Meet Abdullah and see how I work",
+    "description": "I'm a MERN stack developer working with businesses to build user-friendly web applications that can grow with their needs. Explore my experience, the technologies I use, and how I work with clients."
   },
   "intro": {
     "title": "Who I am",
-    "audienceTitle": "Best fit for"
+    "audienceTitle": "Who I work with"
   },
   "philosophy": {
     "eyebrow": "Philosophy",
-    "title": "Ideas into web applications, deliberately",
-    "description": "Four outcomes I hold every project to, regardless of stack or timeline."
+    "title": "What I focus on in every project",
+    "description": "A clear user experience, reliable performance, and code that is easy to maintain and extend."
   },
   "stats": {
     "title": "Experience at a glance"
@@ -19,12 +19,12 @@
   "skills": {
     "eyebrow": "Technology",
     "title": "What I build with",
-    "description": "Grouped by what each area does for the product, not by a self-assigned score."
+    "description": "The technologies I use across interfaces, back-end services, databases, and development workflows."
   },
   "experience": {
     "eyebrow": "Journey",
-    "title": "Professional experience",
-    "description": "Where the work has actually happened.",
+    "title": "Work experience and training",
+    "description": "Highlights from my web development work and training.",
     "present": "Present"
   },
   "principles": {

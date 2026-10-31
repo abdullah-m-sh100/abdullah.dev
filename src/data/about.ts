@@ -14,26 +14,18 @@ import type { AboutInfo } from '@/types/content';
 export const about: AboutInfo = {
   summary: [
     {
-      en: 'I am a full-stack web developer working with the MERN stack — MongoDB, Express.js, React.js and Node.js. I build the interface, the API behind it and the database underneath, and I connect the three into one working application.',
-      ar: 'أنا مطور ويب متكامل أعمل بـ MERN Stack — MongoDB و Express.js و React.js و Node.js. أبني الواجهة وواجهة API خلفها وقاعدة البيانات تحتها، وأربط الثلاثة في تطبيق واحد يعمل.',
+      en: "I'm Abdullah, a full-stack developer specializing in MongoDB, Express.js, React.js, and Node.js. I build interfaces, back-end services, and databases, bringing them together into one application.",
+      ar: 'أنا عبدالله، مطور ويب متكامل متخصص في MongoDB وExpress.js وReact.js وNode.js. أطوّر واجهات المستخدم والخدمات الخلفية وقواعد البيانات، وأربطها لتعمل كتطبيق واحد.',
     },
     {
-      en: 'On the front end I work with React.js and Next.js, and I use TypeScript where it keeps a growing codebase safe to change. On the back end I build REST APIs with Node.js and Express.js, model the data in MongoDB around the queries the application actually makes, and handle the authentication, validation and error states in between.',
-      ar: 'في الواجهة الأمامية أعمل بـ React.js و Next.js، وأستخدم TypeScript حيث يجعل الكود المتنامي آمنًا للتعديل. وفي الباك إند أبني واجهات REST API بـ Node.js و Express.js، وأصمّم البيانات في MongoDB حسب الاستعلامات التي ينفّذها التطبيق فعليًا، وأتولّى المصادقة والتحقق من المدخلات ومعالجة الأخطاء بينهما.',
-    },
-    {
-      en: 'I care about code that the next person can read and extend — clear structure, reusable components, and typed contracts between the layers. I am based in Palestine and work remotely with startups, e-commerce brands and project owners who need an application they can keep building on.',
-      ar: 'يهمّني أن يكون الكود مفهومًا وقابلًا للتطوير من بعدي: بنية واضحة ومكوّنات قابلة لإعادة الاستخدام وعقود محدّدة الأنواع بين الطبقات. أعمل من فلسطين عن بُعد مع شركات ناشئة ومتاجر إلكترونية وأصحاب مشاريع يحتاجون تطبيقًا يمكنهم البناء عليه مستقبلًا.',
+      en: 'Based in Palestine, I work remotely with startups, online stores, and business owners. I focus on understanding requirements, communicating clearly, and writing organized code that is easy to maintain and extend.',
+      ar: 'أعمل عن بُعد من فلسطين مع الشركات الناشئة والمتاجر وأصحاب المشاريع. أركز على فهم المطلوب، والتواصل الواضح، وكتابة كود منظّم يمكن صيانته وتطويره لاحقًا.',
     },
   ],
   preview: [
     {
-      en: 'I am a full-stack web developer working with the MERN stack — I build React.js interfaces, Node.js and Express.js APIs, and the MongoDB data layer underneath them.',
-      ar: 'مطور ويب متكامل أعمل بـ MERN Stack — أبني واجهات بـ React.js، وواجهات API بـ Node.js و Express.js، وطبقة بيانات MongoDB تحتها.',
-    },
-    {
-      en: 'Clean code, clear structure, and applications that keep performing as the product grows.',
-      ar: 'كود نظيف وبنية واضحة وتطبيقات تحافظ على أدائها مع نمو المنتج.',
+      en: 'I bring the interface, back end, and database together in one complete application. I focus on a clear user experience, well-organized code, and room to add features as your project grows.',
+      ar: 'أربط واجهة المستخدم والخادم وقاعدة البيانات في تطبيق متكامل. أركز على وضوح تجربة الاستخدام، وتنظيم الكود، وسهولة إضافة الخصائص مع تطور مشروعك.',
     },
   ],
   values: [
@@ -41,8 +33,8 @@ export const about: AboutInfo = {
       id: 'clarity',
       title: { en: 'Clarity first', ar: 'الوضوح أولًا' },
       description: {
-        en: 'Readable structure and predictable components beat clever abstractions.',
-        ar: 'البنية الواضحة والمكوّنات المتوقّعة أفضل من التجريدات المعقّدة.',
+        en: 'An interface users understand and code developers can follow.',
+        ar: 'واجهة يفهمها المستخدم وكود يسهل على فريق التطوير قراءته.',
       },
       icon: 'eye',
     },
@@ -50,8 +42,8 @@ export const about: AboutInfo = {
       id: 'performance',
       title: { en: 'Performance as a feature', ar: 'الأداء ميزة أساسية' },
       description: {
-        en: 'Fast interfaces and efficient queries are part of the deliverable, not an afterthought.',
-        ar: 'الواجهات السريعة والاستعلامات الفعّالة جزء من التسليم وليست خطوة لاحقة.',
+        en: 'Reviewing page speed and application responsiveness to improve the user experience.',
+        ar: 'مراجعة سرعة الصفحات واستجابة التطبيق وتحسين ما يؤثر في تجربة المستخدم.',
       },
       icon: 'gauge',
     },
@@ -59,17 +51,17 @@ export const about: AboutInfo = {
       id: 'accessibility',
       title: { en: 'Accessible by default', ar: 'سهولة الوصول افتراضيًا' },
       description: {
-        en: 'Keyboard support, semantics and contrast are built in from the start.',
-        ar: 'دعم لوحة المفاتيح والدلالات والتباين مبنية من البداية.',
+        en: 'Considering keyboard navigation, readable content, contrast, and screen-reader support.',
+        ar: 'مراعاة التنقل بلوحة المفاتيح، ووضوح النصوص، والتباين، ودعم قارئات الشاشة.',
       },
       icon: 'accessibility',
     },
     {
       id: 'maintainability',
-      title: { en: 'Built to be extended', ar: 'قابلية التوسّع' },
+      title: { en: 'Built to be extended', ar: 'قابلية التطوير' },
       description: {
-        en: 'Typed contracts between the interface, the API and the data keep future work cheap.',
-        ar: 'العقود محدّدة الأنواع بين الواجهة وواجهة API والبيانات تقلّل تكلفة التطوير لاحقًا.',
+        en: 'Organizing the application so future features and changes are easier to implement.',
+        ar: 'تنظيم التطبيق بحيث تكون إضافة الخصائص والتعديلات اللاحقة أسهل.',
       },
       icon: 'layers',
     },
@@ -78,44 +70,44 @@ export const about: AboutInfo = {
     {
       id: 'discover',
       order: 1,
-      title: { en: 'Understand', ar: 'الفهم' },
+      title: { en: 'Understand the project', ar: 'فهم المشروع' },
       description: {
-        en: 'Clarify the goal, the audience and the constraints before writing code.',
-        ar: 'توضيح الهدف والجمهور والقيود قبل كتابة أي كود.',
+        en: 'We define the goals, users, and required features.',
+        ar: 'نحدد الهدف والمستخدمين والخصائص المطلوبة.',
       },
     },
     {
       id: 'structure',
       order: 2,
-      title: { en: 'Structure', ar: 'البناء الهيكلي' },
+      title: { en: 'Plan', ar: 'التخطيط' },
       description: {
-        en: 'Define the data model, the API surface and the component tree up front.',
-        ar: 'تحديد نموذج البيانات وواجهات API وشجرة المكوّنات منذ البداية.',
+        en: 'We organize the requirements, application structure, and implementation steps.',
+        ar: 'ننظم المتطلبات وهيكل التطبيق وخطوات التنفيذ.',
       },
     },
     {
       id: 'build',
       order: 3,
-      title: { en: 'Build', ar: 'التنفيذ' },
+      title: { en: 'Build', ar: 'التطوير' },
       description: {
-        en: 'Implement the interface and the API together, against real data.',
-        ar: 'تنفيذ الواجهة وواجهة API معًا، باستخدام بيانات حقيقية.',
+        en: 'I build the features and share progress for your review.',
+        ar: 'أطوّر الخصائص وأشاركك التقدم للمراجعة.',
       },
     },
     {
       id: 'refine',
       order: 4,
-      title: { en: 'Measure & refine', ar: 'القياس والتحسين' },
+      title: { en: 'Test & deliver', ar: 'الاختبار والتسليم' },
       description: {
-        en: 'Audit performance, accessibility and SEO, then tighten what matters.',
-        ar: 'مراجعة الأداء وسهولة الوصول وتحسين محركات البحث ثم تحسين ما يهم فعلًا.',
+        en: 'I review functionality, user experience, and performance, then prepare the project for delivery according to the agreed scope.',
+        ar: 'أراجع الوظائف وتجربة الاستخدام والأداء، ثم أجهّز المشروع للتسليم وفق النطاق المتفق عليه.',
       },
     },
   ],
   audience: [
-    { en: 'Startups shipping their first web application', ar: 'شركات ناشئة تطلق أول تطبيق ويب لها' },
-    { en: 'E-commerce brands that need a faster storefront', ar: 'متاجر إلكترونية تحتاج واجهة أسرع' },
-    { en: 'Project owners who need both a front end and an API', ar: 'أصحاب مشاريع يحتاجون واجهة وواجهة API معًا' },
-    { en: 'Teams modernizing a legacy web application', ar: 'فرق تُحدّث تطبيق ويب قديمًا' },
+    { en: 'Startups launching a new web application', ar: 'شركات ناشئة تطلق تطبيق ويب جديدًا' },
+    { en: 'Online stores improving the shopping experience', ar: 'متاجر تطوّر تجربة التسوق' },
+    { en: 'Business owners who need a complete application', ar: 'أصحاب مشاريع يحتاجون تطبيقًا متكاملًا' },
+    { en: 'Teams improving an existing website or application', ar: 'فرق تطوّر مواقع أو تطبيقات قائمة' },
   ],
 };

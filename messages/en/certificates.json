@@ -2,7 +2,7 @@
   "hero": {
     "eyebrow": "Credentials",
     "title": "Certificates and continued learning",
-    "description": "Verified credentials and structured programs in web development, React and modern web fundamentals — kept current as the ecosystem changes."
+    "description": "Programs and courses I've completed in web development and AI tools, with issuing organizations and relevant skills listed for each certificate."
   },
   "listing": {
     "countLabel": "{count, plural, one {# certificate} other {# certificates}}"

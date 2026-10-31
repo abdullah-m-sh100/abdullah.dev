@@ -32,7 +32,7 @@ export const stats: Stat[] = [
     id: 'production',
     value: 6,
     suffix: '',
-    label: { en: 'Products in production', ar: 'منتجات في بيئة الإنتاج' },
+    label: { en: 'Live projects', ar: 'مشاريع منشورة وقيد الاستخدام' },
     icon: 'rocket',
   },
 ];

@@ -9,8 +9,15 @@ import type { Service } from '@/types/content';
  * two-column grid and the supporting group in a three-column one, so six and
  * three fill both cleanly without an orphan card.
  *
- * Each `summary` is one line — it is the only copy a supporting card shows, so
- * it has to say what the client gets, not what the stack is.
+ * Written for a client who is not a developer: each `description` says what
+ * they get and what it does for their project, and keeps the technical term
+ * (MERN, Node.js, WCAG) only where it names the thing being delivered. Each
+ * `summary` is one line — it is the only copy a card outside the feature
+ * layout shows. `slug` doubles as the anchor id the Services hero links to, so
+ * it is deliberately unchanged.
+ *
+ * Nothing here promises an outcome that depends on someone else — in
+ * particular nothing promises a search ranking.
  */
 export const services: Service[] = [
   {
@@ -21,17 +28,17 @@ export const services: Service[] = [
     icon: 'layers',
     title: { en: 'Full-Stack Web Development', ar: 'تطوير تطبيقات ويب متكاملة' },
     summary: {
-      en: 'One team for the interface, the API and the database.',
-      ar: 'جهة واحدة تتولّى الواجهة وواجهات API وقاعدة البيانات.',
+      en: 'An interface, back end, and database built together as one application.',
+      ar: 'واجهة وخادم وقاعدة بيانات تُبنى معًا كتطبيق واحد.',
     },
     description: {
-      en: 'A complete web application built end to end — a React.js interface, a Node.js and Express.js API behind it, and MongoDB underneath — so the three layers are designed against each other instead of being stitched together late.',
-      ar: 'تطبيق ويب كامل يُبنى من البداية إلى النهاية: واجهة بـ React.js، وواجهة API بـ Node.js و Express.js خلفها، وقاعدة بيانات MongoDB تحتها — بحيث تُصمَّم الطبقات الثلاث معًا لا أن تُجمَع في آخر مرحلة.',
+      en: "Build a complete MERN stack application with a user interface, back-end services, and database, based on your project's requirements.",
+      ar: 'بناء تطبيق يشمل واجهة المستخدم والخادم وقاعدة البيانات باستخدام MERN Stack، وفق الخصائص المطلوبة لمشروعك.',
     },
     highlights: [
-      { en: 'Interface, API and database in one build', ar: 'الواجهة وواجهات API وقاعدة البيانات في مسار واحد' },
-      { en: 'One person accountable for the whole flow', ar: 'مسؤول واحد عن التدفّق بالكامل' },
-      { en: 'Deployed and handed over working', ar: 'تسليم المشروع منشورًا وجاهزًا للعمل' },
+      { en: 'A connected interface, back end, and database', ar: 'واجهة وخادم وقاعدة بيانات مترابطة' },
+      { en: 'A clear scope and implementation stages', ar: 'نطاق عمل ومراحل تنفيذ واضحة' },
+      { en: 'The project prepared for launch and handover', ar: 'تجهيز المشروع للنشر والتسليم' },
     ],
   },
   {
@@ -40,19 +47,19 @@ export const services: Service[] = [
     order: 2,
     featured: true,
     icon: 'component',
-    title: { en: 'React & Next.js Development', ar: 'تطوير بـ React و Next.js' },
+    title: { en: 'React & Next.js Front-End Development', ar: 'تطوير واجهات بـReact وNext.js' },
     summary: {
-      en: 'Responsive, maintainable interfaces that scale with the product.',
-      ar: 'واجهات متجاوبة وقابلة للصيانة تتوسّع مع نمو المنتج.',
+      en: 'Responsive interfaces that are easy to use and easy to extend.',
+      ar: 'واجهات متجاوبة سهلة الاستخدام وسهلة التطوير لاحقًا.',
     },
     description: {
-      en: 'Typed, reusable component systems with clear data contracts, built mobile-first with logical CSS so the same layout works in Arabic and English without a second codebase. Next.js is used where server rendering and routing actually pay off.',
-      ar: 'أنظمة مكوّنات قابلة لإعادة الاستخدام ومحدّدة الأنواع بعقود بيانات واضحة، تُبنى بمنهج الجوال أولًا مع خصائص CSS المنطقية ليعمل التخطيط نفسه بالعربية والإنجليزية دون نسخة ثانية من الكود. ويُستخدم Next.js حيث يقدّم العرض من الخادم والتوجيه قيمة فعلية.',
+      en: 'Turn designs into user-friendly, responsive interfaces, with Arabic and English support when needed and reusable components that make future changes easier.',
+      ar: 'تحويل التصميم إلى واجهة سهلة الاستخدام ومتوافقة مع الجوال، مع دعم العربية والإنجليزية عند الحاجة، وتنظيم المكونات لتسهيل تطويرها لاحقًا.',
     },
     highlights: [
-      { en: 'Reusable component systems', ar: 'أنظمة مكوّنات قابلة لإعادة الاستخدام' },
-      { en: 'Full RTL and LTR support', ar: 'دعم كامل للاتجاهين' },
-      { en: 'Strong TypeScript typing', ar: 'كتابة قوية بـ TypeScript' },
+      { en: 'Reusable components that make later changes easier', ar: 'مكونات قابلة لإعادة الاستخدام تسهّل التعديل لاحقًا' },
+      { en: 'Arabic and English, including right-to-left layouts', ar: 'دعم العربية والإنجليزية بما يشمل الاتجاه من اليمين إلى اليسار' },
+      { en: 'TypeScript, which helps catch mistakes early', ar: 'استخدام TypeScript لاكتشاف الأخطاء مبكرًا' },
     ],
   },
   {
@@ -61,19 +68,19 @@ export const services: Service[] = [
     order: 3,
     featured: true,
     icon: 'code',
-    title: { en: 'Node.js & Express.js Development', ar: 'تطوير بـ Node.js و Express.js' },
+    title: { en: 'Back-End & API Development', ar: 'تطوير الخادم وواجهات API' },
     summary: {
-      en: 'Server logic and REST APIs your front end can rely on.',
-      ar: 'منطق الخادم وواجهات REST API يمكن للواجهة الاعتماد عليها.',
+      en: "Services that manage your application's data, accounts, and permissions.",
+      ar: 'خدمات تدير بيانات التطبيق والحسابات والصلاحيات.',
     },
     description: {
-      en: 'Express.js services with routes grouped by resource, validation at the edge, authentication, and errors that return a useful status and message instead of a generic failure.',
-      ar: 'خدمات بـ Express.js بمسارات منظّمة حسب الموارد، مع التحقق من المدخلات عند الطرف، ومعالجة المصادقة، وأخطاء ترجع حالة ورسالة مفيدة بدل فشل عام غير مفهوم.',
+      en: 'Build Node.js and Express.js services for application data, user accounts, and access permissions, and connect them to the interface.',
+      ar: 'بناء الخدمات التي تدير بيانات التطبيق وحسابات المستخدمين والصلاحيات باستخدام Node.js وExpress.js، وربطها بالواجهة.',
     },
     highlights: [
-      { en: 'REST endpoints with input validation', ar: 'نقاط REST مع التحقق من المدخلات' },
-      { en: 'Authentication and protected routes', ar: 'المصادقة والمسارات المحميّة' },
-      { en: 'Predictable error responses', ar: 'استجابات أخطاء متوقّعة' },
+      { en: 'Endpoints that check data before it is saved', ar: 'نقاط وصول تتحقق من البيانات قبل حفظها' },
+      { en: 'Sign-in and access control for protected pages', ar: 'تسجيل دخول وتحكم في الصلاحيات للصفحات المحمية' },
+      { en: 'Clear error messages when something goes wrong', ar: 'رسائل خطأ واضحة عند حدوث مشكلة' },
     ],
   },
   {
@@ -82,19 +89,19 @@ export const services: Service[] = [
     order: 4,
     featured: true,
     icon: 'database',
-    title: { en: 'MongoDB Database Development', ar: 'تطوير قواعد بيانات MongoDB' },
+    title: { en: 'MongoDB Database Design', ar: 'تصميم قواعد بيانات MongoDB' },
     summary: {
-      en: 'Data modelled around how the application actually reads it.',
-      ar: 'بيانات مصمّمة حسب الطريقة التي يقرؤها بها التطبيق فعليًا.',
+      en: 'Organized data and the operations your application needs.',
+      ar: 'بيانات منظّمة والعمليات التي يحتاجها تطبيقك.',
     },
     description: {
-      en: 'Collections and schemas shaped around real queries, with the create, read, update and delete operations the application needs, plus indexes on the fields it filters by.',
-      ar: 'تصميم المجموعات والمخططات بناءً على الاستعلامات الحقيقية، مع تنفيذ عمليات الإضافة والقراءة والتعديل والحذف التي يحتاجها التطبيق، وفهرسة الحقول المستخدمة في التصفية.',
+      en: "Organize application data and relationships, implement data operations, and improve queries based on the project's needs.",
+      ar: 'تنظيم بيانات التطبيق والعلاقات بينها، وتطوير عمليات الإضافة والعرض والتعديل والحذف، وتحسين الاستعلامات حسب احتياج المشروع.',
     },
     highlights: [
-      { en: 'Schema and data modelling', ar: 'تصميم المخططات ونماذج البيانات' },
-      { en: 'Full CRUD operations', ar: 'عمليات إضافة وقراءة وتعديل وحذف كاملة' },
-      { en: 'Indexes on the fields you query', ar: 'فهارس على الحقول التي تُستعلم فعليًا' },
+      { en: 'A data structure planned around how the app uses it', ar: 'هيكل بيانات مبني على طريقة استخدام التطبيق لها' },
+      { en: 'Add, view, edit, and delete operations', ar: 'عمليات الإضافة والعرض والتعديل والحذف' },
+      { en: 'Faster searches on the fields you use most', ar: 'استعلامات أسرع على الحقول الأكثر استخدامًا في البحث' },
     ],
   },
   {
@@ -103,19 +110,19 @@ export const services: Service[] = [
     order: 5,
     featured: true,
     icon: 'plug',
-    title: { en: 'API Integration', ar: 'تكامل واجهات البرمجة' },
+    title: { en: 'Third-Party API Integration', ar: 'ربط الموقع بالخدمات الخارجية' },
     summary: {
-      en: 'Connecting your interface to a back end or a third-party service.',
-      ar: 'ربط الواجهة بالباك إند أو بخدمات خارجية.',
+      en: 'Connect your application to services such as payments, email, and messaging.',
+      ar: 'ربط تطبيقك بخدمات مثل الدفع والبريد والرسائل.',
     },
     description: {
-      en: 'REST integrations with typed responses, sensible caching, and clear loading, error and empty states — whether the API is mine, yours, or a provider such as a payment or messaging service.',
-      ar: 'تكامل REST باستجابات محدّدة الأنواع وتخزين مؤقت مدروس وحالات تحميل وأخطاء وحالات فارغة واضحة — سواء كانت واجهة API من تطويري أو من فريقك أو من مزوّد خارجي مثل خدمات الدفع أو الرسائل.',
+      en: 'Connect your application to payment, email, messaging, and other services, with clear handling of loading states, errors, and data exchange.',
+      ar: 'ربط تطبيقك بخدمات الدفع والبريد والرسائل وغيرها، مع التعامل مع حالات التحميل والأخطاء وتبادل البيانات.',
     },
     highlights: [
-      { en: 'Typed API contracts', ar: 'عقود واجهات برمجية محدّدة الأنواع' },
-      { en: 'Third-party service integration', ar: 'التكامل مع الخدمات الخارجية' },
-      { en: 'Robust error handling', ar: 'معالجة قوية للأخطاء' },
+      { en: 'Connections to the third-party services you use', ar: 'ربط التطبيق بالخدمات الخارجية التي تستخدمها' },
+      { en: 'Loading and error states that are clear to users', ar: 'حالات تحميل وأخطاء واضحة للمستخدم' },
+      { en: 'Organized data exchange between the interface and services', ar: 'تبادل بيانات منظّم بين الواجهة والخدمات' },
     ],
   },
   {
@@ -129,17 +136,17 @@ export const services: Service[] = [
       ar: 'الصيانة وتحسين الأداء',
     },
     summary: {
-      en: 'Fixing bugs and speeding up an application that already exists.',
-      ar: 'إصلاح الأخطاء وتحسين أداء تطبيق قائم بالفعل.',
+      en: 'Fix and improve a project you already have.',
+      ar: 'إصلاح وتطوير مشروع تملكه بالفعل.',
     },
     description: {
-      en: 'Work on a codebase you already have: tracking down bugs, cutting bundle size, fixing image and font loading, and modernizing a legacy interface incrementally — measured before and after rather than assumed.',
-      ar: 'العمل على كود قائم لديك فعلًا: تتبّع الأخطاء وإصلاحها، وتقليل حجم الحزم، وإصلاح تحميل الصور والخطوط، وتحديث الواجهات القديمة تدريجيًا — مع قياس قبل وبعد لا مجرد افتراضات.',
+      en: 'Fix bugs, improve website speed, and develop features in your existing project, with checks to assess the impact of each change.',
+      ar: 'إصلاح الأخطاء، وتحسين سرعة الموقع، وتطوير الخصائص في مشروعك الحالي، مع مراجعة أثر التعديلات.',
     },
     highlights: [
-      { en: 'Bug fixing on an existing codebase', ar: 'إصلاح الأخطاء في كود قائم' },
-      { en: 'Core Web Vitals improvements', ar: 'تحسين مؤشرات الأداء الأساسية' },
-      { en: 'Incremental modernization', ar: 'تحديث تدريجي دون إيقاف العمل' },
+      { en: 'Bug fixes in your existing project', ar: 'إصلاح الأخطاء في مشروعك الحالي' },
+      { en: 'Faster pages, measured with Core Web Vitals', ar: 'تحسين سرعة الصفحات ومؤشرات الأداء (Core Web Vitals)' },
+      { en: 'Step-by-step updates to modernize the interface', ar: 'تحديث الواجهة تدريجيًا على مراحل' },
     ],
   },
 
@@ -151,19 +158,19 @@ export const services: Service[] = [
     order: 7,
     featured: false,
     icon: 'smartphone',
-    title: { en: 'Responsive UI Implementation', ar: 'تنفيذ واجهات متجاوبة' },
+    title: { en: 'Responsive Design Implementation', ar: 'تحويل التصميم إلى واجهة متجاوبة' },
     summary: {
-      en: 'Design files turned into interfaces that hold up on every screen.',
-      ar: 'تحويل ملفات التصميم إلى واجهات تعمل بثبات على كل الشاشات.',
+      en: 'Designs that look right on phones, tablets, and desktop screens.',
+      ar: 'تصاميم تظهر بصورة سليمة على الجوال والأجهزة اللوحية والكمبيوتر.',
     },
     description: {
-      en: 'Designs implemented mobile-first with logical CSS properties, so the same layout works in both LTR and RTL without a second codebase.',
-      ar: 'تنفيذ التصاميم بمنهج الجوال أولًا مع خصائص CSS المنطقية، ليعمل التخطيط نفسه في الاتجاهين دون الحاجة إلى نسخة ثانية من الكود.',
+      en: 'Implement designs that work clearly and consistently across phones, tablets, and desktop screens.',
+      ar: 'تنفيذ ملفات التصميم لتعمل بصورة واضحة ومتناسقة على الجوال والأجهزة اللوحية والكمبيوتر.',
     },
     highlights: [
-      { en: 'Mobile-first layouts', ar: 'تخطيطات تبدأ من الجوال' },
-      { en: 'Design-system fidelity', ar: 'التزام دقيق بنظام التصميم' },
-      { en: 'Verified on real device widths', ar: 'مُختبرة على عروض أجهزة حقيقية' },
+      { en: 'Layouts that start from the phone screen', ar: 'تخطيطات تبدأ من شاشة الجوال' },
+      { en: 'A close match to your approved design', ar: 'مطابقة دقيقة للتصميم المعتمد' },
+      { en: 'Checked at real device widths', ar: 'مراجعة على عروض أجهزة حقيقية' },
     ],
   },
   {
@@ -172,19 +179,19 @@ export const services: Service[] = [
     order: 8,
     featured: false,
     icon: 'accessibility',
-    title: { en: 'Accessibility Improvements', ar: 'تحسين سهولة الوصول' },
+    title: { en: 'Accessibility Improvements', ar: 'تحسين إمكانية الوصول' },
     summary: {
-      en: 'Interfaces that work for keyboard and screen-reader users.',
-      ar: 'واجهات تعمل لمستخدمي لوحة المفاتيح وقارئات الشاشة.',
+      en: 'A site that more people can use, including keyboard and screen-reader users.',
+      ar: 'موقع يستطيع عدد أكبر من الناس استخدامه، ومنهم مستخدمو لوحة المفاتيح وقارئات الشاشة.',
     },
     description: {
-      en: 'Audits and fixes targeting WCAG 2.2 AA: semantics, focus management, contrast and reduced-motion support.',
-      ar: 'مراجعات وإصلاحات تستهدف معيار WCAG 2.2 AA: الدلالات وإدارة التركيز والتباين ودعم تقليل الحركة.',
+      en: 'Improve keyboard navigation, content clarity, contrast, and screen-reader support.',
+      ar: 'تحسين التنقل بلوحة المفاتيح، ووضوح المحتوى، والتباين، ودعم قارئات الشاشة.',
     },
     highlights: [
-      { en: 'WCAG 2.2 AA audits', ar: 'مراجعات وفق WCAG 2.2 AA' },
-      { en: 'Keyboard and focus fixes', ar: 'إصلاحات لوحة المفاتيح والتركيز' },
-      { en: 'Contrast corrections', ar: 'تصحيح التباين' },
+      { en: 'A review against the WCAG 2.2 AA guidelines', ar: 'مراجعة وفق إرشادات WCAG 2.2 AA' },
+      { en: 'Keyboard navigation and focus fixes', ar: 'إصلاح التنقل بلوحة المفاتيح وحركة التركيز' },
+      { en: 'Contrast and readability corrections', ar: 'تصحيح التباين ووضوح القراءة' },
     ],
   },
   {
@@ -193,19 +200,19 @@ export const services: Service[] = [
     order: 9,
     featured: false,
     icon: 'search',
-    title: { en: 'Technical SEO Foundations', ar: 'أساسيات تقنية لمحركات البحث' },
+    title: { en: 'Technical SEO', ar: 'تهيئة الموقع لمحركات البحث' },
     summary: {
-      en: 'Metadata and structured data handled in the rendering layer.',
-      ar: 'البيانات الوصفية والمنظّمة مُعالَجة في طبقة العرض.',
+      en: 'Pages that search engines can understand more easily.',
+      ar: 'صفحات يسهل على محركات البحث فهم محتواها.',
     },
     description: {
-      en: 'Metadata, canonical URLs, structured data and crawlable rendering handled at the framework level instead of bolted on afterwards.',
-      ar: 'البيانات الوصفية والروابط الأساسية والبيانات المنظّمة والعرض القابل للفهرسة، تُعالَج على مستوى الإطار لا كإضافة لاحقة.',
+      en: 'Improve page titles, descriptions, structure, and structured data to help search engines understand the content.',
+      ar: 'تحسين عناوين الصفحات وأوصافها وبنيتها والبيانات المنظّمة، لتسهيل فهم محتواها من محركات البحث.',
     },
     highlights: [
-      { en: 'Localized metadata', ar: 'بيانات وصفية بلغتين' },
-      { en: 'Structured data', ar: 'بيانات منظّمة' },
-      { en: 'Crawlable rendering', ar: 'عرض قابل للفهرسة' },
+      { en: 'Page titles and descriptions in both languages', ar: 'عناوين وأوصاف للصفحات باللغتين' },
+      { en: 'Structured data for your pages', ar: 'بيانات منظّمة للصفحات' },
+      { en: 'Content that search engines can read', ar: 'محتوى يمكن لمحركات البحث قراءته' },
     ],
   },
 ];

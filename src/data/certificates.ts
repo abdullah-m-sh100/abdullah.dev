@@ -26,8 +26,8 @@ export const certificates: Certificate[] = [
       ar: 'مركز شيفرة للتدريب والتطوير',
     },
     description: {
-      en: 'An intensive Front-End Web Development training program focused on building modern web interfaces and strengthening practical frontend development skills. Completed with a final grade of Excellent (A+).',
-      ar: 'برنامج تدريبي مكثف في تطوير الواجهات الأمامية ركّز على بناء واجهات ويب حديثة وتطوير المهارات العملية في الـ Front-End، وتم إكمال البرنامج بتقدير ممتاز (A+).',
+      en: 'An intensive program covering HTML, CSS, JavaScript, and responsive interface development, completed with a final grade of Excellent (A+).',
+      ar: 'برنامج مكثف في HTML وCSS وJavaScript وتطوير الواجهات المتجاوبة، أُنجز بتقدير ممتاز (A+).',
     },
     image: {
       src: '/Certificates/frontend web dev.jpg',
@@ -56,8 +56,8 @@ export const certificates: Certificate[] = [
       ar: 'غزة تك بيلدرز',
     },
     description: {
-      en: 'A 120-hour technical training program focused on React.js and modern frontend application development, including component-based UI development and practical web application building.',
-      ar: 'برنامج تدريبي تقني لمدة 120 ساعة ركّز على React.js وتطوير تطبيقات الويب الحديثة، بما يشمل بناء الواجهات باستخدام المكونات والتطبيق العملي على تطوير واجهات المستخدم.',
+      en: '120 hours of hands-on training in building interfaces and applications with React.js.',
+      ar: 'تدريب عملي لمدة 120 ساعة على تطوير واجهات وتطبيقات باستخدام React.js.',
     },
     image: {
       src: '/Certificates/react.js.jpg',
@@ -93,8 +93,8 @@ export const certificates: Certificate[] = [
       ar: 'غزة سكاي جيكس',
     },
     description: {
-      en: 'A 100-hour structured frontend development training program focused on strengthening practical web development skills and preparing participants for professional software development opportunities.',
-      ar: 'برنامج تدريبي مكثف لمدة 100 ساعة في تطوير الواجهات الأمامية، ركّز على تطوير المهارات العملية في بناء تطبيقات الويب والاستعداد للعمل في بيئات تطوير برمجية احترافية.',
+      en: 'A 100-hour training program in front-end development and working within development teams.',
+      ar: 'برنامج تدريبي لمدة 100 ساعة في تطوير الواجهات الأمامية والعمل ضمن فرق تطوير.',
     },
     image: {
       src: '/Certificates/GazaSkyGeeks-frontend.jpg',
@@ -124,8 +124,8 @@ export const certificates: Certificate[] = [
       ar: 'أكاديمية LangChain',
     },
     description: {
-      en: 'A foundational LangChain Academy course covering the core concepts of building LLM-powered applications with LangChain and Python.',
-      ar: 'دورة تأسيسية من أكاديمية LangChain تناولت المفاهيم الأساسية لبناء تطبيقات تعتمد على نماذج اللغة الكبيرة باستخدام LangChain و Python.',
+      en: 'A foundational course on building applications powered by language models with LangChain and Python.',
+      ar: 'دورة تأسيسية في بناء تطبيقات تعتمد على النماذج اللغوية باستخدام LangChain وPython.',
     },
     image: {
       src: '/Certificates/Introduction to LangChain - Python.jpg',
@@ -154,8 +154,8 @@ export const certificates: Certificate[] = [
       ar: 'Anthropic',
     },
     description: {
-      en: 'A foundational program covering practical frameworks for working effectively with AI systems, with an emphasis on understanding AI capabilities, responsible use, and effective human-AI collaboration.',
-      ar: 'برنامج تأسيسي تناول أطرًا عملية للتعامل الفعّال مع أنظمة الذكاء الاصطناعي، مع التركيز على فهم قدرات هذه الأنظمة، والاستخدام المسؤول، وتحسين التعاون بين الإنسان والذكاء الاصطناعي.',
+      en: 'A course on understanding AI capabilities and collaborating effectively and responsibly with AI tools.',
+      ar: 'دورة في فهم قدرات الذكاء الاصطناعي والتعاون الفعّال والمسؤول مع أدواته.',
     },
     image: {
       src: '/Certificates/Ai-Fluency.jpg',
@@ -184,8 +184,8 @@ export const certificates: Certificate[] = [
       ar: 'Anthropic',
     },
     description: {
-      en: 'Technical training focused on integrating Claude through the Anthropic API and understanding the fundamentals of building applications powered by Claude.',
-      ar: 'تدريب تقني ركّز على دمج Claude في التطبيقات باستخدام Anthropic API وفهم الأساسيات العملية لبناء تطبيقات تعتمد على نماذج Claude.',
+      en: 'Training on integrating Claude models into applications with the Anthropic API.',
+      ar: 'تدريب على دمج نماذج Claude في التطبيقات باستخدام Anthropic API.',
     },
     image: {
       src: '/Certificates/Building with the Claude API.jpg',
@@ -214,8 +214,8 @@ export const certificates: Certificate[] = [
       ar: 'Anthropic',
     },
     description: {
-      en: 'An introductory technical program covering the fundamentals of Claude Code and practical workflows for using AI-assisted development tools in software engineering tasks.',
-      ar: 'برنامج تقني تمهيدي تناول أساسيات Claude Code وأساليب استخدام أدوات التطوير المدعومة بالذكاء الاصطناعي بصورة عملية ضمن مهام تطوير البرمجيات.',
+      en: 'An introductory course on using Claude Code in software development tasks.',
+      ar: 'دورة تمهيدية في استخدام Claude Code ضمن مهام تطوير البرمجيات.',
     },
     image: {
       src: '/Certificates/Code CIaude.jpg',

@@ -21,11 +21,10 @@ type NavLinkProps = {
  * Navigation link with an active indicator.
  *
  * The pathname never contains a locale, so comparing it to the route directly
- * is enough. Active state is signalled three ways — colour, weight and the
- * underline — so it never depends on colour alone.
- *
- * The underline animates with `transform: scaleX`, which is symmetric and so
- * behaves identically in LTR and RTL.
+ * is enough. The current page is filled (a capsule in the bar, a full-width row
+ * in the drawer) and set in a heavier weight, and `aria-current` plus a
+ * screen-reader suffix announce it — so it never depends on colour alone. The
+ * drawer row also carries a small Sage dot.
  */
 export function NavLink({
   href,
@@ -44,27 +43,21 @@ export function NavLink({
       onClick={onNavigate}
       aria-current={isActive ? 'page' : undefined}
       className={cn(
-        'group/nav relative inline-flex items-center rounded-md transition-colors duration-(--duration-base) ease-out',
-        // The bar tightens between `md` and `lg`, where the inline nav has to
-        // share a narrow row with the logo and both switchers.
-        appearance === 'bar' ? 'px-2 py-2 text-sm lg:px-3' : 'w-full px-2 py-3 text-lg',
+        'group/nav relative inline-flex items-center transition-colors duration-(--duration-base) ease-out',
+        appearance === 'bar'
+          ? 'rounded-pill px-3.5 py-2 text-sm'
+          : 'min-h-12 w-full justify-between rounded-lg px-4 py-3 text-lg',
         isActive
-          ? 'text-foreground font-semibold'
-          : 'text-muted-foreground hover:text-foreground font-medium',
+          ? 'bg-surface-muted text-foreground font-semibold'
+          : 'text-muted-foreground hover:bg-surface-muted/60 hover:text-foreground font-medium',
         className,
       )}
     >
       {label}
 
-      <span
-        aria-hidden="true"
-        className={cn(
-          'bg-primary absolute bottom-0.5 h-0.5 rounded-full',
-          appearance === 'bar' ? 'inset-x-2 lg:inset-x-3' : 'inset-x-2',
-          'origin-center transition-transform duration-(--duration-base) ease-out',
-          isActive ? 'scale-x-100' : 'scale-x-0 group-hover/nav:scale-x-40',
-        )}
-      />
+      {appearance === 'drawer' && isActive ? (
+        <span aria-hidden="true" className="bg-secondary size-2 rounded-full" />
+      ) : null}
 
       {isActive ? <span className="sr-only"> ({currentPageLabel})</span> : null}
     </Link>

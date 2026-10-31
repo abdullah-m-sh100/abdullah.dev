@@ -6,7 +6,7 @@
   },
   "home": {
     "title": "Abdullah — Full-Stack Developer | MERN Stack",
-    "description": "I help businesses turn ideas into web applications with React.js, Node.js, Express.js and MongoDB — from responsive interfaces to back-end APIs and databases. Based in Palestine, working worldwide."
+    "description": "I'm Abdullah, a full-stack developer specializing in the MERN stack. I help businesses build user-friendly websites, dashboards, and web applications, from defining requirements to deployment. Based in Palestine, working worldwide."
   },
   "about": {
     "title": "About — Full-Stack MERN Developer",
@@ -18,15 +18,15 @@
   },
   "work": {
     "title": "Selected Projects & Case Studies",
-    "description": "Selected web projects: the problem each one solved, the technical decisions behind it, and what actually shipped to production."
+    "description": "A selection of my web development work: each project's goals, technologies, my contribution, and the main features developed."
   },
   "certificates": {
     "title": "Certificates & Credentials",
-    "description": "Verified certificates and structured programs in web development, React and modern web fundamentals — kept current as the ecosystem changes."
+    "description": "Programs and courses I've completed in web development and AI tools, with issuing organizations and relevant skills listed for each certificate."
   },
   "contact": {
     "title": "Contact — Hire a MERN Stack Developer",
-    "description": "Tell me about the web application, API or back-end you are planning. I reply within one business day with a clear, scoped plan."
+    "description": "Tell me about your project or the improvements you need. I usually reply within one business day to understand the details and discuss the next step."
   },
   "notFound": {
     "title": "Page Not Found",

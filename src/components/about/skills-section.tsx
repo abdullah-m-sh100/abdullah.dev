@@ -7,7 +7,7 @@ import { Icon } from '@/components/ui/icon';
 import { Section } from '@/components/ui/section';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { localize } from '@/i18n/localize';
-import { getSkillCategories } from '@/lib/content/profile';
+import { getSkillCategories, getSkillLabel } from '@/lib/content/profile';
 
 /**
  * Skills & technology, as categorized rows rather than the `ExpertiseStrip`
@@ -57,7 +57,7 @@ export async function SkillsSection() {
                     <ul className="flex flex-wrap gap-2">
                       {core.map((skill) => (
                         <li key={skill.id}>
-                          <Badge variant="secondary">{skill.name}</Badge>
+                          <Badge variant="secondary">{getSkillLabel(skill, locale)}</Badge>
                         </li>
                       ))}
                     </ul>
@@ -68,7 +68,7 @@ export async function SkillsSection() {
                       {supporting.map((skill) => (
                         <li key={skill.id}>
                           <Badge variant="neutral" size="sm">
-                            {skill.name}
+                            {getSkillLabel(skill, locale)}
                           </Badge>
                         </li>
                       ))}

@@ -55,13 +55,14 @@ export async function ContactCta() {
         </Reveal>
 
         <Reveal index={2}>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <ButtonLink href={cta.primary.href} size="lg">
+          {/* Equal full-width buttons on a phone, a centred pair from `sm`. */}
+          <div className="mx-auto mt-10 grid max-w-xs gap-3 sm:flex sm:max-w-none sm:flex-wrap sm:justify-center sm:gap-4">
+            <ButtonLink href={cta.primary.href} size="lg" className="w-full sm:w-auto">
               {localize(cta.primary.label, locale)}
               <ButtonArrow />
             </ButtonLink>
             {cta.secondary ? (
-              <ButtonLink href={cta.secondary.href} size="lg" variant="secondary">
+              <ButtonLink href={cta.secondary.href} size="lg" variant="secondary" className="w-full sm:w-auto">
                 {localize(cta.secondary.label, locale)}
               </ButtonLink>
             ) : null}

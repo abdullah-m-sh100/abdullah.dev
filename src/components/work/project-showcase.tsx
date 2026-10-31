@@ -75,12 +75,6 @@ export function ProjectShowcase({
           {localize(project.summary, locale)}
         </p>
 
-        {project.challenge ? (
-          <p className="border-border text-muted-foreground mt-6 border-s-2 ps-4 text-sm">
-            {localize(project.challenge, locale)}
-          </p>
-        ) : null}
-
         <TechnologyList
           technologies={project.technologies}
           label={labels.technologies}

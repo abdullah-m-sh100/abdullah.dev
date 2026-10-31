@@ -26,12 +26,6 @@ export const socialLinks: SocialLink[] = [
     label: { en: 'LinkedIn', ar: 'LinkedIn' },
   },
   {
-    id: 'upwork',
-    platform: 'upwork',
-    url: 'https://www.upwork.com/freelancers/~01cb82b8f02f4ecb43',
-    label: { en: 'Upwork', ar: 'Upwork' },
-  },
-  {
     id: 'x',
     platform: 'x',
     url: 'https://x.com/Abdullah_sh_100',

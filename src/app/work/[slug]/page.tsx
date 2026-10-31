@@ -108,6 +108,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           technicalApproach: t('work.caseStudy.technicalApproach.title'),
           responsibilities: t('work.caseStudy.responsibilities.title'),
           results: t('work.caseStudy.results.title'),
+          planned: t('work.caseStudy.planned.title'),
         }}
       />
 

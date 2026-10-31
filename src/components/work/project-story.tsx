@@ -17,6 +17,7 @@ type ProjectStoryProps = {
     technicalApproach: string;
     responsibilities: string;
     results: string;
+    planned: string;
   };
 };
 
@@ -72,9 +73,11 @@ function Tick({ icon = 'check' }: { icon?: 'check' | 'award' }) {
  * continuity through surface rather than identical bands.
  */
 export function ProjectStory({ project, locale, labels }: ProjectStoryProps) {
-  const { challenge, solution, technicalDecisions, responsibilities, results } = project;
+  const { challenge, solution, technicalDecisions, responsibilities, results, plannedWork } = project;
 
-  const hasProseContent = Boolean(challenge || solution || technicalDecisions?.length);
+  const hasProseContent = Boolean(
+    challenge || solution || technicalDecisions?.length || plannedWork,
+  );
   const hasListContent = Boolean(responsibilities?.length || results?.length);
 
   const proseHeadingId = challenge
@@ -142,6 +145,18 @@ export function ProjectStory({ project, locale, labels }: ProjectStoryProps) {
                     </li>
                   ))}
                 </ul>
+              </StoryRow>
+            ) : null}
+
+            {/* Kept apart from the rows above, so a future capability cannot be read as a current one. */}
+            {plannedWork ? (
+              <StoryRow
+                index={row++}
+                heading={<h2 className="text-h3">{labels.planned}</h2>}
+              >
+                <p className="text-muted-foreground max-w-prose-comfortable leading-relaxed">
+                  {localize(plannedWork, locale)}
+                </p>
               </StoryRow>
             ) : null}
           </Container>

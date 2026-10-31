@@ -6,7 +6,7 @@ import { Container } from '@/components/ui/container';
 import { Icon } from '@/components/ui/icon';
 import { Section } from '@/components/ui/section';
 import { localize } from '@/i18n/localize';
-import { getSkillCategories } from '@/lib/content/profile';
+import { getSkillCategories, getSkillLabel } from '@/lib/content/profile';
 
 /**
  * Expertise strip.
@@ -42,7 +42,7 @@ export async function ExpertiseStrip() {
         <ul className="mt-10 grid gap-4 md:grid-cols-2 md:gap-6">
           {categories.map((category, index) => (
             <Reveal key={category.id} as="li" index={index}>
-              <Card tone="elevated" interactive className="group h-full p-6 md:p-7">
+              <Card tone="elevated" interactive className="group h-full p-5 sm:p-6 md:p-7">
                 <div className="flex items-center justify-between gap-4">
                   <span className="inline-flex items-center gap-3">
                     <span className="text-secondary bg-secondary-subtle inline-flex size-10 items-center justify-center rounded-md">
@@ -66,7 +66,7 @@ export async function ExpertiseStrip() {
                       key={skill.id}
                       className="border-hairline border-border bg-surface text-foreground rounded-pill px-3 py-1.5 text-sm font-medium transition-colors duration-(--duration-base) group-hover:border-border-strong"
                     >
-                      {skill.name}
+                      {getSkillLabel(skill, locale)}
                     </li>
                   ))}
                 </ul>

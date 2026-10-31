@@ -48,7 +48,8 @@ export async function HeroSection() {
 
       <Container className="relative">
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-6">
+          {/* Centred while the hero is a single column (below `lg`), start-aligned beside the visual from `lg`. */}
+          <div className="text-center lg:col-span-6 lg:text-start">
             <Reveal variant="scale-in" className="inline-block">
               <Badge variant="secondary" dot>
                 {localize(personal.availability.label, locale)}
@@ -68,25 +69,28 @@ export async function HeroSection() {
             */}
             <Reveal index={1}>
               <h1 className="mt-6 text-display">
-                {/* Each sentence starts its own line, so the break is the meaning, not the column width. */}
-                <span className="block">{localize(personal.headline, locale)}</span>
-                <span className="text-accent-emphasis mt-1 block">{localize(personal.tagline, locale)}</span>
+                {/* Each part starts its own line, so the break is the meaning, not the column width. */}
+                <span className="block">{localize(personal.heroTitle.lead, locale)}</span>
+                <span className="text-accent-emphasis mt-1 block">
+                  {localize(personal.heroTitle.emphasis, locale)}
+                </span>
               </h1>
             </Reveal>
 
             <Reveal index={2}>
-              <p className="text-muted-foreground mt-6 max-w-xl text-lead">
+              <p className="text-muted-foreground mx-auto mt-6 max-w-xl text-lead lg:mx-0">
                 {localize(personal.intro, locale)}
               </p>
             </Reveal>
 
             <Reveal index={3}>
-              <div className="mt-10 flex flex-wrap gap-4">
-                <ButtonLink href="/work" size="lg">
+              {/* Full-width and stacked on a phone, so the pair is always even; side by side from `sm`. */}
+              <div className="mt-10 grid gap-3 sm:flex sm:flex-wrap sm:justify-center sm:gap-4 lg:justify-start">
+                <ButtonLink href="/work" size="lg" className="w-full sm:w-auto">
                   {t('common.actions.viewWork')}
                   <ButtonArrow />
                 </ButtonLink>
-                <ButtonLink href="/contact" size="lg" variant="secondary">
+                <ButtonLink href="/contact" size="lg" variant="secondary" className="w-full sm:w-auto">
                   {t('common.actions.contactMe')}
                 </ButtonLink>
               </div>
@@ -109,8 +113,9 @@ export async function HeroSection() {
         </div>
 
         <Reveal index={4}>
-          <div className="border-border mt-14 flex flex-col gap-4 border-t pt-6 sm:flex-row sm:items-center sm:justify-between lg:mt-16">
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <div className="border-border mt-14 flex flex-col items-center gap-4 border-t pt-6 text-center sm:flex-row sm:justify-between sm:text-start lg:mt-16">
+            {/* Hidden on a phone: the three tiers beside the portrait already name the stack. */}
+            <div className="hidden flex-wrap items-center gap-x-3 gap-y-2 sm:flex">
               <span className="text-subtle-foreground text-label ltr:uppercase">
                 {t('home.hero.technologiesLabel')}
               </span>

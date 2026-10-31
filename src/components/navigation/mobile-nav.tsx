@@ -4,8 +4,8 @@ import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
+import { Logo } from '@/components/brand/logo';
 import { SocialIcon } from '@/components/brand/social-icon';
-import { LanguageSwitcher } from '@/components/navigation/language-switcher';
 import { NavLink } from '@/components/navigation/nav-link';
 import { ButtonArrow, ButtonLink } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
@@ -29,6 +29,8 @@ type MobileNavSocialLink = {
 type MobileNavProps = {
   items: MobileNavItem[];
   socialLinks: MobileNavSocialLink[];
+  /** Localized brand name, shown in the panel's top row. */
+  brand: string;
   contactLabel: string;
   email: string;
 };
@@ -40,7 +42,13 @@ const FOCUSABLE =
  * Mobile navigation drawer.
  *
  * Slides in from the reading-end edge, full height, carrying navigation plus
- * the language and contact controls that the compact header hides.
+ * the contact details the compact header hides. The language switch is not
+ * repeated here: it is in the header itself at every width.
+ *
+ * The panel is a Midnight band, like the header it extends — opening the menu
+ * should not swap the page's dark chrome for a light sheet. On a phone it is
+ * full width; a `max-w-sm` panel left a 6px strip of backdrop down one side of
+ * a 390px screen. From `sm` it is a 384px drawer.
  *
  * The panel stays mounted and is toggled with `data-state`, so it animates
  * closed as well as open; `inert` removes it from the tab order and the
@@ -51,9 +59,8 @@ const FOCUSABLE =
  * The trigger and panel switch off at `lg`, matching `SiteHeader`'s inline
  * nav — see the comment there for why that moved from `md`.
  */
-export function MobileNav({ items, socialLinks, contactLabel, email }: MobileNavProps) {
+export function MobileNav({ items, socialLinks, brand, contactLabel, email }: MobileNavProps) {
   const t = useTranslations('navigation');
-  const tCommon = useTranslations('common');
   const [isOpen, setIsOpen] = useState(false);
   const isMounted = useIsMounted();
   const panelId = useId();
@@ -207,7 +214,7 @@ export function MobileNav({ items, socialLinks, contactLabel, email }: MobileNav
           aria-modal="true"
           aria-label={t('menu')}
           className={[
-            'border-border bg-surface absolute inset-y-0 inset-e-0 flex w-full max-w-sm flex-col',
+            'tone-midnight text-foreground border-border bg-background absolute inset-y-0 inset-e-0 flex w-full flex-col sm:max-w-sm',
             'border-s shadow-raised',
             // The offset is a variable rather than competing translate
             // utilities, so RTL and the open state can never fight over
@@ -217,8 +224,8 @@ export function MobileNav({ items, socialLinks, contactLabel, email }: MobileNav
             'transition-transform duration-(--duration-slow) ease-out',
           ].join(' ')}
         >
-          <div className="border-border bg-surface sticky top-0 z-10 flex h-(--header-height) shrink-0 items-center justify-between gap-4 border-b px-6">
-            <span className="text-label text-subtle-foreground ltr:uppercase">{t('menu')}</span>
+          <div className="border-border bg-background sticky top-0 z-10 flex h-(--header-height) shrink-0 items-center justify-between gap-4 border-b px-6">
+            <Logo name={brand} />
             <IconButton label={t('closeMenu')} onClick={close}>
               <Icon name="x" />
             </IconButton>
@@ -233,8 +240,8 @@ export function MobileNav({ items, socialLinks, contactLabel, email }: MobileNav
             scrolls.
           */}
           <div className="flex-1 overflow-y-auto">
-            <nav aria-label={t('primaryLabel')} className="px-6 py-2">
-              <ul className="flex flex-col gap-0.5">
+            <nav aria-label={t('primaryLabel')} className="px-4 py-4">
+              <ul className="flex flex-col gap-1">
                 {items.map((item) => (
                   <li key={item.id}>
                     <NavLink
@@ -255,15 +262,8 @@ export function MobileNav({ items, socialLinks, contactLabel, email }: MobileNav
                 <ButtonArrow />
               </ButtonLink>
 
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-muted-foreground text-sm font-semibold">
-                  {tCommon('language.label')}
-                </span>
-                <LanguageSwitcher />
-              </div>
-
               {socialLinks.length > 0 ? (
-                <ul aria-label={t('socialLabel')} className="flex items-center gap-2">
+                <ul aria-label={t('socialLabel')} className="flex flex-wrap items-center gap-2">
                   {socialLinks.map((link) => (
                     <li key={link.id}>
                       <IconLink
@@ -278,7 +278,13 @@ export function MobileNav({ items, socialLinks, contactLabel, email }: MobileNav
                 </ul>
               ) : null}
 
-              <p className="text-subtle-foreground text-sm break-all">{email}</p>
+              <a
+                href={`mailto:${email}`}
+                dir="ltr"
+                className="text-muted-foreground hover:text-foreground block text-sm break-all transition-colors duration-(--duration-base) rtl:text-end"
+              >
+                {email}
+              </a>
             </div>
           </div>
         </div>

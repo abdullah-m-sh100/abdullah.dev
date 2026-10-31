@@ -8,12 +8,12 @@
     }
   },
   "expertise": {
-    "title": "Where I go deep",
-    "description": "Grouped by what it does for the product, not by a self-assigned score."
+    "title": "My technical expertise",
+    "description": "The technologies and skills I use to build and improve your application."
   },
   "about": {
     "eyebrow": "About",
-    "title": "Full-stack engineering with a product mindset",
+    "title": "Development shaped around your business needs",
     "action": "More about how I work"
   },
   "stats": {
@@ -22,21 +22,21 @@
   "services": {
     "eyebrow": "Services",
     "title": "What I can build for you",
-    "description": "From a single interface to a complete web application with its API and database, I deliver the right solution based on the outcome you want to achieve.",
+    "description": "Whether you're launching a new project or improving an existing website, I help you define and build what your business needs.",
     "action": "All services"
   },
   "featuredWork": {
     "eyebrow": "Selected work",
     "title": "Case studies",
-    "description": "A closer look at the problem, the decision, and what changed as a result.",
+    "description": "Explore each project's goals, my contribution, and the main features developed.",
     "action": "All work",
     "badge": "Featured",
     "caseStudy": "Read the case study"
   },
   "latestWork": {
     "eyebrow": "Also recent",
-    "title": "More from the workbench",
-    "description": "Shorter engagements and smaller builds."
+    "title": "More projects",
+    "description": "More examples of websites and web experiences I've developed."
   },
   "certificates": {
     "eyebrow": "Credentials",

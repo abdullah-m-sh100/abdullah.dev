@@ -46,13 +46,25 @@ export async function CertificatesPreview() {
         />
 
         {certificates.length > 0 ? (
-          <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {certificates.map((certificate, index) => (
-              <Reveal key={certificate.id} as="li" index={index}>
-                <CertificateCard certificate={certificate} locale={locale} labels={labels} />
-              </Reveal>
-            ))}
-          </ul>
+          <Reveal>
+            {/*
+              A swipeable row on a phone, a grid from `sm`. Three full-height
+              cards stacked made this section ~1000px of scrolling; as a row the
+              next card peeks in from the edge, which is what signals a swipe.
+              `-mx-6 px-6` lets the row run to the screen edge while its first
+              card still lines up with the page gutter, and `scroll-px-6` keeps
+              that alignment when a card snaps into place. The reveal wraps the
+              whole list rather than each card: a card still off-screen to the
+              side would otherwise stay invisible until it was scrolled to.
+            */}
+            <ul className="-mx-6 mt-10 flex snap-x snap-mandatory scroll-px-6 gap-4 overflow-x-auto px-6 pb-4 sm:mx-0 sm:mt-12 sm:grid sm:snap-none sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
+              {certificates.map((certificate) => (
+                <li key={certificate.id} className="w-[84%] shrink-0 snap-start sm:w-auto sm:shrink">
+                  <CertificateCard certificate={certificate} locale={locale} labels={labels} />
+                </li>
+              ))}
+            </ul>
+          </Reveal>
         ) : (
           <EmptyState
             className="mt-12"
