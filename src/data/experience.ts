@@ -1,8 +1,10 @@
 import type { Experience } from '@/types/content';
 
 /**
- * TODO: Replace `exp-freelance` with the real employment history — left
- * untouched pending a separate review.
+ * TODO: `exp-freelance` still needs a review against the real engagement
+ * history — its title and summary now match the current full-stack positioning,
+ * but the 2023 start date and the achievement lines have not been verified
+ * against individual contracts.
  *
  * The three `training` entries below are structured programs sourced from
  * the certificates in `public/Certificates/`, labelled honestly as training
@@ -14,11 +16,17 @@ export const experience: Experience[] = [
   {
     id: 'exp-freelance',
     current: true,
+    /*
+     * Start date and achievements are unchanged — only the title and summary
+     * were brought in line with the current full-stack positioning. The years
+     * here are years of freelance web development; they are deliberately NOT
+     * restated anywhere as years of MERN or full-stack experience.
+     */
     startDate: '2023-01-01',
     employmentType: 'freelance',
     role: {
-      en: 'Front-End Developer',
-      ar: 'مطوّر واجهات أمامية',
+      en: 'Full-Stack Developer',
+      ar: 'مطور ويب متكامل',
     },
     company: {
       en: 'Freelance',
@@ -29,20 +37,24 @@ export const experience: Experience[] = [
       ar: 'عن بُعد',
     },
     summary: {
-      en: 'Building React and Next.js interfaces for startups, e-commerce brands and product teams.',
-      ar: 'بناء واجهات بـ React و Next.js لشركات ناشئة ومتاجر إلكترونية وفرق منتجات.',
+      en: 'Building web applications for startups, e-commerce brands and project owners — interfaces, the APIs behind them, and the data layer underneath.',
+      ar: 'بناء تطبيقات ويب لشركات ناشئة ومتاجر إلكترونية وأصحاب مشاريع — الواجهات وواجهات API خلفها وطبقة البيانات تحتها.',
     },
     achievements: [
       {
-        en: 'Delivered production front-ends from design files to deployment.',
-        ar: 'تسليم واجهات إنتاجية من ملفات التصميم حتى النشر.',
+        en: 'Delivered production web applications from design files to deployment.',
+        ar: 'تسليم تطبيقات ويب إنتاجية من ملفات التصميم حتى النشر.',
       },
       {
         en: 'Introduced typed component systems that reduced duplicated UI code.',
         ar: 'إدخال أنظمة مكوّنات محدّدة الأنواع قلّلت تكرار كود الواجهة.',
       },
+      {
+        en: 'Integrated front ends with REST APIs, authentication flows and relational and document databases.',
+        ar: 'ربط الواجهات بواجهات REST API وتدفّقات المصادقة وقواعد بيانات علائقية ووثائقية.',
+      },
     ],
-    technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
+    technologies: ['React', 'Next.js', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS'],
   },
   {
     id: 'exp-code-center-frontend-training',

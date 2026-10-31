@@ -1,35 +1,35 @@
 {
   "site": {
-    "title": "Abdullah — Front-End Developer",
+    "title": "Abdullah — Full-Stack Developer | MERN Stack",
     "titleTemplate": "%s | Abdullah",
-    "description": "Front-end developer specializing in React.js and Next.js. Fast, accessible, SEO-ready web interfaces for startups, e-commerce brands and product teams."
+    "description": "Full-stack web developer working with the MERN stack — MongoDB, Express.js, React.js and Node.js. Web applications built end to end for startups, e-commerce brands and project owners."
   },
   "home": {
-    "title": "Abdullah — Front-End Developer | React.js & Next.js",
-    "description": "I build fast, accessible, SEO-ready web interfaces with React.js and Next.js, from design system to production. Based in Palestine, working worldwide."
+    "title": "Abdullah — Full-Stack Developer | MERN Stack",
+    "description": "I help businesses turn ideas into web applications with React.js, Node.js, Express.js and MongoDB — from responsive interfaces to back-end APIs and databases. Based in Palestine, working worldwide."
   },
   "about": {
-    "title": "About — React & Next.js Front-End Developer",
-    "description": "Three years building production front-ends with React.js and Next.js: how I work, the stack I rely on, and the teams I fit best. Based in Palestine, remote."
+    "title": "About — Full-Stack MERN Developer",
+    "description": "How I build web applications end to end: React.js and Next.js on the front end, Node.js and Express.js APIs behind them, MongoDB underneath. My stack, my process, and the teams I fit best."
   },
   "services": {
-    "title": "Front-End Development Services: React & Next.js",
-    "description": "Next.js development, React applications, responsive UI, API integration, performance tuning and accessibility — scoped around what your product needs."
+    "title": "Full-Stack MERN Development Services",
+    "description": "Full-stack web development, React and Next.js interfaces, Node.js and Express.js APIs, MongoDB data modelling, API integration and ongoing maintenance — scoped around what your product needs."
   },
   "work": {
-    "title": "Front-End Projects & Case Studies",
-    "description": "Selected React.js and Next.js projects: the problem each one solved, the technical decisions behind it, and what actually shipped to production."
+    "title": "Selected Projects & Case Studies",
+    "description": "Selected web projects: the problem each one solved, the technical decisions behind it, and what actually shipped to production."
   },
   "certificates": {
-    "title": "Front-End Certificates & Credentials",
-    "description": "Verified certificates and structured programs in front-end development, React and modern web fundamentals — kept current as the ecosystem changes."
+    "title": "Certificates & Credentials",
+    "description": "Verified certificates and structured programs in web development, React and modern web fundamentals — kept current as the ecosystem changes."
   },
   "contact": {
-    "title": "Contact — Hire a React & Next.js Developer",
-    "description": "Tell me about the website, front-end rebuild or Next.js product you are planning. I reply within one business day with a clear, scoped plan."
+    "title": "Contact — Hire a MERN Stack Developer",
+    "description": "Tell me about the web application, API or back-end you are planning. I reply within one business day with a clear, scoped plan."
   },
   "notFound": {
     "title": "Page Not Found",
-    "description": "This page does not exist. Browse the front-end projects, services and certificates instead."
+    "description": "This page does not exist. Browse the projects, services and certificates instead."
   }
 }

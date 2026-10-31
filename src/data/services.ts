@@ -1,59 +1,160 @@
 import type { Service } from '@/types/content';
 
-/** TODO: Replace with final portfolio content. Review wording before launch. */
+/**
+ * Services offered.
+ *
+ * `featured: true` is the /services "Core services" group and the pool the Home
+ * preview draws its four cards from; `featured: false` is "Also available".
+ * Counts are load-bearing for the layout: the core group renders in a
+ * two-column grid and the supporting group in a three-column one, so six and
+ * three fill both cleanly without an orphan card.
+ *
+ * Each `summary` is one line — it is the only copy a supporting card shows, so
+ * it has to say what the client gets, not what the stack is.
+ */
 export const services: Service[] = [
   {
-    id: 'nextjs',
-    slug: 'nextjs-development',
+    id: 'fullstack',
+    slug: 'full-stack-web-development',
     order: 1,
     featured: true,
-    icon: 'rocket',
-    title: { en: 'Next.js Development', ar: 'تطوير بـ Next.js' },
+    icon: 'layers',
+    title: { en: 'Full-Stack Web Development', ar: 'تطوير تطبيقات ويب متكاملة' },
     summary: {
-      en: 'Production-ready Next.js applications with the App Router.',
-      ar: 'تطبيقات Next.js جاهزة للإنتاج باستخدام App Router.',
+      en: 'One team for the interface, the API and the database.',
+      ar: 'جهة واحدة تتولّى الواجهة وواجهات API وقاعدة البيانات.',
     },
     description: {
-      en: 'Server Components, streaming, route handlers and static rendering used where each actually pays off — resulting in a site that is fast on first load and cheap to run.',
-      ar: 'استخدام Server Components والعرض التدريجي ومعالجات المسارات والعرض الثابت في مواضعها الصحيحة، لينتج موقع سريع منذ التحميل الأول ومنخفض التكلفة في التشغيل.',
+      en: 'A complete web application built end to end — a React.js interface, a Node.js and Express.js API behind it, and MongoDB underneath — so the three layers are designed against each other instead of being stitched together late.',
+      ar: 'تطبيق ويب كامل يُبنى من البداية إلى النهاية: واجهة بـ React.js، وواجهة API بـ Node.js و Express.js خلفها، وقاعدة بيانات MongoDB تحتها — بحيث تُصمَّم الطبقات الثلاث معًا لا أن تُجمَع في آخر مرحلة.',
     },
     highlights: [
-      { en: 'App Router architecture', ar: 'بنية App Router' },
-      { en: 'Server Components by default', ar: 'Server Components بشكل افتراضي' },
-      { en: 'Static and dynamic rendering strategy', ar: 'استراتيجية عرض ثابت وديناميكي' },
+      { en: 'Interface, API and database in one build', ar: 'الواجهة وواجهات API وقاعدة البيانات في مسار واحد' },
+      { en: 'One person accountable for the whole flow', ar: 'مسؤول واحد عن التدفّق بالكامل' },
+      { en: 'Deployed and handed over working', ar: 'تسليم المشروع منشورًا وجاهزًا للعمل' },
     ],
   },
   {
-    id: 'react',
-    slug: 'react-application-development',
+    id: 'react-nextjs',
+    slug: 'react-nextjs-development',
     order: 2,
     featured: true,
     icon: 'component',
-    title: { en: 'React Application Development', ar: 'تطوير تطبيقات React' },
+    title: { en: 'React & Next.js Development', ar: 'تطوير بـ React و Next.js' },
     summary: {
-      en: 'Component architecture that scales with the product.',
-      ar: 'بنية مكوّنات تتوسّع مع نمو المنتج.',
+      en: 'Responsive, maintainable interfaces that scale with the product.',
+      ar: 'واجهات متجاوبة وقابلة للصيانة تتوسّع مع نمو المنتج.',
     },
     description: {
-      en: 'Typed, reusable component libraries with clear data contracts, so new features slot in without rewriting what already works.',
-      ar: 'مكتبات مكوّنات قابلة لإعادة الاستخدام ومكتوبة بأنواع واضحة وعقود بيانات محدّدة، بحيث تُضاف الميزات الجديدة دون إعادة كتابة ما يعمل بالفعل.',
+      en: 'Typed, reusable component systems with clear data contracts, built mobile-first with logical CSS so the same layout works in Arabic and English without a second codebase. Next.js is used where server rendering and routing actually pay off.',
+      ar: 'أنظمة مكوّنات قابلة لإعادة الاستخدام ومحدّدة الأنواع بعقود بيانات واضحة، تُبنى بمنهج الجوال أولًا مع خصائص CSS المنطقية ليعمل التخطيط نفسه بالعربية والإنجليزية دون نسخة ثانية من الكود. ويُستخدم Next.js حيث يقدّم العرض من الخادم والتوجيه قيمة فعلية.',
     },
     highlights: [
       { en: 'Reusable component systems', ar: 'أنظمة مكوّنات قابلة لإعادة الاستخدام' },
+      { en: 'Full RTL and LTR support', ar: 'دعم كامل للاتجاهين' },
       { en: 'Strong TypeScript typing', ar: 'كتابة قوية بـ TypeScript' },
-      { en: 'Predictable state handling', ar: 'إدارة حالة متوقّعة' },
     ],
   },
   {
-    id: 'responsive-ui',
-    slug: 'responsive-ui-implementation',
+    id: 'nodejs-express',
+    slug: 'nodejs-express-development',
     order: 3,
     featured: true,
+    icon: 'code',
+    title: { en: 'Node.js & Express.js Development', ar: 'تطوير بـ Node.js و Express.js' },
+    summary: {
+      en: 'Server logic and REST APIs your front end can rely on.',
+      ar: 'منطق الخادم وواجهات REST API يمكن للواجهة الاعتماد عليها.',
+    },
+    description: {
+      en: 'Express.js services with routes grouped by resource, validation at the edge, authentication, and errors that return a useful status and message instead of a generic failure.',
+      ar: 'خدمات بـ Express.js بمسارات منظّمة حسب الموارد، مع التحقق من المدخلات عند الطرف، ومعالجة المصادقة، وأخطاء ترجع حالة ورسالة مفيدة بدل فشل عام غير مفهوم.',
+    },
+    highlights: [
+      { en: 'REST endpoints with input validation', ar: 'نقاط REST مع التحقق من المدخلات' },
+      { en: 'Authentication and protected routes', ar: 'المصادقة والمسارات المحميّة' },
+      { en: 'Predictable error responses', ar: 'استجابات أخطاء متوقّعة' },
+    ],
+  },
+  {
+    id: 'mongodb',
+    slug: 'mongodb-database-development',
+    order: 4,
+    featured: true,
+    icon: 'database',
+    title: { en: 'MongoDB Database Development', ar: 'تطوير قواعد بيانات MongoDB' },
+    summary: {
+      en: 'Data modelled around how the application actually reads it.',
+      ar: 'بيانات مصمّمة حسب الطريقة التي يقرؤها بها التطبيق فعليًا.',
+    },
+    description: {
+      en: 'Collections and schemas shaped around real queries, with the create, read, update and delete operations the application needs, plus indexes on the fields it filters by.',
+      ar: 'تصميم المجموعات والمخططات بناءً على الاستعلامات الحقيقية، مع تنفيذ عمليات الإضافة والقراءة والتعديل والحذف التي يحتاجها التطبيق، وفهرسة الحقول المستخدمة في التصفية.',
+    },
+    highlights: [
+      { en: 'Schema and data modelling', ar: 'تصميم المخططات ونماذج البيانات' },
+      { en: 'Full CRUD operations', ar: 'عمليات إضافة وقراءة وتعديل وحذف كاملة' },
+      { en: 'Indexes on the fields you query', ar: 'فهارس على الحقول التي تُستعلم فعليًا' },
+    ],
+  },
+  {
+    id: 'api-integration',
+    slug: 'api-integration',
+    order: 5,
+    featured: true,
+    icon: 'plug',
+    title: { en: 'API Integration', ar: 'تكامل واجهات البرمجة' },
+    summary: {
+      en: 'Connecting your interface to a back end or a third-party service.',
+      ar: 'ربط الواجهة بالباك إند أو بخدمات خارجية.',
+    },
+    description: {
+      en: 'REST integrations with typed responses, sensible caching, and clear loading, error and empty states — whether the API is mine, yours, or a provider such as a payment or messaging service.',
+      ar: 'تكامل REST باستجابات محدّدة الأنواع وتخزين مؤقت مدروس وحالات تحميل وأخطاء وحالات فارغة واضحة — سواء كانت واجهة API من تطويري أو من فريقك أو من مزوّد خارجي مثل خدمات الدفع أو الرسائل.',
+    },
+    highlights: [
+      { en: 'Typed API contracts', ar: 'عقود واجهات برمجية محدّدة الأنواع' },
+      { en: 'Third-party service integration', ar: 'التكامل مع الخدمات الخارجية' },
+      { en: 'Robust error handling', ar: 'معالجة قوية للأخطاء' },
+    ],
+  },
+  {
+    id: 'maintenance',
+    slug: 'maintenance-and-performance',
+    order: 6,
+    featured: true,
+    icon: 'gauge',
+    title: {
+      en: 'Maintenance & Performance Improvements',
+      ar: 'الصيانة وتحسين الأداء',
+    },
+    summary: {
+      en: 'Fixing bugs and speeding up an application that already exists.',
+      ar: 'إصلاح الأخطاء وتحسين أداء تطبيق قائم بالفعل.',
+    },
+    description: {
+      en: 'Work on a codebase you already have: tracking down bugs, cutting bundle size, fixing image and font loading, and modernizing a legacy interface incrementally — measured before and after rather than assumed.',
+      ar: 'العمل على كود قائم لديك فعلًا: تتبّع الأخطاء وإصلاحها، وتقليل حجم الحزم، وإصلاح تحميل الصور والخطوط، وتحديث الواجهات القديمة تدريجيًا — مع قياس قبل وبعد لا مجرد افتراضات.',
+    },
+    highlights: [
+      { en: 'Bug fixing on an existing codebase', ar: 'إصلاح الأخطاء في كود قائم' },
+      { en: 'Core Web Vitals improvements', ar: 'تحسين مؤشرات الأداء الأساسية' },
+      { en: 'Incremental modernization', ar: 'تحديث تدريجي دون إيقاف العمل' },
+    ],
+  },
+
+  /* ------------------------------------------------- also available (narrower) */
+
+  {
+    id: 'responsive-ui',
+    slug: 'responsive-ui-implementation',
+    order: 7,
+    featured: false,
     icon: 'smartphone',
     title: { en: 'Responsive UI Implementation', ar: 'تنفيذ واجهات متجاوبة' },
     summary: {
-      en: 'Pixel-accurate interfaces that hold up on every screen.',
-      ar: 'واجهات دقيقة التنفيذ تعمل بثبات على كل الشاشات.',
+      en: 'Design files turned into interfaces that hold up on every screen.',
+      ar: 'تحويل ملفات التصميم إلى واجهات تعمل بثبات على كل الشاشات.',
     },
     description: {
       en: 'Designs implemented mobile-first with logical CSS properties, so the same layout works in both LTR and RTL without a second codebase.',
@@ -61,56 +162,14 @@ export const services: Service[] = [
     },
     highlights: [
       { en: 'Mobile-first layouts', ar: 'تخطيطات تبدأ من الجوال' },
-      { en: 'Full RTL and LTR support', ar: 'دعم كامل للاتجاهين' },
       { en: 'Design-system fidelity', ar: 'التزام دقيق بنظام التصميم' },
-    ],
-  },
-  {
-    id: 'api-integration',
-    slug: 'api-integration',
-    order: 4,
-    featured: false,
-    icon: 'plug',
-    title: { en: 'API Integration', ar: 'تكامل واجهات البرمجة' },
-    summary: {
-      en: 'Reliable data flow between your interface and back-end.',
-      ar: 'تدفّق بيانات موثوق بين الواجهة والخادم.',
-    },
-    description: {
-      en: 'REST integrations with typed responses, sensible caching, and clear loading, error and empty states.',
-      ar: 'تكامل REST باستجابات محدّدة الأنواع وتخزين مؤقت مدروس وحالات تحميل وأخطاء وحالات فارغة واضحة.',
-    },
-    highlights: [
-      { en: 'Typed API contracts', ar: 'عقود واجهات برمجية محدّدة الأنواع' },
-      { en: 'Caching and revalidation', ar: 'تخزين مؤقت وإعادة تحقّق' },
-      { en: 'Robust error handling', ar: 'معالجة قوية للأخطاء' },
-    ],
-  },
-  {
-    id: 'performance',
-    slug: 'performance-optimization',
-    order: 5,
-    featured: true,
-    icon: 'gauge',
-    title: { en: 'Performance Optimization', ar: 'تحسين الأداء' },
-    summary: {
-      en: 'Measurable Core Web Vitals improvements.',
-      ar: 'تحسينات قابلة للقياس في مؤشرات الأداء الأساسية.',
-    },
-    description: {
-      en: 'Bundle analysis, image strategy, font loading and rendering decisions reviewed against real measurements rather than assumptions.',
-      ar: 'تحليل حجم الحزم واستراتيجية الصور وتحميل الخطوط وقرارات العرض، مبنية على قياسات حقيقية لا على افتراضات.',
-    },
-    highlights: [
-      { en: 'Bundle size reduction', ar: 'تقليل حجم الحزم' },
-      { en: 'Image and font strategy', ar: 'استراتيجية الصور والخطوط' },
-      { en: 'Before and after measurement', ar: 'قياس قبل وبعد' },
+      { en: 'Verified on real device widths', ar: 'مُختبرة على عروض أجهزة حقيقية' },
     ],
   },
   {
     id: 'accessibility',
     slug: 'accessibility-improvements',
-    order: 6,
+    order: 8,
     featured: false,
     icon: 'accessibility',
     title: { en: 'Accessibility Improvements', ar: 'تحسين سهولة الوصول' },
@@ -130,14 +189,14 @@ export const services: Service[] = [
   },
   {
     id: 'seo',
-    slug: 'seo-focused-front-end',
-    order: 7,
+    slug: 'technical-seo',
+    order: 9,
     featured: false,
     icon: 'search',
-    title: { en: 'SEO-Focused Front-End', ar: 'واجهات مهيّأة لمحركات البحث' },
+    title: { en: 'Technical SEO Foundations', ar: 'أساسيات تقنية لمحركات البحث' },
     summary: {
-      en: 'Technical SEO built into the rendering layer.',
-      ar: 'تهيئة تقنية لمحركات البحث مدمجة في طبقة العرض.',
+      en: 'Metadata and structured data handled in the rendering layer.',
+      ar: 'البيانات الوصفية والمنظّمة مُعالَجة في طبقة العرض.',
     },
     description: {
       en: 'Metadata, canonical URLs, structured data and crawlable rendering handled at the framework level instead of bolted on afterwards.',
@@ -147,27 +206,6 @@ export const services: Service[] = [
       { en: 'Localized metadata', ar: 'بيانات وصفية بلغتين' },
       { en: 'Structured data', ar: 'بيانات منظّمة' },
       { en: 'Crawlable rendering', ar: 'عرض قابل للفهرسة' },
-    ],
-  },
-  {
-    id: 'refactoring',
-    slug: 'ui-refactoring',
-    order: 8,
-    featured: false,
-    icon: 'refresh',
-    title: { en: 'UI Refactoring & Modernization', ar: 'إعادة هيكلة وتحديث الواجهات' },
-    summary: {
-      en: 'Bringing an existing front-end back under control.',
-      ar: 'إعادة السيطرة على واجهة أمامية قائمة.',
-    },
-    description: {
-      en: 'Incremental modernization of legacy interfaces — introducing types, tokens and reusable components without stopping delivery.',
-      ar: 'تحديث تدريجي للواجهات القديمة عبر إدخال الأنواع والرموز التصميمية والمكوّنات القابلة لإعادة الاستخدام دون إيقاف التسليم.',
-    },
-    highlights: [
-      { en: 'Incremental migration', ar: 'ترحيل تدريجي' },
-      { en: 'Design token adoption', ar: 'اعتماد رموز التصميم' },
-      { en: 'Reduced duplication', ar: 'تقليل التكرار' },
     ],
   },
 ];

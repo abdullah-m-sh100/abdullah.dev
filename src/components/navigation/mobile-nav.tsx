@@ -7,7 +7,6 @@ import { createPortal } from 'react-dom';
 import { SocialIcon } from '@/components/brand/social-icon';
 import { LanguageSwitcher } from '@/components/navigation/language-switcher';
 import { NavLink } from '@/components/navigation/nav-link';
-import { ThemeToggle } from '@/components/navigation/theme-toggle';
 import { ButtonArrow, ButtonLink } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { IconButton, IconLink } from '@/components/ui/icon-button';
@@ -41,7 +40,7 @@ const FOCUSABLE =
  * Mobile navigation drawer.
  *
  * Slides in from the reading-end edge, full height, carrying navigation plus
- * the language, theme and contact controls that the compact header hides.
+ * the language and contact controls that the compact header hides.
  *
  * The panel stays mounted and is toggled with `data-state`, so it animates
  * closed as well as open; `inert` removes it from the tab order and the
@@ -159,16 +158,19 @@ export function MobileNav({ items, socialLinks, contactLabel, email }: MobileNav
    * The overlay is portalled to `<body>` rather than rendered where it sits in
    * the tree, and that is load-bearing.
    *
-   * `MobileNav` lives inside `<header>`, which picks up `backdrop-blur-xl` once
-   * the page is scrolled. A `backdrop-filter` — like `filter`, `transform`,
-   * `perspective` and `contain` — makes an element the containing block for
-   * every fixed-position descendant. So on a scrolled page the drawer's
-   * `fixed inset-0` stopped resolving against the viewport and resolved
-   * against the header instead, collapsing a full-height panel into the 72px
-   * header strip: the drawer worked at the top of a page and was crushed
-   * anywhere else. Rendering it as a child of `<body>` puts it outside that
-   * containing block for good, and keeps it immune to any filter or transform
-   * added to the header later.
+   * `MobileNav` lives inside `<header>`, which used to pick up
+   * `backdrop-blur-xl` once the page was scrolled. A `backdrop-filter` — like
+   * `filter`, `transform`, `perspective` and `contain` — makes an element the
+   * containing block for every fixed-position descendant. So on a scrolled
+   * page the drawer's `fixed inset-0` stopped resolving against the viewport
+   * and resolved against the header instead, collapsing a full-height panel
+   * into the 72px header strip: the drawer worked at the top of a page and was
+   * crushed anywhere else.
+   *
+   * The Midnight header is solid and no longer blurs, so that specific trigger
+   * is gone — but the portal stays, because it is what makes the drawer immune
+   * to any filter, transform or `contain` added to the header in future rather
+   * than merely unaffected by today's header.
    */
   const overlay = (
     <>
@@ -258,13 +260,6 @@ export function MobileNav({ items, socialLinks, contactLabel, email }: MobileNav
                   {tCommon('language.label')}
                 </span>
                 <LanguageSwitcher />
-              </div>
-
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-muted-foreground text-sm font-semibold">
-                  {tCommon('theme.label')}
-                </span>
-                <ThemeToggle />
               </div>
 
               {socialLinks.length > 0 ? (

@@ -1,6 +1,5 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 
-import { OrbitBackground } from '@/components/effects/orbit-background';
 import { Reveal } from '@/components/motion/reveal';
 import { Container } from '@/components/ui/container';
 import { Icon } from '@/components/ui/icon';
@@ -17,7 +16,7 @@ import { cn } from '@/lib/utils/cn';
  *
  * An editorial 7/5 grid rather than heading-paragraph-button: the prose column
  * ends on a pull-quote carrying the brand line, and the stats sit beside it in
- * one bordered panel with the orbit framing it.
+ * one bordered panel, divided into cells by hairlines.
  *
  * Numbers are rendered statically with a staggered reveal. A count-up would add
  * client JavaScript and a moving target for screen readers for no real gain.
@@ -68,53 +67,44 @@ export async function AboutPreview() {
           </div>
 
           {/* ------------------------------------------------------- stats */}
-          <Reveal variant="slide-end" index={1} className="lg:col-span-5">
-            <div className="group border-border bg-surface relative overflow-hidden rounded-xl border">
-              {/* Framing only — the travelling node is reserved for the hero and the closing CTA. */}
-              <OrbitBackground
-                rings={2}
-                animated={false}
-                className="absolute -top-20 -inset-e-24 h-80 w-128 opacity-50 rtl:-scale-x-100"
-              />
+          {/*
+            The cells are divided by hairlines rather than floated in space, so
+            the panel reads as one instrument. The flow line that used to frame
+            it ran straight through the numbers at most widths; the motif is
+            already carried by the hero, the closing CTA and the footer.
+          */}
+          <Reveal variant="slide-end" index={1} className="lg:col-span-5 lg:self-center">
+            <div className="border-hairline border-border bg-surface-elevated overflow-hidden rounded-xl shadow-(--shadow-elevated)">
+              <h3 className="text-label text-subtle-foreground px-6 pt-6 sm:px-8 sm:pt-7 ltr:uppercase">
+                {t('stats.title')}
+              </h3>
 
-              <div className="relative p-8">
-                <h3 className="text-label text-subtle-foreground ltr:uppercase">
-                  {t('stats.title')}
-                </h3>
+              <dl className="border-border mt-5 grid grid-cols-2 border-t">
+                {stats.map((stat, index) => (
+                  <div
+                    key={stat.id}
+                    className={cn(
+                      'border-border flex flex-col p-5 sm:p-7',
+                      index % 2 === 0 && 'border-e',
+                      index < stats.length - 2 && 'border-b',
+                    )}
+                  >
+                    {/* Sage, like every decorative chip — see `StatsBand`. */}
+                    <span className="text-secondary bg-secondary-subtle inline-flex size-9 items-center justify-center rounded-md">
+                      <Icon name={stat.icon} className="size-4" />
+                    </span>
 
-                <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-8">
-                  {stats.map((stat, index) => {
-                    const isPrimary = index % 2 === 0;
-
-                    return (
-                      <div key={stat.id}>
-                        <span
-                          className={cn(
-                            'inline-flex size-9 items-center justify-center rounded-md',
-                            isPrimary
-                              ? 'bg-primary-subtle text-primary'
-                              : 'bg-secondary-subtle text-secondary',
-                          )}
-                        >
-                          <Icon name={stat.icon} className="size-4" />
-                        </span>
-
-                        <dt className="text-muted-foreground mt-3 text-sm">
-                          {localize(stat.label, locale)}
-                        </dt>
-                        <dd className="text-foreground mt-1 text-h1">
-                          {stat.value}
-                          {stat.suffix ? (
-                            <span className={isPrimary ? 'text-primary' : 'text-secondary'}>
-                              {stat.suffix}
-                            </span>
-                          ) : null}
-                        </dd>
-                      </div>
-                    );
-                  })}
-                </dl>
-              </div>
+                    {/* `dd` first visually, `dt` first in the source, so the label still leads for screen readers. */}
+                    <dt className="text-muted-foreground order-last mt-1 text-sm">
+                      {localize(stat.label, locale)}
+                    </dt>
+                    <dd className="text-foreground font-brand-display mt-4 text-h1 tabular-nums">
+                      {stat.value}
+                      {stat.suffix ? <span className="text-secondary">{stat.suffix}</span> : null}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
             </div>
           </Reveal>
         </div>

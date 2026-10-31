@@ -35,8 +35,10 @@ type ProjectOverviewProps = {
 export function ProjectOverview({ project, locale, labels }: ProjectOverviewProps) {
   const hasLinks = Boolean(project.liveUrl || project.githubUrl);
 
+  // No bottom padding: the story section below brings its own top, and two
+  // stacked made ~190px of dead space.
   return (
-    <Section aria-labelledby="case-study-overview">
+    <Section aria-labelledby="case-study-overview" className="pb-0 md:pb-0">
       <Container>
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
           <Reveal className="lg:col-span-7">

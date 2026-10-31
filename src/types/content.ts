@@ -44,12 +44,19 @@ export type PersonalInfo = {
   name: LocalizedText;
   role: LocalizedText;
   specialization: LocalizedText;
-  /** The core brand line: "Ideas into Interfaces." */
+  /**
+   * The core brand line: "Ideas into Web Applications." Rendered both as the
+   * emphasised half of the Home `<h1>` and standalone as a pull-quote, so it
+   * has to read as a complete thought on its own.
+   */
   tagline: LocalizedText;
+  /** Leads the Home `<h1>`, with `tagline` following it in copper. */
   headline: LocalizedText;
   /** Supporting hero paragraph. */
   intro: LocalizedText;
   location: LocalizedText;
+  /** Just the place name, for compact UI where `location` would not fit. */
+  place: LocalizedText;
   email: string;
   phone?: string;
   resumeUrl?: string;
@@ -204,9 +211,13 @@ export type Certificate = {
   pdf?: string;
   /** Topics/skills covered — rendered as tags, distinct from `Project.technologies`. */
   skills?: string[];
+  /** Which group the /certificates page files it under. */
+  category: CertificateCategory;
   featured: boolean;
   order: number;
 };
+
+export type CertificateCategory = 'web' | 'ai';
 
 /* -------------------------------------------------------------------------- */
 /* Experience                                                                  */

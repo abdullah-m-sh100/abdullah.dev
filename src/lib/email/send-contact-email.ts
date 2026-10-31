@@ -133,7 +133,7 @@ function buildPlainTextBody(input: ContactEmailInput, submittedAt: Date): string
  *
  * `color-scheme`/`supported-color-schemes` opt into the handful of clients
  * (Apple Mail, the newer Outlook clients) that respect them so a dark-mode
- * inbox does not invert this into low-contrast navy-on-navy; every color
+ * inbox does not invert this into low-contrast midnight-on-midnight; every colour
  * below is still set explicitly as a safe fallback everywhere else.
  */
 function buildHtmlBody(input: ContactEmailInput, submittedAt: Date): string {
@@ -145,19 +145,37 @@ function buildHtmlBody(input: ContactEmailInput, submittedAt: Date): string {
   const localeLabel = escapeHtml(input.locale === 'ar' ? 'Arabic (ar)' : 'English (en)');
   const mailtoHref = `mailto:${encodeURIComponent(input.email)}?subject=${encodeURIComponent(`Re: ${input.subject}`)}`;
 
-  const navy = '#0f172a';
-  const blue = '#3b82f6';
-  const teal = '#14b8a6';
-  const offWhite = '#f8fafc';
-  const surfaceMuted = '#f1f5f9';
-  const border = '#e5e7eb';
-  const mutedText = '#475569';
+  /*
+   * The Flow palette, inlined.
+   *
+   * Email cannot read the site's design tokens — there is no stylesheet and no
+   * custom-property support worth relying on — so these are literal hex values
+   * kept deliberately in step with `src/styles/tokens.css`. Change them there
+   * and here together.
+   *
+   * The two copper roles are split the same way the site splits them, and for
+   * the same reason: Burnt Copper is the accent on the Bone card (6.21:1 under
+   * white button text) and Copper is the accent on the Midnight header, where
+   * Burnt Copper would nearly disappear.
+   *
+   * Type stays on the system stack. The guide's faces are webfonts, and no
+   * mail client will load one reliably, so asking for Fraunces here would only
+   * produce an unpredictable serif on some clients and nothing on the rest.
+   */
+  const midnight = '#0f1b2d';
+  const bone = '#f3eee6';
+  const burntCopper = '#9a4a24';
+  const copper = '#e08a57';
+  const sage = '#3f6b52';
+  const surfaceMuted = '#eae2d6';
+  const border = '#ddd2c1';
+  const mutedText = '#4a5a6e';
 
   const field = (label: string, value: string) => `
     <tr>
       <td style="padding:0 0 16px 0;">
-        <p style="margin:0 0 4px 0;font:600 12px/1.4 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;letter-spacing:0.06em;text-transform:uppercase;color:${teal};">${label}</p>
-        <p style="margin:0;font:400 15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:${navy};">${value}</p>
+        <p style="margin:0 0 4px 0;font:600 12px/1.4 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;letter-spacing:0.06em;text-transform:uppercase;color:${sage};">${label}</p>
+        <p style="margin:0;font:400 15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:${midnight};">${value}</p>
       </td>
     </tr>`;
 
@@ -170,50 +188,50 @@ function buildHtmlBody(input: ContactEmailInput, submittedAt: Date): string {
 <meta name="supported-color-schemes" content="light" />
 <title>New portfolio contact</title>
 </head>
-<body style="margin:0;padding:0;background-color:${offWhite};">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:${offWhite};padding:32px 16px;">
+<body style="margin:0;padding:0;background-color:${bone};">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:${bone};padding:32px 16px;">
     <tr>
       <td align="center">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background-color:#ffffff;border-radius:16px;overflow:hidden;border:1px solid ${border};">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background-color:#ffffff;border-radius:20px;overflow:hidden;border:1px solid ${border};">
 
           <!-- Header -->
           <tr>
-            <td style="background-color:${navy};padding:28px 32px;">
+            <td style="background-color:${midnight};padding:28px 32px;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td style="font:800 18px/1.3 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#ffffff;">
-                    Abdullah <span style="color:${teal};">&middot;</span> Portfolio
+                  <td style="font:800 18px/1.3 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:${bone};">
+                    Abdullah <span style="color:${copper};">&middot;</span> Portfolio
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
           <tr>
-            <td style="height:4px;line-height:4px;font-size:0;background-color:${blue};">&nbsp;</td>
+            <td style="height:4px;line-height:4px;font-size:0;background-color:${copper};">&nbsp;</td>
           </tr>
 
           <!-- Title -->
           <tr>
             <td style="padding:28px 32px 4px 32px;">
-              <p style="margin:0 0 6px 0;font:600 12px/1.4 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;letter-spacing:0.08em;text-transform:uppercase;color:${blue};">New contact form submission</p>
-              <h1 style="margin:0;font:700 22px/1.3 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:${navy};">${subject}</h1>
+              <p style="margin:0 0 6px 0;font:600 12px/1.4 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;letter-spacing:0.08em;text-transform:uppercase;color:${burntCopper};">New contact form submission</p>
+              <h1 style="margin:0;font:700 22px/1.3 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:${midnight};">${subject}</h1>
             </td>
           </tr>
 
           <!-- Sender card -->
           <tr>
             <td style="padding:20px 32px 4px 32px;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:${surfaceMuted};border-radius:12px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:${surfaceMuted};border-radius:16px;">
                 <tr>
                   <td style="padding:20px 24px;">
                     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                       ${field('From', name)}
-                      ${field('Email', `<a href="mailto:${encodeURIComponent(input.email)}" style="color:${blue};text-decoration:none;">${email}</a>`)}
+                      ${field('Email', `<a href="mailto:${encodeURIComponent(input.email)}" style="color:${burntCopper};text-decoration:none;">${email}</a>`)}
                       ${field('Submitted', timestamp)}
                       <tr>
                         <td style="padding:0;">
-                          <p style="margin:0 0 4px 0;font:600 12px/1.4 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;letter-spacing:0.06em;text-transform:uppercase;color:${teal};">Site language</p>
-                          <p style="margin:0;font:400 15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:${navy};">${localeLabel}</p>
+                          <p style="margin:0 0 4px 0;font:600 12px/1.4 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;letter-spacing:0.06em;text-transform:uppercase;color:${sage};">Site language</p>
+                          <p style="margin:0;font:400 15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:${midnight};">${localeLabel}</p>
                         </td>
                       </tr>
                     </table>
@@ -232,10 +250,10 @@ function buildHtmlBody(input: ContactEmailInput, submittedAt: Date): string {
           <tr>
             <td style="padding:20px 32px 8px 32px;">
               <p style="margin:0 0 8px 0;font:600 12px/1.4 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;letter-spacing:0.06em;text-transform:uppercase;color:${mutedText};">Message</p>
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-left:3px solid ${blue};background-color:${surfaceMuted};border-radius:0 12px 12px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-left:3px solid ${burntCopper};background-color:${surfaceMuted};border-radius:0 16px 16px 0;">
                 <tr>
                   <td style="padding:16px 20px;">
-                    <p style="margin:0;white-space:pre-wrap;font:400 15px/1.7 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:${navy};">${message}</p>
+                    <p style="margin:0;white-space:pre-wrap;font:400 15px/1.7 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:${midnight};">${message}</p>
                   </td>
                 </tr>
               </table>
@@ -247,8 +265,8 @@ function buildHtmlBody(input: ContactEmailInput, submittedAt: Date): string {
             <td style="padding:24px 32px 8px 32px;">
               <table role="presentation" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td style="border-radius:10px;background-color:${blue};">
-                    <a href="${mailtoHref}" style="display:inline-block;padding:12px 22px;font:600 14px/1 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#ffffff;text-decoration:none;border-radius:10px;">Reply to ${name}</a>
+                  <td style="border-radius:999px;background-color:${burntCopper};">
+                    <a href="${mailtoHref}" style="display:inline-block;padding:12px 22px;font:600 14px/1 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#ffffff;text-decoration:none;border-radius:999px;">Reply to ${name}</a>
                   </td>
                 </tr>
               </table>

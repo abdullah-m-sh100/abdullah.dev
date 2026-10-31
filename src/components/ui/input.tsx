@@ -20,7 +20,7 @@ export function Input({ hasError, className, ref, ...props }: InputProps) {
       ref={ref}
       aria-invalid={hasError || undefined}
       className={cn(
-        'border-border bg-surface text-foreground placeholder:text-subtle-foreground h-11 w-full rounded-lg border px-4 text-sm',
+        'border-hairline border-border-control bg-background text-foreground placeholder:text-subtle-foreground h-11 w-full rounded-lg px-4 text-sm',
         'transition-[border-color,box-shadow] duration-(--duration-base) ease-out',
         'focus-visible:outline-(length:--focus-ring-width) focus-visible:outline-offset-(--focus-ring-offset) focus-visible:outline-ring',
         'disabled:pointer-events-none disabled:opacity-55',

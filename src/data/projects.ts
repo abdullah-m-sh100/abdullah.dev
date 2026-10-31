@@ -21,7 +21,7 @@ import type { ImageAsset, Project } from "@/types/content";
 const placeholderCover = (alt: { en: string; ar: string }): ImageAsset => ({
   src: "/images/projects/placeholder-cover.svg",
   width: 1600,
-  height: 1000, // 16:10, the project-cover aspect ratio for the whole site.
+  height: 1200, // 4:3, the project-cover aspect ratio for the whole site.
   alt,
 });
 
@@ -164,7 +164,7 @@ export const projects: Project[] = [
     },
     description: {
       en: "A personal finance platform where users sign in, log income and expenses, and review a filterable transaction history alongside a clear financial summary — with full Arabic/English support, RTL/LTR layouts and light/dark themes.",
-      ar: "منصة مالية شخصية يسجّل فيها المستخدمون الدخول، ويرصدون دخلهم ومصروفاتهم، ويستعرضون سجل معاملات قابلاً للتصفية إلى جانب ملخّص مالي واضح — بدعم كامل للعربية والإنجليزية، وتخطيطي RTL وLTR، ووضعين فاتح وداكن.",
+      ar: "منصة مالية شخصية يسجّل فيها المستخدمون الدخول، ويرصدون دخلهم ومصروفاتهم، ويستعرضون سجل معاملات قابلاً للتصفية إلى جانب ملخّص مالي واضح — بدعم كامل للعربية والإنجليزية، وتخطيطي RTL و LTR، ووضعين فاتح وداكن.",
     },
     technologies: [
       "React",
@@ -185,7 +185,7 @@ export const projects: Project[] = [
     },
     solution: {
       en: "Built a React front end that talks to a Laravel REST API over Axios: a multi-page dashboard summarizes income, expenses and balance, transactions can be filtered by type, date or status, and Google Sign-In plus email verification and password reset round out account management — all wrapped in full Arabic/English, RTL/LTR and light/dark support.",
-      ar: "بُنيت واجهة React تتواصل مع REST API مبني بـ Laravel عبر Axios: تلخّص لوحة تحكم متعددة الصفحات الدخل والمصروفات والرصيد، ويمكن تصفية المعاملات حسب النوع أو التاريخ أو الحالة، وتكتمل إدارة الحساب بتسجيل الدخول عبر Google والتحقق من البريد الإلكتروني وإعادة تعيين كلمة المرور — كل ذلك ضمن دعم كامل للعربية والإنجليزية، واتجاهي RTL وLTR، والوضعين الفاتح والداكن.",
+      ar: "بُنيت واجهة React تتواصل مع REST API مبني بـ Laravel عبر Axios: تلخّص لوحة تحكم متعددة الصفحات الدخل والمصروفات والرصيد، ويمكن تصفية المعاملات حسب النوع أو التاريخ أو الحالة، وتكتمل إدارة الحساب بتسجيل الدخول عبر Google والتحقق من البريد الإلكتروني وإعادة تعيين كلمة المرور — كل ذلك ضمن دعم كامل للعربية والإنجليزية، واتجاهي RTL و LTR، والوضعين الفاتح والداكن.",
     },
     responsibilities: [
       {
@@ -320,16 +320,16 @@ export const projects: Project[] = [
     },
     solution: {
       en: "Built a three-layer system end to end: a React + Vite front end with full Arabic/English support, a Laravel API on MySQL with Sanctum authentication, and a Python/Flask service handling audio processing and Whisper speech-to-text, with Laravel Reverb driving real-time updates. Candidates answer Technical, Behavioral and HR questions by voice; the system scores each response from 0–10 across clarity, relevance, depth and confidence, handles edge cases like silent answers, and applies penalties when its MediaPipe-based proctoring — tab-switch detection, fullscreen monitoring and copy restrictions — flags suspicious behavior. On the company side, recruiters create jobs and interview campaigns, import candidates from Excel, send invitations by email, and review results from a dedicated dashboard, with identity verification before an interview begins.",
-      ar: "بُني النظام على ثلاث طبقات متكاملة من الصفر: واجهة أمامية بـ React وVite تدعم العربية والإنجليزية بالكامل، وAPI مبني بـ Laravel فوق MySQL مع مصادقة عبر Sanctum، وخدمة بـ Python وFlask تتولّى معالجة الصوت وتحويله إلى نص عبر Whisper، مع اعتماد Laravel Reverb لتشغيل التحديثات اللحظية. يجيب المرشحون بصوتهم عن أسئلة تقنية وسلوكية وأسئلة موارد بشرية؛ ويقيّم النظام كل إجابة من 0 إلى 10 عبر معايير الوضوح والملاءمة والعمق والثقة، ويتعامل مع حالات خاصة كالإجابات الصامتة، ويطبّق عقوبات عندما ترصد طبقة المراقبة المعتمدة على MediaPipe — كشف تبديل التبويبات ومراقبة وضع ملء الشاشة وتقييد النسخ — سلوكًا مريبًا. أمّا في جانب الشركات، فيمكن لفرق التوظيف إنشاء وظائف وحملات مقابلات، واستيراد المرشحين من ملفات إكسل، وإرسال الدعوات عبر البريد الإلكتروني، ومراجعة النتائج من لوحة تحكم مخصّصة، مع التحقق من الهوية قبل بدء أي مقابلة.",
+      ar: "بُني النظام على ثلاث طبقات متكاملة من الصفر: واجهة أمامية بـ React و Vite تدعم العربية والإنجليزية بالكامل، و API مبني بـ Laravel فوق MySQL مع مصادقة عبر Sanctum، وخدمة بـ Python و Flask تتولّى معالجة الصوت وتحويله إلى نص عبر Whisper، مع اعتماد Laravel Reverb لتشغيل التحديثات اللحظية. يجيب المرشحون بصوتهم عن أسئلة تقنية وسلوكية وأسئلة موارد بشرية؛ ويقيّم النظام كل إجابة من 0 إلى 10 عبر معايير الوضوح والملاءمة والعمق والثقة، ويتعامل مع حالات خاصة كالإجابات الصامتة، ويطبّق عقوبات عندما ترصد طبقة المراقبة المعتمدة على MediaPipe — كشف تبديل التبويبات ومراقبة وضع ملء الشاشة وتقييد النسخ — سلوكًا مريبًا. أمّا في جانب الشركات، فيمكن لفرق التوظيف إنشاء وظائف وحملات مقابلات، واستيراد المرشحين من ملفات إكسل، وإرسال الدعوات عبر البريد الإلكتروني، ومراجعة النتائج من لوحة تحكم مخصّصة، مع التحقق من الهوية قبل بدء أي مقابلة.",
     },
     responsibilities: [
       {
         en: "Full-stack architecture across the React front end, Laravel API and Python/Flask audio service",
-        ar: "بنية متكاملة (Full-stack) تمتد عبر واجهة React الأمامية وAPI مبني بـLaravel وخدمة الصوت بـPython/Flask",
+        ar: "بنية متكاملة (Full-stack) تمتد عبر واجهة React الأمامية و API مبني بـLaravel وخدمة الصوت بـPython/Flask",
       },
       {
         en: "React + Vite front end with Arabic/English and RTL/LTR support",
-        ar: "واجهة أمامية بـReact وVite تدعم العربية والإنجليزية والاتجاهين RTL وLTR",
+        ar: "واجهة أمامية بـReact و Vite تدعم العربية والإنجليزية والاتجاهين RTL و LTR",
       },
       {
         en: "Laravel API design (MySQL, Sanctum authentication, Reverb real-time events)",
@@ -443,7 +443,7 @@ export const projects: Project[] = [
     },
     description: {
       en: "The official website for Nesto Burgers, a smash burger restaurant in Nablus: a menu browsable by category, special offers, a shopping cart for building an order, and a gallery and customer reviews — all in Arabic and English with automatic RTL/LTR switching. Orders can be placed through the site's own cart or sent directly over WhatsApp.",
-      ar: "الموقع الرسمي لمطعم Nesto Burgers، مطعم سماش برغر في نابلس: قائمة طعام قابلة للتصفّح حسب الفئة، وعروض خاصة، وسلة شراء لتجهيز الطلب، ومعرض صور وآراء للزبائن — كل ذلك بالعربية والإنجليزية مع تبديل تلقائي للاتجاه بين RTL وLTR. يمكن إتمام الطلب عبر سلة الموقع أو مباشرة عبر واتساب.",
+      ar: "الموقع الرسمي لمطعم Nesto Burgers، مطعم سماش برغر في نابلس: قائمة طعام قابلة للتصفّح حسب الفئة، وعروض خاصة، وسلة شراء لتجهيز الطلب، ومعرض صور وآراء للزبائن — كل ذلك بالعربية والإنجليزية مع تبديل تلقائي للاتجاه بين RTL و LTR. يمكن إتمام الطلب عبر سلة الموقع أو مباشرة عبر واتساب.",
     },
     technologies: [
       "React",
@@ -473,7 +473,7 @@ export const projects: Project[] = [
       },
       {
         en: "Bilingual content and automatic RTL/LTR layout switching",
-        ar: "محتوى ثنائي اللغة وتبديل تلقائي للاتجاه بين RTL وLTR",
+        ar: "محتوى ثنائي اللغة وتبديل تلقائي للاتجاه بين RTL و LTR",
       },
       {
         en: "Shopping cart and category-filtered menu",
@@ -533,7 +533,7 @@ export const projects: Project[] = [
         },
         description: {
           en: "Every section switches between RTL and LTR automatically, with no separate layout to maintain per language.",
-          ar: "يتبدّل كل قسم تلقائيًا بين RTL وLTR، دون تخطيط منفصل يتطلّب الصيانة لكل لغة.",
+          ar: "يتبدّل كل قسم تلقائيًا بين RTL و LTR، دون تخطيط منفصل يتطلّب الصيانة لكل لغة.",
         },
       },
       {

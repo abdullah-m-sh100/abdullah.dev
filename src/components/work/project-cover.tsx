@@ -35,7 +35,8 @@ type ProjectCoverProps = {
  * Project cover image.
  *
  * Intrinsic `width`/`height` come from the content model and the wrapper
- * carries a fixed 16:10 `aspect-ratio`, so the space is reserved before the
+ * carries a fixed 4:3 `aspect-ratio` (the ratio the real project
+ * screenshots are exported at, so `object-cover` crops nothing), so the space is reserved before the
  * image loads and the card never shifts.
  *
  * Renders `overrideSrc` (a project's custom screenshot) when set, and falls
@@ -63,7 +64,7 @@ export function ProjectCover({
   return (
     <div
       className={cn(
-        'border-border bg-surface-muted relative aspect-16/10 overflow-hidden rounded-lg border',
+        'border-border bg-surface-muted relative aspect-4/3 overflow-hidden rounded-lg border',
         className,
       )}
     >

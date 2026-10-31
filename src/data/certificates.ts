@@ -13,6 +13,7 @@ export const certificates: Certificate[] = [
   {
     id: 'cert-code-center-frontend-web-dev',
     slug: 'front-end-web-development-intensive-training',
+    category: 'web',
     order: 1,
     featured: true,
     issueDate: '2026-06-02',
@@ -42,6 +43,7 @@ export const certificates: Certificate[] = [
   {
     id: 'cert-gazatech-reactjs',
     slug: 'reactjs-training-program',
+    category: 'web',
     order: 2,
     featured: true,
     issueDate: '2025-11-23',
@@ -78,6 +80,7 @@ export const certificates: Certificate[] = [
   {
     id: 'cert-gsg-code2career-frontend',
     slug: 'code2career-frontend-path-training',
+    category: 'web',
     order: 3,
     featured: true,
     // No issue date is printed on this certificate — left unset rather than guessed.
@@ -107,6 +110,7 @@ export const certificates: Certificate[] = [
   {
     id: 'cert-langchain-python-foundation',
     slug: 'introduction-to-langchain-python',
+    category: 'ai',
     order: 4,
     featured: false,
     issueDate: '2026-08-24',
@@ -121,7 +125,7 @@ export const certificates: Certificate[] = [
     },
     description: {
       en: 'A foundational LangChain Academy course covering the core concepts of building LLM-powered applications with LangChain and Python.',
-      ar: 'دورة تأسيسية من أكاديمية LangChain تناولت المفاهيم الأساسية لبناء تطبيقات تعتمد على نماذج اللغة الكبيرة باستخدام LangChain وPython.',
+      ar: 'دورة تأسيسية من أكاديمية LangChain تناولت المفاهيم الأساسية لبناء تطبيقات تعتمد على نماذج اللغة الكبيرة باستخدام LangChain و Python.',
     },
     image: {
       src: '/Certificates/Introduction to LangChain - Python.jpg',
@@ -137,6 +141,7 @@ export const certificates: Certificate[] = [
   {
     id: 'cert-anthropic-ai-fluency',
     slug: 'ai-fluency-framework-and-foundations',
+    category: 'ai',
     order: 5,
     featured: false,
     // No issue date is printed on this certificate — left unset rather than guessed.
@@ -166,6 +171,7 @@ export const certificates: Certificate[] = [
   {
     id: 'cert-anthropic-claude-api',
     slug: 'claude-with-the-anthropic-api',
+    category: 'ai',
     order: 6,
     featured: false,
     // No issue date is printed on this certificate — left unset rather than guessed.
@@ -195,6 +201,7 @@ export const certificates: Certificate[] = [
   {
     id: 'cert-anthropic-claude-code-101',
     slug: 'claude-code-101',
+    category: 'ai',
     order: 7,
     featured: false,
     // No issue date is printed on this certificate — left unset rather than guessed.

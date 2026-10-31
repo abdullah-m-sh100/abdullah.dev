@@ -1,8 +1,8 @@
 {
   "hero": {
     "eyebrow": "Services",
-    "title": "Front-end development services, scoped around outcomes",
-    "description": "From a single interface layer to a full React or Next.js rebuild — each engagement is scoped around what the product actually needs, not a fixed package."
+    "title": "Full-stack development services, scoped around outcomes",
+    "description": "From a single interface layer to a complete web application with its API and database — each engagement is scoped around what the product actually needs, not a fixed package."
   },
   "listing": {
     "coreEyebrow": "Core services",

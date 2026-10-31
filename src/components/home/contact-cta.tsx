@@ -1,7 +1,7 @@
 import { getLocale } from 'next-intl/server';
 
 import { GradientGlow } from '@/components/effects/gradient-glow';
-import { OrbitBackground } from '@/components/effects/orbit-background';
+import { FlowBackground } from '@/components/effects/flow-background';
 import { Reveal } from '@/components/motion/reveal';
 import { ButtonArrow, ButtonLink } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
@@ -15,9 +15,10 @@ import { localize } from '@/i18n/localize';
  * Closing call to action.
  *
  * Visually the heaviest section after the hero, and it mirrors it: the same
- * orbit and glow, now centred, so the page opens and closes on the same motif.
- * Sitting on the sunken surface it reads as a distinct closing panel rather
- * than one more content band.
+ * Midnight ground, flow line and glow, now centred, so the page opens and
+ * closes on the same motif. The inversion is what makes it read as a closing
+ * panel rather than one more content band — on Bone it needed a sunken surface
+ * to do the same job less convincingly.
  *
  * All copy comes from `portfolioData.cta`. The form itself belongs to a later
  * sprint — this only routes to /contact.
@@ -28,15 +29,14 @@ export async function ContactCta() {
 
   return (
     <Section
-      surface="sunken"
+      tone="midnight"
       spacing="spacious"
-      divider
       className="relative isolate overflow-hidden"
       aria-labelledby="home-contact-cta"
     >
-      <GradientGlow tone="brand" className="inset-x-0 top-0 -z-10 h-128" />
-      <OrbitBackground
-        rings={3}
+      <GradientGlow tone="warm" className="inset-x-0 top-0 -z-10 h-128" />
+      <FlowBackground
+        lines={2}
         className="absolute inset-x-0 -bottom-64 -z-10 mx-auto h-160 w-256 opacity-60"
       />
 

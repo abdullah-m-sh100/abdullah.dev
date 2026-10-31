@@ -3,7 +3,7 @@ import { getLocale, getTranslations } from 'next-intl/server';
 
 import { Logo } from '@/components/brand/logo';
 import { SocialIcon } from '@/components/brand/social-icon';
-import { OrbitBackground } from '@/components/effects/orbit-background';
+import { FlowBackground } from '@/components/effects/flow-background';
 import { Container } from '@/components/ui/container';
 import { Eyebrow } from '@/components/ui/section-heading';
 import { IconLink } from '@/components/ui/icon-button';
@@ -16,8 +16,13 @@ import { getSocialLinks } from '@/lib/content/profile';
  * Global footer.
  *
  * Carries the brand statement, navigation, contact shortcut and social links —
- * all from centralized content. A single large orbit sits behind it at low
+ * all from centralized content. A single large flow line sits behind it at low
  * opacity, closing the page with the brand motif rather than an empty bar.
+ *
+ * The last Midnight band on the page, which is what lets the footer close the
+ * document instead of trailing off: the page opens dark at the header and hero,
+ * reads on Bone, and lands dark again here. It carries the class directly
+ * rather than through `Section` because a footer is its own landmark element.
  */
 export async function SiteFooter() {
   const locale = await getLocale();
@@ -27,10 +32,10 @@ export async function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-border bg-surface-muted relative mt-auto overflow-hidden border-t">
+    <footer className="tone-midnight bg-background text-foreground relative mt-auto overflow-hidden">
       {/* Static: the footer is rarely in view, so it need not hold an animation. */}
-      <OrbitBackground
-        rings={2}
+      <FlowBackground
+        lines={2}
         animated={false}
         className="absolute -top-40 -inset-e-40 h-128 w-176 opacity-60 rtl:-scale-x-100"
       />
@@ -83,7 +88,21 @@ export async function SiteFooter() {
           <div>
             <Eyebrow>{t('metadata.contact.title')}</Eyebrow>
             <div className="mt-5 flex flex-col items-start gap-3">
-              <TextLink href={`mailto:${personal.email}`} tone="foreground">
+              {/*
+                `max-w-full break-all` is load-bearing at exactly one width.
+                `TextLink` is an `inline-flex`, which sizes to max-content, so
+                the address never wrapped however narrow its column got. At the
+                `md` breakpoint this grid goes to three columns and the last one
+                lands at ~189px against an address that needs ~223px — so it
+                ran past the container's gutter, by 10px past the screen edge in
+                RTL. Constraining the box to the column lets the address break
+                inside it instead.
+              */}
+              <TextLink
+                href={`mailto:${personal.email}`}
+                tone="foreground"
+                className="max-w-full break-all"
+              >
                 {personal.email}
               </TextLink>
               <p className="text-muted-foreground text-sm">

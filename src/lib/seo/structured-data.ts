@@ -1,7 +1,7 @@
 import { portfolioData } from '@/data/portfolio-data';
 import type { Locale } from '@/i18n/config';
 import { localize } from '@/i18n/localize';
-import { getAllSkills, getSocialLinks } from '@/lib/content/profile';
+import { getAllSkills, getCoreStack, getSocialLinks } from '@/lib/content/profile';
 import { absoluteUrl, siteConfig } from '@/lib/site-config';
 import type { Project } from '@/types/content';
 
@@ -20,6 +20,7 @@ export function buildSiteJsonLd(locale: Locale): JsonLdGraph {
   const { personal } = portfolioData;
   const personId = absoluteUrl('/#person');
   const siteId = absoluteUrl('/#website');
+  const coreStackIds = new Set(getCoreStack().map((skill) => skill.id));
 
   return {
     '@context': 'https://schema.org',
@@ -37,9 +38,19 @@ export function buildSiteJsonLd(locale: Locale): JsonLdGraph {
          * Both of these restate facts the pages already show — the skill list
          * on /about and the location line in the hero — in the form search
          * engines read as entity data. `knowsAbout` is what ties the person to
-         * "React" and "Next.js" as topics rather than as loose page text.
+         * "MongoDB", "Express.js", "React.js" and "Node.js" as topics rather
+         * than as loose page text, and it stays in step with the rendered
+         * skills automatically because it is derived from the same source.
+         *
+         * The four core-stack technologies lead the array, then every
+         * remaining skill in group order.
          */
-        knowsAbout: getAllSkills().map((skill) => skill.name),
+        knowsAbout: [
+          ...getCoreStack().map((skill) => skill.name),
+          ...getAllSkills()
+            .filter((skill) => !coreStackIds.has(skill.id))
+            .map((skill) => skill.name),
+        ],
         address: {
           '@type': 'PostalAddress',
           addressCountry: 'PS',

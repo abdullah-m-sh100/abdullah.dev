@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Icon } from '@/components/ui/icon';
 import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
+import { ProjectCover } from '@/components/work/project-cover';
 import { localize } from '@/i18n/localize';
 import { cn } from '@/lib/utils/cn';
 import type { Locale, Project } from '@/types/content';
@@ -13,6 +14,19 @@ type AdjacentProjectsProps = {
   locale: Locale;
   labels: { previous: string; next: string };
 };
+
+/** Small 4:3 preview, so a neighbouring project is recognisable before it is read. */
+function Thumb({ project, locale }: { project: Project; locale: Locale }) {
+  return (
+    <ProjectCover
+      image={project.coverImage}
+      overrideSrc={project.image}
+      locale={locale}
+      sizes="160px"
+      className="w-28 transition-transform duration-(--duration-base) ease-out motion-safe:group-hover:-translate-y-0.5"
+    />
+  );
+}
 
 /**
  * Previous / next project navigation, built from `getAdjacentProjects()`.
@@ -44,11 +58,12 @@ export function AdjacentProjects({ previous, next, locale, labels }: AdjacentPro
                   'focus-visible:outline-(length:--focus-ring-width) focus-visible:outline-offset-(--focus-ring-offset) focus-visible:outline-ring',
                 )}
               >
-                <span className="text-subtle-foreground flex items-center gap-2 text-label ltr:uppercase">
+                <Thumb project={previous} locale={locale} />
+                <span className="text-subtle-foreground mt-4 flex items-center gap-2 text-label ltr:uppercase">
                   <Icon name="arrow-left" className="size-3.5 rtl:-scale-x-100" />
                   {labels.previous}
                 </span>
-                <span className="group-hover:text-primary mt-3 text-h3 transition-colors duration-(--duration-base)">
+                <span className="group-hover:text-primary mt-2 text-h3 transition-colors duration-(--duration-base)">
                   {localize(previous.title, locale)}
                 </span>
               </Link>
@@ -65,11 +80,12 @@ export function AdjacentProjects({ previous, next, locale, labels }: AdjacentPro
                   !previous && 'sm:col-start-2',
                 )}
               >
-                <span className="text-subtle-foreground flex items-center gap-2 text-label ltr:uppercase">
+                <Thumb project={next} locale={locale} />
+                <span className="text-subtle-foreground mt-4 flex items-center gap-2 text-label ltr:uppercase">
                   {labels.next}
                   <Icon name="arrow-right" className="size-3.5 rtl:-scale-x-100" />
                 </span>
-                <span className="group-hover:text-primary mt-3 text-h3 transition-colors duration-(--duration-base)">
+                <span className="group-hover:text-primary mt-2 text-h3 transition-colors duration-(--duration-base)">
                   {localize(next.title, locale)}
                 </span>
               </Link>

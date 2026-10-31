@@ -9,14 +9,14 @@ import type { Stat } from '@/types/content';
 export const stats: Stat[] = [
   {
     id: 'experience',
-    value: 3,
+    value: 5,
     suffix: '+',
     label: { en: 'Years of experience', ar: 'سنوات الخبرة' },
     icon: 'calendar',
   },
   {
     id: 'projects',
-    value: 12,
+    value: 30,
     suffix: '+',
     label: { en: 'Completed projects', ar: 'مشاريع مكتملة' },
     icon: 'briefcase',

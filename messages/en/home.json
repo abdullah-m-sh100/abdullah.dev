@@ -1,6 +1,11 @@
 {
   "hero": {
-    "technologiesLabel": "Core stack"
+    "technologiesLabel": "Core stack",
+    "flow": {
+      "interface": "Interface",
+      "server": "Server",
+      "data": "Data"
+    }
   },
   "expertise": {
     "title": "Where I go deep",
@@ -8,7 +13,7 @@
   },
   "about": {
     "eyebrow": "About",
-    "title": "Front-end engineering with a product mindset",
+    "title": "Full-stack engineering with a product mindset",
     "action": "More about how I work"
   },
   "stats": {
@@ -17,7 +22,7 @@
   "services": {
     "eyebrow": "Services",
     "title": "What I can build for you",
-    "description": "From a single interface to a complete front-end rebuild, I deliver the right solution based on the outcome you want to achieve.",
+    "description": "From a single interface to a complete web application with its API and database, I deliver the right solution based on the outcome you want to achieve.",
     "action": "All services"
   },
   "featuredWork": {

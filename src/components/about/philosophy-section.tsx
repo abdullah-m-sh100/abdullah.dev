@@ -34,10 +34,15 @@ export async function PhilosophySection() {
         <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {values.map((value, index) => (
             <Reveal key={value.id} as="li" index={index}>
-              <Card className="h-full p-6">
-                <span className="text-primary bg-primary-subtle mb-4 inline-flex size-11 items-center justify-center rounded-md">
-                  <Icon name={value.icon} />
-                </span>
+              <Card interactive className="h-full p-6">
+                <div className="mb-5 flex items-center justify-between">
+                  <span className="text-secondary bg-secondary-subtle inline-flex size-11 items-center justify-center rounded-md">
+                    <Icon name={value.icon} />
+                  </span>
+                  <span aria-hidden="true" className="text-subtle-foreground text-label tabular-nums">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                </div>
                 <h3 className="text-h3">{localize(value.title, locale)}</h3>
                 <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
                   {localize(value.description, locale)}

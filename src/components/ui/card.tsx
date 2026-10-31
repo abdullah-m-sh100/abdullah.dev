@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils/cn';
 type CardProps = {
   children: ReactNode;
   className?: string;
+  id?: string;
   as?: ElementType;
   /** Adds a restrained hover lift for cards that link somewhere. */
   interactive?: boolean;
@@ -20,35 +21,40 @@ type CardProps = {
  * current user; reach for `Card` first.
  */
 export const cardTones = {
-  default: 'rounded-lg border bg-surface bg-[image:var(--surface-gradient)] border-border shadow-(--shadow-rest)',
-  elevated:
-    'rounded-lg border bg-surface-elevated bg-[image:var(--surface-gradient)] border-border shadow-(--shadow-elevated)',
-  muted: 'rounded-lg border bg-surface-muted border-border',
+  default: 'rounded-lg border-hairline bg-surface border-border shadow-(--shadow-rest)',
+  elevated: 'rounded-lg border-hairline bg-surface-elevated border-border shadow-(--shadow-elevated)',
+  muted: 'rounded-lg border-hairline bg-surface-muted border-border',
 } as const;
 
 /**
  * Surface primitive.
  *
- * Hierarchy comes from the border and surface tint rather than shadow alone,
- * which is what keeps cards legible in dark mode. The hover lift is capped at
- * 2px and gated behind `motion-safe`.
+ * A 1.5px hairline and a surface step carry the hierarchy — the guide replaces
+ * heavy shadows with exactly that ("حدود رفيعة 1.5 بكسل بدل الظلال الثقيلة"), so
+ * `--shadow-rest` is a whisper that pins the card to the page rather than what
+ * separates it from it. The hover lift is capped at 2px and gated behind
+ * `motion-safe`.
  *
- * `default` and `elevated` add a resting shadow and a vertical sheen through
- * `--shadow-rest` / `--surface-gradient`. Both resolve to `none` in dark, so
- * these classes are inert there and dark cards render as they always have —
- * the elevation is a light-theme concern, where a white card on an Off White
- * page has no surface step to separate it. `muted` stays flat by design: it
- * recedes into the page rather than sitting on it.
+ * There is no surface gradient any more: Bone gives a card a real step to sit
+ * on, so the vertical sheen the old off-white page needed has nothing left to
+ * do. `muted` stays flat by design — it recedes into the page rather than
+ * sitting on it.
+ *
+ * Inside a `.tone-midnight` band every one of these tokens resolves to the
+ * Midnight set, and `--shadow-rest` resolves to nothing, so the same three
+ * tones work on a dark ground with no inverted variant.
  */
 export function Card({
   children,
   className,
+  id,
   as: Component = 'div',
   interactive,
   tone = 'default',
 }: CardProps) {
   return (
     <Component
+      id={id}
       className={cn(
         cardTones[tone],
         interactive && [

@@ -36,7 +36,7 @@ export async function ServicesList({ featured, supporting }: ServicesListProps) 
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
             {featured.map((service, index) => (
               <Reveal key={service.id} index={index}>
-                <ServiceCard service={service} locale={locale} size="feature" />
+                <ServiceCard service={service} locale={locale} size="feature" index={index + 1} />
               </Reveal>
             ))}
           </div>
@@ -56,7 +56,7 @@ export async function ServicesList({ featured, supporting }: ServicesListProps) 
             <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {supporting.map((service, index) => (
                 <Reveal key={service.id} as="li" index={index}>
-                  <ServiceCard service={service} locale={locale} />
+                  <ServiceCard service={service} locale={locale} index={featured.length + index + 1} />
                 </Reveal>
               ))}
             </ul>

@@ -10,12 +10,17 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 /**
  * Button system.
  *
+ * Fully rounded and never shorter than 44px, both of which the guide states
+ * outright for the site interface ("أزرار دائرية بارتفاع 44 بكسل على الأقل").
+ * That makes every size here a legal touch target, so there is no small
+ * variant that quietly is not one.
+ *
  * `group` is on the base so a nested `<ButtonArrow />` can respond to hover;
  * the arrow's direction handling lives in the `.cta-arrow` rules in globals.css
  * so it travels the reading direction in both LTR and RTL.
  */
 const base = [
-  'group relative inline-flex items-center justify-center gap-2 rounded-lg font-semibold whitespace-nowrap',
+  'group relative inline-flex items-center justify-center gap-2 rounded-pill font-semibold whitespace-nowrap',
   'transition-[background-color,border-color,color,box-shadow,transform] duration-(--duration-base) ease-out',
   'focus-visible:outline-(length:--focus-ring-width) focus-visible:outline-offset-(--focus-ring-offset) focus-visible:outline-ring',
   'disabled:pointer-events-none disabled:opacity-55',
@@ -28,9 +33,14 @@ const variants: Record<ButtonVariant, string> = {
     'bg-primary text-primary-foreground shadow-subtle',
     'hover:bg-primary-hover hover:shadow-card active:bg-primary-active',
   ),
-  // Transparent with a theme-aware border, per the brand CTA rules.
+  /*
+   * Transparent with a hairline border, per the guide's secondary CTA rule.
+   * `--border-control` rather than `--border-strong`: here the border *is* the
+   * affordance, so it owes 3:1 against the surface behind it, which only that
+   * token clears.
+   */
   secondary: cn(
-    'border border-border-strong bg-transparent text-foreground',
+    'border-hairline border-border-control bg-transparent text-foreground',
     'hover:border-primary hover:text-primary hover:bg-primary-subtle',
   ),
   ghost: 'bg-transparent text-muted-foreground hover:bg-surface-muted hover:text-foreground',
@@ -38,10 +48,10 @@ const variants: Record<ButtonVariant, string> = {
 };
 
 const sizes: Record<ButtonSize, string> = {
-  // 44px minimum tap target on the sizes used for real actions.
-  sm: 'h-10 px-4 text-sm',
-  md: 'h-11 px-5 text-sm',
-  lg: 'h-12 px-6 text-base',
+  // 44px is the floor, not a target the smallest size is allowed to miss.
+  sm: 'h-11 px-5 text-sm',
+  md: 'h-12 px-6 text-sm',
+  lg: 'h-13 px-7 text-base',
 };
 
 export function buttonClasses(

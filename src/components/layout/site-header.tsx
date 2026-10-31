@@ -6,7 +6,6 @@ import { HeaderShell } from '@/components/navigation/header-shell';
 import { LanguageSwitcher } from '@/components/navigation/language-switcher';
 import { MobileNav } from '@/components/navigation/mobile-nav';
 import { NavLink } from '@/components/navigation/nav-link';
-import { ThemeToggle } from '@/components/navigation/theme-toggle';
 import { ButtonArrow, ButtonLink } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
 import { portfolioData } from '@/data/portfolio-data';
@@ -79,16 +78,13 @@ export async function SiteHeader() {
 
           <div className="flex items-center gap-2">
             {/*
-              Both switchers appear at `lg` — the same breakpoint where the
-              inline nav takes over and the drawer's trigger disappears.
-              Showing them any earlier would duplicate the drawer's own
-              language/theme rows while the hamburger is still visible.
+              The language switcher appears at `lg` — the same breakpoint where
+              the inline nav takes over and the drawer's trigger disappears.
+              Showing it any earlier would duplicate the drawer's own language
+              row while the hamburger is still visible.
             */}
             <div className="hidden lg:block">
               <LanguageSwitcher />
-            </div>
-            <div className="hidden lg:block">
-              <ThemeToggle />
             </div>
             <ButtonLink href="/contact" size="sm" className="hidden xl:inline-flex">
               {t('common.actions.contactMe')}

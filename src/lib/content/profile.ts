@@ -1,4 +1,5 @@
 import { portfolioData } from '@/data/portfolio-data';
+import { coreStack } from '@/data/skills';
 import type {
   Experience,
   Service,
@@ -41,9 +42,26 @@ export function getAllSkills(): Skill[] {
   return getSkillCategories().flatMap((category) => category.skills);
 }
 
-/** Technologies shown in the Home technology strip. */
+/** Skills promoted to an emphasized badge inside their own group. */
 export function getHighlightedSkills(): Skill[] {
   return getAllSkills().filter((skill) => skill.highlighted);
+}
+
+/**
+ * The four core-stack technologies, in the order `coreStack` names them —
+ * which is MERN order, so the Home hero reads "MongoDB · Express.js ·
+ * React.js · Node.js".
+ *
+ * Resolved by id rather than by filtering on `highlighted`, because
+ * highlighting is per-group prominence: the first four highlighted skills are
+ * always front-end ones, which is not the stack. Ids that do not resolve are
+ * dropped rather than rendered as a blank chip.
+ */
+export function getCoreStack(): Skill[] {
+  const byId = new Map(getAllSkills().map((skill) => [skill.id, skill]));
+  return coreStack
+    .map((id) => byId.get(id))
+    .filter((skill): skill is Skill => skill !== undefined);
 }
 
 /* --------------------------------------------------------------------- stats */

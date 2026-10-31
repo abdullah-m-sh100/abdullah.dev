@@ -1,19 +1,31 @@
 import { cn } from '@/lib/utils/cn';
-import Image from 'next/image';
 
 type LogoMarkProps = {
   className?: string;
+  /**
+   * Drops the enclosing circle. The guide requires this below 32px, where the
+   * ring closes up against the line and the three nodes stop being readable.
+   */
+  bare?: boolean;
 };
 
 /**
- * The orbit mark: a geometric "A" inside a Saturn-inspired orbit with an
- * orbital node.
+ * The Flow mark: a thin circle enclosing an S-curve that threads three nodes.
  *
- * The "A" uses `currentColor` so it inherits the theme foreground, while the
- * orbit and node keep the brand blue/teal accents. Never rotate, stretch,
- * recolor or drop the orbital dot.
+ * The nodes are the three tiers of the stack, top to bottom — the interface
+ * (Next.js), the server (Node.js / Express), the data (MongoDB) — and the
+ * middle one is both copper and the largest, which is the guide's rule and the
+ * reason the mark reads as a path with a centre rather than as an ornament.
+ *
+ * Colour comes from tokens, so the mark inverts correctly by ground without a
+ * second asset: on Bone the line and middle node are Burnt Copper with
+ * Midnight outer nodes, and inside a `.tone-midnight` band the same tokens
+ * resolve to Copper with Bone outer nodes. Both are exactly what the guide
+ * specifies for those grounds.
+ *
+ * Never rotate it, stretch it, change the curve, or drop a node.
  */
-export function LogoMark({ className }: LogoMarkProps) {
+export function LogoMark({ className, bare = false }: LogoMarkProps) {
   return (
     <svg
       viewBox="0 0 48 48"
@@ -21,28 +33,33 @@ export function LogoMark({ className }: LogoMarkProps) {
       aria-hidden="true"
       focusable="false"
     >
-      <ellipse
-        cx="24"
-        cy="24"
-        rx="21"
-        ry="8.5"
-        transform="rotate(-22 24 24)"
+      {bare ? null : (
+        <circle
+          cx="24"
+          cy="24"
+          r="21"
+          fill="none"
+          stroke="var(--accent)"
+          strokeWidth="1.5"
+          opacity="0.45"
+        />
+      )}
+
+      {/* The flowing path, passing through all three node centres. */}
+      <path
+        d="M 17.5 13 C 25 15, 28 19.5, 24 24 C 20 28.5, 23 33, 30.5 35"
         fill="none"
-        stroke="var(--accent-blue)"
+        stroke="var(--accent)"
         strokeWidth="2"
-        opacity="0.6"
-      />
-      <g
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.6"
         strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M14.5 34 24 13l9.5 21" />
-        <path d="M18.4 26.5h11.2" />
-      </g>
-      <circle cx="43.5" cy="16.1" r="2.8" fill="var(--accent-teal)" />
+      />
+
+      {/* Interface. */}
+      <circle cx="17.5" cy="13" r="2.2" fill="currentColor" />
+      {/* Server — copper, and the largest. */}
+      <circle cx="24" cy="24" r="3.2" fill="var(--accent)" />
+      {/* Data. */}
+      <circle cx="30.5" cy="35" r="2.2" fill="currentColor" />
     </svg>
   );
 }
@@ -56,34 +73,36 @@ type LogoProps = {
 };
 
 /**
- * Full horizontal lockup. Use this wherever the brand name is not already
- * visible nearby; use `LogoMark` on its own only in tight, repeated contexts.
+ * Full horizontal lockup — the mark plus the name, which is the version the
+ * guide assigns to the site and its headers.
+ *
+ * Use `LogoMark` on its own only in tight, repeated contexts where the brand
+ * name is already visible nearby.
  */
 export function Logo({ name, markOnly = false, className }: LogoProps) {
   return (
     <span className={cn('inline-flex items-center gap-2.5', className)}>
-      {/* <LogoMark /> */}
       {/*
-        `shrink-0` and an explicit box are load-bearing, not decoration. The
-        header is a flex row, and a bare `next/image` is a shrinkable flex item:
-        once the row ran out of width — which it did at 768px, before the
-        breakpoint below moved the inline nav up to `lg` — the mark was the
-        first thing to give, compressing from 30px to 12px and squashing the
-        lockup. A fixed box means the row runs out of room somewhere the layout
-        can answer for, never inside the logo.
+        `shrink-0` and a fixed box are load-bearing, not decoration. The header
+        is a flex row, and a bare mark is a shrinkable flex item: once the row
+        ran out of width — which it did at 768px, before the breakpoint in
+        `SiteHeader` moved the inline nav up to `lg` — the mark was the first
+        thing to give, compressing from 30px to 12px and squashing the lockup. A
+        fixed box means the row runs out of room somewhere the layout can answer
+        for, never inside the logo.
+
+        The mark also sits under the guide's 32px threshold at this size, so it
+        renders `bare` — without the enclosing circle — as the guide requires.
       */}
-      <Image
-        src="/a-logo.png"
-        alt="Abdullah"
-        width={30}
-        height={30}
-        className="size-[30px] shrink-0 object-contain"
-      />
+      <LogoMark bare className="size-[30px] shrink-0" />
+
       {markOnly ? (
         <span className="sr-only">{name}</span>
       ) : (
         /* Truncates rather than wrapping the header to two lines. */
-        <span className="truncate text-lg font-bold tracking-tight">{name}</span>
+        <span className="font-brand-display truncate text-lg font-semibold tracking-(--tracking-heading)">
+          {name}
+        </span>
       )}
     </span>
   );

@@ -33,16 +33,21 @@ export const contact: ContactInfo = {
   },
 };
 
-/** The closing invitation reused by the Home page and internal pages. */
+/**
+ * The closing invitation reused by the Home page and internal pages.
+ *
+ * Phrased around the whole application rather than an interface, so a visitor
+ * who needs an API or a database does not read this as out of scope.
+ */
 export const cta: CallToAction = {
   eyebrow: { en: "Next step", ar: "الخطوة التالية" },
   title: {
-    en: "Have an interface to build?",
-    ar: "لديك واجهة تريد بناءها؟",
+    en: "Have a web application to build?",
+    ar: "لديك تطبيق ويب تريد بناءه؟",
   },
   description: {
-    en: "Tell me what you are building and what it needs to achieve. I will reply with a clear plan.",
-    ar: "أخبرني بما تبنيه وما تريد تحقيقه، وسأرد عليك بخطة واضحة.",
+    en: "A full web application, an API, a database, or a fix to something you already have — tell me what you are building and what it needs to achieve, and I will reply with a clear plan.",
+    ar: "تطبيق ويب كامل أو واجهة API أو قاعدة بيانات أو إصلاح لمشروع قائم — أخبرني بما تبنيه وما تريد تحقيقه، وسأرد عليك بخطة واضحة.",
   },
   primary: {
     label: { en: "Start a project", ar: "ابدأ مشروعًا" },

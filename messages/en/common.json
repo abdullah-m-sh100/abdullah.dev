@@ -1,7 +1,7 @@
 {
   "brand": {
     "name": "Abdullah",
-    "tagline": "Ideas into Interfaces."
+    "tagline": "Ideas into Web Applications."
   },
   "actions": {
     "viewWork": "View my work",
@@ -14,13 +14,6 @@
     "backHome": "Back to home",
     "skipToContent": "Skip to content",
     "retry": "Try again"
-  },
-  "theme": {
-    "label": "Theme",
-    "toggle": "Switch theme",
-    "light": "Light",
-    "dark": "Dark",
-    "system": "System"
   },
   "language": {
     "label": "Language",

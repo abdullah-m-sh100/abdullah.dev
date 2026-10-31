@@ -14,10 +14,8 @@ type ProjectGalleryProps = {
 /**
  * Screenshot gallery.
  *
- * Reuses `ProjectCover` per tile rather than a new image component, only
- * overriding its aspect ratio to 4:3 — the second ratio CLAUDE.md §29 allows,
- * used here to visually distinguish gallery tiles from the 16:10 cover shown
- * everywhere else. The caller renders this component only when a project has
+ * Reuses `ProjectCover` per tile rather than a new image component; gallery
+ * tiles share the cover's 4:3 ratio. The caller renders this component only when a project has
  * gallery images, so there is no empty state to design here; when real
  * screenshots replace the placeholder, this component needs no changes.
  */
@@ -34,7 +32,6 @@ export function ProjectGallery({ images, locale, title }: ProjectGalleryProps) {
                 image={image}
                 locale={locale}
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="aspect-4/3"
               />
             </Reveal>
           ))}

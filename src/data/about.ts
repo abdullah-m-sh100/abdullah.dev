@@ -1,29 +1,39 @@
 import type { AboutInfo } from '@/types/content';
 
-/** TODO: Replace with final portfolio content. */
+/**
+ * The About narrative.
+ *
+ * `summary` is the full biography on /about; `preview` is the shorter pair of
+ * paragraphs Home shows. They are separate fields rather than a slice, because
+ * the Home version has to stand alone beside the stats panel.
+ *
+ * Deliberately no year counts or seniority labels in either — the verified
+ * numbers live in `stats.ts`, and prior front-end years are not restated as
+ * full-stack or MERN years anywhere on the site.
+ */
 export const about: AboutInfo = {
   summary: [
     {
-      en: 'I am a front-end developer focused on React.js and Next.js. I turn design systems and product ideas into interfaces that are fast, accessible and straightforward to maintain.',
-      ar: 'أنا مطوّر واجهات أمامية أركّز على React.js و Next.js. أحوّل أنظمة التصميم وأفكار المنتجات إلى واجهات سريعة وسهلة الوصول وقابلة للصيانة.',
+      en: 'I am a full-stack web developer working with the MERN stack — MongoDB, Express.js, React.js and Node.js. I build the interface, the API behind it and the database underneath, and I connect the three into one working application.',
+      ar: 'أنا مطور ويب متكامل أعمل بـ MERN Stack — MongoDB و Express.js و React.js و Node.js. أبني الواجهة وواجهة API خلفها وقاعدة البيانات تحتها، وأربط الثلاثة في تطبيق واحد يعمل.',
     },
     {
-      en: 'My work sits between design and engineering: translating layouts into resilient components, connecting them to real APIs, and keeping the result measurable through performance and accessibility budgets.',
-      ar: 'يقع عملي بين التصميم والهندسة: أترجم التصاميم إلى مكوّنات متينة، وأربطها بواجهات برمجية حقيقية، وأحافظ على قابلية القياس عبر معايير الأداء وسهولة الوصول.',
+      en: 'On the front end I work with React.js and Next.js, and I use TypeScript where it keeps a growing codebase safe to change. On the back end I build REST APIs with Node.js and Express.js, model the data in MongoDB around the queries the application actually makes, and handle the authentication, validation and error states in between.',
+      ar: 'في الواجهة الأمامية أعمل بـ React.js و Next.js، وأستخدم TypeScript حيث يجعل الكود المتنامي آمنًا للتعديل. وفي الباك إند أبني واجهات REST API بـ Node.js و Express.js، وأصمّم البيانات في MongoDB حسب الاستعلامات التي ينفّذها التطبيق فعليًا، وأتولّى المصادقة والتحقق من المدخلات ومعالجة الأخطاء بينهما.',
     },
     {
-      en: 'I am based in Palestine and work remotely with clients worldwide — startups, e-commerce brands and product teams that need an interface layer they can keep building on.',
-      ar: 'أعمل من فلسطين عن بُعد مع عملاء حول العالم — شركات ناشئة ومتاجر إلكترونية وفرق منتجات تحتاج طبقة واجهة يمكن البناء عليها مستقبلًا.',
+      en: 'I care about code that the next person can read and extend — clear structure, reusable components, and typed contracts between the layers. I am based in Palestine and work remotely with startups, e-commerce brands and project owners who need an application they can keep building on.',
+      ar: 'يهمّني أن يكون الكود مفهومًا وقابلًا للتطوير من بعدي: بنية واضحة ومكوّنات قابلة لإعادة الاستخدام وعقود محدّدة الأنواع بين الطبقات. أعمل من فلسطين عن بُعد مع شركات ناشئة ومتاجر إلكترونية وأصحاب مشاريع يحتاجون تطبيقًا يمكنهم البناء عليه مستقبلًا.',
     },
   ],
   preview: [
     {
-      en: 'I am a front-end developer focused on React.js and Next.js, turning product ideas and design systems into fast, accessible interfaces.',
-      ar: 'مطوّر واجهات أمامية أركّز على React.js و Next.js، أحوّل أفكار المنتجات وأنظمة التصميم إلى واجهات سريعة وسهلة الوصول.',
+      en: 'I am a full-stack web developer working with the MERN stack — I build React.js interfaces, Node.js and Express.js APIs, and the MongoDB data layer underneath them.',
+      ar: 'مطور ويب متكامل أعمل بـ MERN Stack — أبني واجهات بـ React.js، وواجهات API بـ Node.js و Express.js، وطبقة بيانات MongoDB تحتها.',
     },
     {
-      en: 'Clean code, clear structure, and interfaces that keep performing as the product grows.',
-      ar: 'كود نظيف وبنية واضحة وواجهات تحافظ على أدائها مع نمو المنتج.',
+      en: 'Clean code, clear structure, and applications that keep performing as the product grows.',
+      ar: 'كود نظيف وبنية واضحة وتطبيقات تحافظ على أدائها مع نمو المنتج.',
     },
   ],
   values: [
@@ -40,8 +50,8 @@ export const about: AboutInfo = {
       id: 'performance',
       title: { en: 'Performance as a feature', ar: 'الأداء ميزة أساسية' },
       description: {
-        en: 'Core Web Vitals are part of the deliverable, not an afterthought.',
-        ar: 'مؤشرات الأداء الأساسية جزء من التسليم وليست خطوة لاحقة.',
+        en: 'Fast interfaces and efficient queries are part of the deliverable, not an afterthought.',
+        ar: 'الواجهات السريعة والاستعلامات الفعّالة جزء من التسليم وليست خطوة لاحقة.',
       },
       icon: 'gauge',
     },
@@ -58,8 +68,8 @@ export const about: AboutInfo = {
       id: 'maintainability',
       title: { en: 'Built to be extended', ar: 'قابلية التوسّع' },
       description: {
-        en: 'Typed contracts and reusable primitives keep future work cheap.',
-        ar: 'العقود المكتوبة بأنواع واضحة والمكوّنات القابلة لإعادة الاستخدام تقلّل تكلفة التطوير لاحقًا.',
+        en: 'Typed contracts between the interface, the API and the data keep future work cheap.',
+        ar: 'العقود محدّدة الأنواع بين الواجهة وواجهة API والبيانات تقلّل تكلفة التطوير لاحقًا.',
       },
       icon: 'layers',
     },
@@ -79,8 +89,8 @@ export const about: AboutInfo = {
       order: 2,
       title: { en: 'Structure', ar: 'البناء الهيكلي' },
       description: {
-        en: 'Define the component model, data contracts and routing up front.',
-        ar: 'تحديد نموذج المكوّنات وعقود البيانات ومسارات التنقّل منذ البداية.',
+        en: 'Define the data model, the API surface and the component tree up front.',
+        ar: 'تحديد نموذج البيانات وواجهات API وشجرة المكوّنات منذ البداية.',
       },
     },
     {
@@ -88,8 +98,8 @@ export const about: AboutInfo = {
       order: 3,
       title: { en: 'Build', ar: 'التنفيذ' },
       description: {
-        en: 'Implement responsive, accessible interfaces against real content.',
-        ar: 'تنفيذ واجهات متجاوبة وسهلة الوصول باستخدام محتوى حقيقي.',
+        en: 'Implement the interface and the API together, against real data.',
+        ar: 'تنفيذ الواجهة وواجهة API معًا، باستخدام بيانات حقيقية.',
       },
     },
     {
@@ -103,9 +113,9 @@ export const about: AboutInfo = {
     },
   ],
   audience: [
-    { en: 'Startups shipping their first product interface', ar: 'شركات ناشئة تطلق أول واجهة لمنتجها' },
-    { en: 'E-commerce brands that need faster storefronts', ar: 'متاجر إلكترونية تحتاج واجهات أسرع' },
-    { en: 'Product teams modernizing a legacy front-end', ar: 'فرق منتجات تُحدّث واجهة قديمة' },
-    { en: 'Agencies looking for a reliable implementation partner', ar: 'وكالات تبحث عن شريك تنفيذ موثوق' },
+    { en: 'Startups shipping their first web application', ar: 'شركات ناشئة تطلق أول تطبيق ويب لها' },
+    { en: 'E-commerce brands that need a faster storefront', ar: 'متاجر إلكترونية تحتاج واجهة أسرع' },
+    { en: 'Project owners who need both a front end and an API', ar: 'أصحاب مشاريع يحتاجون واجهة وواجهة API معًا' },
+    { en: 'Teams modernizing a legacy web application', ar: 'فرق تُحدّث تطبيق ويب قديمًا' },
   ],
 };

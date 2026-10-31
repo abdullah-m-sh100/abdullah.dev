@@ -1,14 +1,16 @@
 @import 'tailwindcss';
 @import '../styles/tokens.css';
 
-/* next-themes toggles the `dark` class on <html>. */
-@custom-variant dark (&:where(.dark, .dark *));
-
 /**
  * Semantic tokens exposed as Tailwind utilities: `bg-surface`,
  * `text-muted-foreground`, `border-border`, `rounded-lg`, `text-h2`, …
- * `inline` keeps the variables live so they re-resolve when the theme, the
- * language or the direction changes.
+ *
+ * `inline` keeps the variables live so they re-resolve when the language, the
+ * direction or the surrounding tone changes. That last one is load-bearing
+ * here: a `.tone-midnight` band restates the same semantic names, so an
+ * unchanged `bg-surface` resolves to Midnight inside the band and Bone outside
+ * it. Resolving these at build time instead would freeze every component to
+ * the Bone palette and the inverted bands would render as light panels.
  */
 @theme inline {
   --color-background: var(--background);
@@ -19,6 +21,7 @@
   --color-surface-sunken: var(--surface-sunken);
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
+  --color-border-control: var(--border-control);
   --color-muted-foreground: var(--muted-foreground);
   --color-subtle-foreground: var(--subtle-foreground);
 
@@ -33,8 +36,8 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary-subtle: var(--secondary-subtle);
 
-  --color-accent-blue: var(--accent-blue);
-  --color-accent-teal: var(--accent-teal);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
   --color-ring: var(--ring);
   --color-overlay: var(--overlay);
 
@@ -42,11 +45,14 @@
   --color-danger: var(--danger);
   --color-warning: var(--warning);
 
-  --color-brand-navy: var(--brand-navy);
-  --color-brand-blue: var(--brand-blue);
-  --color-brand-teal: var(--brand-teal);
-  --color-brand-gray: var(--brand-gray);
-  --color-brand-off-white: var(--brand-off-white);
+  /* The identity palette at its literal values, for decoration and scrims. */
+  --color-brand-midnight: var(--brand-midnight);
+  --color-brand-bone: var(--brand-bone);
+  --color-brand-copper: var(--brand-copper);
+  --color-brand-burnt-copper: var(--brand-burnt-copper);
+  --color-brand-sage: var(--brand-sage);
+  --color-brand-mist: var(--brand-mist);
+  --color-brand-slate: var(--brand-slate);
 
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
@@ -59,13 +65,28 @@
   --shadow-raised: var(--shadow-raised);
   --shadow-header: var(--shadow-header);
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-arabic: var(--font-noto-sans-arabic), var(--font-inter), ui-sans-serif, sans-serif;
+  /*
+   * Type families.
+   *
+   * Tajawal sets the body in *both* languages — the guide gives it as the one
+   * body face for Arabic and Latin alike, which is what keeps a bilingual
+   * paragraph from changing texture mid-sentence. Fraunces carries Latin
+   * headings and El Messiri the Arabic ones; the swap is by `html[lang]` in the
+   * base layer below, not by a second type scale.
+   *
+   * Space Mono is `--font-mono`, so Tailwind's own `font-mono` utility — used
+   * on credential ids — picks it up with no call-site change.
+   */
+  --font-sans: var(--font-tajawal), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-display-arabic: var(--font-el-messiri), var(--font-tajawal), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --ease-out: var(--ease-out);
   --ease-in-out: var(--ease-in-out);
 
   /* Container widths — `max-w-content`, `max-w-wide`, `max-w-prose-comfortable`. */
+  /* 80rem = 1280px, the maximum the guide sets for the site interface. */
   --container-content: 80rem;
   --container-wide: 90rem;
   --container-prose-comfortable: 44rem;
@@ -89,6 +110,11 @@
    * Every step is fluid, and its tracking/leading point at the rhythm tokens
    * so Arabic re-tunes automatically — there is no second Arabic type scale.
    *
+   * Weights follow the guide rather than the old theme: Fraunces 600 for every
+   * heading step, El Messiri 600–700 for the Arabic equivalents. The previous
+   * 800 does not exist as a Fraunces heading weight in this identity, and a
+   * display serif at 800 reads as a different typeface.
+   *
    * The three large steps are tuned by *slope*, not by their floor. Their
    * earlier curves were steep enough that the floor only ever engaged below
    * ~215px, which meant a 320px phone still received near-tablet type: the
@@ -101,17 +127,17 @@
   --text-display: clamp(2.25rem, 1.05rem + 6vw, 4.5rem);
   --text-display--line-height: var(--leading-display);
   --text-display--letter-spacing: var(--tracking-display);
-  --text-display--font-weight: 800;
+  --text-display--font-weight: 600;
 
   --text-h1: clamp(1.875rem, 1rem + 3.6vw, 3.5rem);
   --text-h1--line-height: var(--leading-display);
   --text-h1--letter-spacing: var(--tracking-display);
-  --text-h1--font-weight: 800;
+  --text-h1--font-weight: 600;
 
   --text-h2: clamp(1.5rem, 1.05rem + 2.2vw, 2.5rem);
   --text-h2--line-height: var(--leading-heading);
   --text-h2--letter-spacing: var(--tracking-heading);
-  --text-h2--font-weight: 700;
+  --text-h2--font-weight: 600;
 
   --text-h3: clamp(1.25rem, 1.1rem + 0.65vw, 1.5rem);
   --text-h3--line-height: var(--leading-heading);
@@ -121,18 +147,32 @@
   --text-lead: clamp(1.0625rem, 1rem + 0.42vw, 1.25rem);
   --text-lead--line-height: var(--leading-body);
 
-  --text-body: 1rem;
+  /*
+   * 17px, not 16. The guide puts screen body text at 16–18px, and Tajawal runs
+   * noticeably small on its em — at 16px its Arabic sits under the lower bound
+   * the guide is actually asking for. 17px is mid-band in both scripts.
+   */
+  --text-body: 1.0625rem;
   --text-body--line-height: var(--leading-body);
 
+  /*
+   * Labels are Space Mono, uppercase, +0.14em — the guide's small-label rule.
+   * 0.75rem = 12px, above the 11px floor it sets.
+   *
+   * The family is not set here: Tailwind's `--text-*` namespace only accepts
+   * `--line-height`, `--letter-spacing` and `--font-weight` modifiers, so a
+   * `--font-family` one would be silently dropped. It is applied to the
+   * `.text-label` class in the components layer instead, which also lets
+   * Arabic opt out — Space Mono has no Arabic glyphs.
+   */
   --text-label: 0.75rem;
   --text-label--line-height: 1.25;
   --text-label--letter-spacing: var(--tracking-label);
-  --text-label--font-weight: 600;
+  --text-label--font-weight: 700;
 
   /* Decorative loops. Both are gated behind `motion-safe:` at every call site. */
   --animate-grid-drift: grid-drift 44s linear infinite;
-  --animate-orbit-outer: orbit-travel 54s linear infinite;
-  --animate-orbit-inner: orbit-travel 36s linear infinite reverse;
+  --animate-flow-travel: flow-travel 18s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
 
 @keyframes grid-drift {
@@ -145,9 +185,26 @@
   }
 }
 
-@keyframes orbit-travel {
-  to {
+/**
+ * A single pulse travelling the flow line, front-end → server → data.
+ *
+ * It fades in off the first node and out at the last rather than looping
+ * visibly back, so the motion reads as one packet making the trip instead of a
+ * bead on a necklace. Only `offset-distance` and `opacity` animate, both of
+ * which the compositor handles.
+ */
+@keyframes flow-travel {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  8%,
+  88% {
+    opacity: 1;
+  }
+  100% {
     offset-distance: 100%;
+    opacity: 0;
   }
 }
 
@@ -160,24 +217,39 @@
 
   body {
     background-color: var(--background);
-    /* Brand wash over the flat fill; `none` in dark. Fixed to the body box, so
-       it stays a header-height gradient instead of repeating down the page. */
+    /* Warm wash over the flat Bone fill. Fixed to the body box, so it stays a
+       header-height gradient instead of repeating down the page. */
     background-image: var(--page-gradient);
     background-repeat: no-repeat;
     color: var(--foreground);
     font-family: var(--font-sans);
-    font-feature-settings: 'cv11', 'ss01';
+    /*
+     * 17px, matching `--text-body`. Written literally rather than as
+     * `var(--text-body)` because that token lives in `@theme inline`, where
+     * Tailwind substitutes values into utilities rather than guaranteeing a
+     * custom property to read back here.
+     */
+    font-size: 1.0625rem;
     line-height: var(--leading-body);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
   }
 
-  html[lang='ar'] body {
-    font-family: var(--font-arabic);
+  /*
+   * Headings take the display face in both scripts — Fraunces for Latin,
+   * El Messiri for Arabic. Set on the elements rather than on a utility so a
+   * heading is correct by default and a page cannot forget to ask for it.
+   */
+  :is(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-display);
+    text-wrap: balance;
   }
 
-  :is(h1, h2, h3, h4, h5, h6) {
-    text-wrap: balance;
+  html[lang='ar'] :is(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-display-arabic);
+    /* El Messiri's heading weights are 600 and 700; 700 for the two large
+       steps, where the extra weight answers Fraunces' optical mass. */
+    font-weight: 700;
   }
 
   p {
@@ -186,7 +258,9 @@
 
   /*
    * One focus system for the whole site. A visible ring is mandatory and is
-   * never removed without a replacement.
+   * never removed without a replacement. `--ring` is restated inside a
+   * Midnight band, so the ring is Burnt Copper on Bone and Copper on Midnight
+   * without a second rule.
    */
   :focus-visible {
     outline: var(--focus-ring-width) solid var(--ring);
@@ -195,19 +269,19 @@
   }
 
   ::selection {
-    background-color: var(--accent-blue);
-    color: #ffffff;
+    background-color: var(--accent);
+    color: var(--brand-bone);
   }
 
   /*
    * Scrollbar, brand-aware in both engines.
    *
    * Every colour is a semantic token, so the thumb and hover state re-resolve
-   * with the theme exactly like any other surface — there is no separate dark
-   * scrollbar to keep in sync. `scrollbar-color` covers Firefox; the
-   * `::-webkit-scrollbar*` pseudo-elements cover Chromium and Safari. Applied
-   * on the bare pseudo-elements rather than scoped to `html`, so a scrolling
-   * card, gallery or code block picks up the same treatment as the page.
+   * with the surrounding tone exactly like any other surface. `scrollbar-color`
+   * covers Firefox; the `::-webkit-scrollbar*` pseudo-elements cover Chromium
+   * and Safari. Applied on the bare pseudo-elements rather than scoped to
+   * `html`, so a scrolling card, gallery or code block picks up the same
+   * treatment as the page.
    *
    * Deliberately no `scrollbar-gutter: stable` here. Reserving the gutter
    * looks harmless but breaks two things at once, both only visible while the
@@ -215,10 +289,10 @@
    * initial containing block shrinks by its width and a `position: fixed`
    * overlay with `inset-0` can no longer reach the viewport edge — the drawer
    * and its backdrop stopped 10px short, leaving a lit strip down the side of
-   * the screen in light mode. It also disturbs the `overflow` propagation the
-   * drawer's scroll lock depends on, which silently stopped holding the page
-   * still. The lock in `mobile-nav.tsx` compensates for the scrollbar's width
-   * itself, which keeps the page from shifting without either side effect.
+   * the screen. It also disturbs the `overflow` propagation the drawer's
+   * scroll lock depends on, which silently stopped holding the page still. The
+   * lock in `mobile-nav.tsx` compensates for the scrollbar's width itself,
+   * which keeps the page from shifting without either side effect.
    */
   html {
     scrollbar-width: thin;
@@ -240,8 +314,8 @@
     /*
      * A transparent border padded inside the thumb, clipped to its own
      * background, keeps the thumb narrower than the track it rides in —
-     * the "thumb floats off the edges" look a native theme-aware scrollbar
-     * has, without a second element.
+     * the "thumb floats off the edges" look a native scrollbar has, without a
+     * second element.
      */
     border: 2px solid transparent;
     background-clip: padding-box;
@@ -249,7 +323,7 @@
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--accent-blue);
+    background-color: var(--accent);
   }
 
   ::-webkit-scrollbar-corner {
@@ -284,6 +358,24 @@
  * only `opacity` and `transform` are animated.
  */
 @layer components {
+  /*
+   * Small labels and eyebrows are set in Space Mono — the guide's face for
+   * "كود وقوائم تقنية", which is what every one of these is: a stack name, a
+   * section eyebrow, a field label.
+   *
+   * In the components layer, so the `text-label` utility still owns size,
+   * weight and tracking and only the family comes from here. Arabic opts back
+   * out to the body face: Space Mono has no Arabic glyphs, and leaving it in
+   * the stack would hand the browser a per-glyph fallback decision for no gain.
+   */
+  .text-label {
+    font-family: var(--font-mono);
+  }
+
+  html[lang='ar'] .text-label {
+    font-family: var(--font-sans);
+  }
+
   [data-reveal] {
     opacity: 0;
     transition-property: opacity, transform;
@@ -373,19 +465,42 @@
 /* Utilities                                                                  */
 /* -------------------------------------------------------------------------- */
 
-/* Subtle blue → teal emphasis. Reserved for a single phrase or edge per view. */
-@utility text-gradient-brand {
-  background-image: linear-gradient(100deg, var(--accent-blue) 0%, var(--accent-teal) 100%);
-  background-clip: text;
-  color: transparent;
-  /* The gradient replaces the text colour, so restore a legible fallback
-     wherever background-clip is unsupported. */
-  @supports not (background-clip: text) {
-    color: var(--primary);
+/**
+ * Copper emphasis for a single phrase.
+ *
+ * Flat colour, not a gradient. Copper is the only warm tone in the identity
+ * and the guide allows it on one focal element per screen, so a two-stop blend
+ * would be spending the system's single accent twice — and `--accent` already
+ * resolves to Burnt Copper on Bone and Copper on Midnight, which a hard-coded
+ * gradient could not do.
+ */
+@utility text-accent-emphasis {
+  color: var(--accent);
+}
+
+/**
+ * The display face, picked by language — Fraunces for Latin, El Messiri for
+ * Arabic, the same pairing the heading elements get in the base layer.
+ *
+ * This exists as its own utility rather than as an override of Tailwind's
+ * generated `font-display` because an `html[lang='ar']` rule in another layer
+ * could not win: cascade layers outrank specificity, so a utilities-layer
+ * `.font-display` beats a components-layer `html[lang='ar'] .font-display` no
+ * matter how specific the latter is. Declaring both inside one `@utility`
+ * keeps them in the same layer, where specificity decides and Arabic wins.
+ *
+ * For headings, prefer a real `h1`–`h6`, which is already covered. This is for
+ * display type on something that is not a heading — the brand wordmark.
+ */
+@utility font-brand-display {
+  font-family: var(--font-display);
+
+  html[lang='ar'] & {
+    font-family: var(--font-display-arabic);
   }
 }
 
-/* Fine grid motif. Sized by `--grid-size` so the drift keyframe stays in sync. */
+/* Fine grid motif. Sized to match the drift keyframe's one-cell translate. */
 @utility grid-surface {
   background-image:
     linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
@@ -408,29 +523,32 @@
   }
 }
 
+/* Hairline, at the 1.5px weight the guide specifies in place of heavy shadow. */
+@utility border-hairline {
+  border-width: var(--hairline);
+}
+
 /* -------------------------------------------------------------------------- */
-/* Orbit node motion path                                                     */
+/* Flow line motion path                                                      */
 /* -------------------------------------------------------------------------- */
 
 /**
- * The orbiting node travels an elliptical `offset-path`, which the compositor
- * handles as a transform. The SVG `transform` attribute positions the node for
- * browsers without motion-path support; inside `@supports` it is cleared so the
- * two placements never stack.
+ * The travelling pulse rides the same S-curve the flow line is drawn with, as
+ * an `offset-path` — which the compositor handles as a transform. The SVG
+ * `transform` attribute parks the node on the first node for browsers without
+ * motion-path support; inside `@supports` it is cleared so the two placements
+ * never stack.
+ *
+ * The path string is duplicated from `flow-background.tsx` by necessity: an
+ * `offset-path` cannot reference another element's geometry. The two must be
+ * changed together, and the component's comment says so.
  */
 @supports (offset-path: path('M 0 0 L 1 1')) {
-  .orbit-node {
+  .flow-pulse {
     transform: none;
     offset-rotate: 0deg;
     offset-distance: 0%;
-  }
-
-  .orbit-node--outer {
-    offset-path: path('M 570 200 A 270 108 0 1 1 30 200 A 270 108 0 1 1 570 200');
-  }
-
-  .orbit-node--inner {
-    offset-path: path('M 490 200 A 190 76 0 1 1 110 200 A 190 76 0 1 1 490 200');
+    offset-path: path('M 210 60 C 300 80, 340 130, 300 200 C 260 270, 300 320, 390 340');
   }
 }
 
@@ -455,6 +573,17 @@
   [data-reveal] {
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  /*
+   * The pulse's keyframes both start and end at `opacity: 0`, so a stopped
+   * animation would leave it invisible — and with `animation-iteration-count`
+   * forced to 1 it would also have nowhere to return to. Hiding it outright is
+   * the honest end state: the three static nodes already carry the motif.
+   */
+  .flow-pulse,
+  .hero-pulse {
+    display: none;
   }
 }
 

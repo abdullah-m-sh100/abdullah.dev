@@ -24,9 +24,9 @@ type BuildMetadataInput = {
  *
  * `openGraph.title` and `twitter.title` are deliberately left unset. Next.js
  * then falls back to the page title *after* the root layout's template has run,
- * so a shared link reads "About — React & Next.js Front-End Developer |
- * Abdullah". Setting either one here overrides that fallback with the bare
- * segment title and silently drops the brand from every social card.
+ * so a shared link reads "About — Full-Stack MERN Developer | Abdullah".
+ * Setting either one here overrides that fallback with the bare segment title
+ * and silently drops the brand from every social card.
  */
 export function buildMetadata({
   title,

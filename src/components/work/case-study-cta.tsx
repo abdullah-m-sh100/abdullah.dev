@@ -12,7 +12,7 @@ import { Eyebrow } from '@/components/ui/section-heading';
  * Closing CTA for a case study.
  *
  * Deliberately smaller and quieter than Home's `ContactCta`: a single
- * contained card rather than a full-bleed orbit + glow panel, and its own
+ * contained card rather than a full-bleed flow + glow panel, and its own
  * project-specific copy from the `work.caseStudy.cta` messages rather than
  * `portfolioData.cta`. A visitor who just read a full case study needs one
  * clear next step, not a second hero-scale moment.
@@ -28,7 +28,7 @@ export async function CaseStudyCta() {
             tone="elevated"
             className="relative isolate flex flex-col items-start gap-6 overflow-hidden p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10"
           >
-            <GradientGlow tone="teal" className="inset-y-0 -end-24 -z-10 w-96 opacity-70" />
+            <GradientGlow tone="sage" className="inset-y-0 -end-24 -z-10 w-96 opacity-70" />
 
             <div className="max-w-xl">
               <Eyebrow>{t('eyebrow')}</Eyebrow>

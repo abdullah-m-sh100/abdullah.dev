@@ -13,8 +13,10 @@ import { getSkillCategories } from '@/lib/content/profile';
  * Skills & technology, as categorized rows rather than the `ExpertiseStrip`
  * hairline band Home already shows in full — same selector, a deliberately
  * different composition so the two don't repeat each other. Highlighted
- * (core) skills get an emphasized badge; the rest stay a quiet inline list —
- * never a percentage, per CLAUDE.md.
+ * (core) skills get a Sage badge and the rest a quiet neutral chip — never a
+ * percentage, per CLAUDE.md. The core badges were Copper, which put a dozen
+ * warm pills on one screen against a palette that allows the tone on a single
+ * focal element; Sage is the guide's colour for "quiet details".
  */
 export async function SkillsSection() {
   const locale = await getLocale();
@@ -55,16 +57,22 @@ export async function SkillsSection() {
                     <ul className="flex flex-wrap gap-2">
                       {core.map((skill) => (
                         <li key={skill.id}>
-                          <Badge variant="primary">{skill.name}</Badge>
+                          <Badge variant="secondary">{skill.name}</Badge>
                         </li>
                       ))}
                     </ul>
                   ) : null}
 
                   {supporting.length > 0 ? (
-                    <p className="text-muted-foreground text-sm">
-                      {supporting.map((skill) => skill.name).join(' · ')}
-                    </p>
+                    <ul className="flex flex-wrap gap-2">
+                      {supporting.map((skill) => (
+                        <li key={skill.id}>
+                          <Badge variant="neutral" size="sm">
+                            {skill.name}
+                          </Badge>
+                        </li>
+                      ))}
+                    </ul>
                   ) : null}
                 </div>
               </Reveal>

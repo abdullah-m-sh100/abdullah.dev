@@ -6,6 +6,8 @@ import { ContactForm } from '@/components/contact/contact-form';
 import { ContactHero } from '@/components/contact/contact-hero';
 import { Container } from '@/components/ui/container';
 import { Section } from '@/components/ui/section';
+import { portfolioData } from '@/data/portfolio-data';
+import { localize } from '@/i18n/localize';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { now } from '@/lib/utils/now';
 
@@ -34,8 +36,10 @@ export async function generateMetadata(): Promise<Metadata> {
  * the time it receives the submission as a secondary, non-authoritative
  * signal that a submission was scripted rather than typed.
  */
-export default function ContactPage() {
+export default async function ContactPage() {
+  const locale = await getLocale();
   const renderedAt = now();
+  const responseTime = localize(portfolioData.contact.responseTime, locale);
 
   return (
     <>
@@ -45,7 +49,7 @@ export default function ContactPage() {
         <Container>
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-7">
-              <ContactForm renderedAt={renderedAt} />
+              <ContactForm renderedAt={renderedAt} responseTime={responseTime} />
             </div>
 
             <div className="lg:col-span-5">

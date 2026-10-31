@@ -35,7 +35,14 @@ export async function AboutIntro() {
             <div className="mt-6 flex flex-col gap-5">
               {about.summary.map((paragraph, index) => (
                 <Reveal key={paragraph.en} index={index + 1}>
-                  <p className="text-muted-foreground max-w-prose-comfortable leading-relaxed">
+                  {/* The opening paragraph leads: larger and in full-strength ink. */}
+                  <p
+                    className={
+                      index === 0
+                        ? 'text-foreground max-w-prose-comfortable text-lead'
+                        : 'text-muted-foreground max-w-prose-comfortable leading-relaxed'
+                    }
+                  >
                     {localize(paragraph, locale)}
                   </p>
                 </Reveal>
@@ -49,17 +56,24 @@ export async function AboutIntro() {
             </Reveal>
           </div>
 
-          <Reveal variant="slide-start" index={1} className="lg:col-span-5">
-            <div className="border-border bg-surface-muted rounded-xl border p-8">
+          {/* Sticky on desktop, so the aside stays beside the long biography instead of leaving a void under it. */}
+          <Reveal
+            variant="slide-start"
+            index={1}
+            className="lg:sticky lg:top-28 lg:col-span-5 lg:self-start"
+          >
+            <div className="border-hairline border-border bg-surface-elevated rounded-xl p-8 shadow-(--shadow-elevated)">
               <h3 className="text-subtle-foreground text-label ltr:uppercase">
                 {t('audienceTitle')}
               </h3>
 
-              <ul className="mt-5 flex flex-col gap-4">
+              <ul className="mt-6 flex flex-col gap-5">
                 {localizeList(about.audience, locale).map((line) => (
                   <li key={line} className="flex items-start gap-3 text-sm">
-                    <Icon name="check" className="text-secondary mt-0.5 size-4 shrink-0" />
-                    <span className="text-muted-foreground">{line}</span>
+                    <span className="text-secondary bg-secondary-subtle mt-px inline-flex size-5 shrink-0 items-center justify-center rounded-full">
+                      <Icon name="check" className="size-3" />
+                    </span>
+                    <span className="text-foreground">{line}</span>
                   </li>
                 ))}
               </ul>

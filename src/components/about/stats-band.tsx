@@ -23,11 +23,12 @@ import { cn } from '@/lib/utils/cn';
  * and `contact-details` both keep to the single-wrapper form for the same
  * `dl`. See those for the same convention.
  *
- * The icon chip alternates blue and teal by position rather than using a
- * fixed colour per stat: with only four cells and no inherent category to
- * hang a colour on, alternation is what turns two accents into rhythm instead
- * of an arbitrary pick. The suffix repeats whichever accent its own card uses,
- * so the two colours on each card visibly belong together.
+ * Every icon chip is Sage, and the alternation that used to run through them
+ * is gone. The identity has one warm tone and allows it on a single focal
+ * element per screen, so four chips taking turns at it would spend that budget
+ * on decoration — and these chips are decoration. Sage is the guide's colour
+ * for exactly this ("الحالة والتفاصيل الهادئة"), which also removes the need to
+ * justify an arbitrary two-colour rhythm.
  *
  * Every value here is a real, source-controlled placeholder (see
  * `src/data/stats.ts`), never invented for this page.
@@ -45,38 +46,21 @@ export async function StatsBand() {
         </h2>
 
         <dl className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
-          {stats.map((stat, index) => {
-            const isPrimary = index % 2 === 0;
+          {stats.map((stat, index) => (
+            <Reveal key={stat.id} index={index} className={cn(cardTones.elevated, 'p-6')}>
+              <span className="text-secondary bg-secondary-subtle inline-flex size-11 items-center justify-center rounded-md">
+                <Icon name={stat.icon} />
+              </span>
 
-            return (
-              <Reveal
-                key={stat.id}
-                index={index}
-                className={cn(cardTones.elevated, 'p-6')}
-              >
-                <span
-                  className={cn(
-                    'inline-flex size-11 items-center justify-center rounded-md',
-                    isPrimary ? 'bg-primary-subtle text-primary' : 'bg-secondary-subtle text-secondary',
-                  )}
-                >
-                  <Icon name={stat.icon} />
-                </span>
-
-                <dt className="text-muted-foreground mt-4 text-sm">
-                  {localize(stat.label, locale)}
-                </dt>
-                <dd className="text-foreground mt-1 text-h1">
-                  {stat.value}
-                  {stat.suffix ? (
-                    <span className={isPrimary ? 'text-primary' : 'text-secondary'}>
-                      {stat.suffix}
-                    </span>
-                  ) : null}
-                </dd>
-              </Reveal>
-            );
-          })}
+              <dt className="text-muted-foreground mt-4 text-sm">
+                {localize(stat.label, locale)}
+              </dt>
+              <dd className="text-foreground font-brand-display mt-1 text-h1 tabular-nums">
+                {stat.value}
+                {stat.suffix ? <span className="text-secondary">{stat.suffix}</span> : null}
+              </dd>
+            </Reveal>
+          ))}
         </dl>
       </Container>
     </Section>

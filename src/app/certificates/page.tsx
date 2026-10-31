@@ -8,8 +8,11 @@ import { Reveal } from '@/components/motion/reveal';
 import { Container } from '@/components/ui/container';
 import { EmptyState } from '@/components/ui/empty-state';
 import { Section } from '@/components/ui/section';
+import { SectionHeading } from '@/components/ui/section-heading';
 import { getAllCertificates } from '@/lib/content/certificates';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { cn } from '@/lib/utils/cn';
+import type { CertificateCategory } from '@/types/content';
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -23,17 +26,31 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
+/** Page order of the groups. A group with no certificates is simply not rendered. */
+const GROUP_ORDER: readonly CertificateCategory[] = ['web', 'ai'];
+
+/**
+ * Column count that never leaves a card alone on its last row: three across
+ * when the count divides by three, four for a group of four (a 2×2 of cards
+ * this tall would run past a screen), otherwise the count itself up to three.
+ */
+function columnsFor(count: number): string {
+  if (count === 4) return 'sm:grid-cols-2 lg:grid-cols-4';
+  if (count === 2) return 'sm:grid-cols-2';
+  return 'sm:grid-cols-2 lg:grid-cols-3';
+}
+
 /**
  * /certificates — the full credential list Home only previews three of.
  *
- * `getAllCertificates()` already sorts featured-first, then by `order`, then
- * newest — that ordering alone is the page's hierarchy signal. With only a
- * handful of certificates and most of them featured, a separate "Featured"
- * section would repeat most of the grid immediately below it, so this page
- * stays a single ordered grid rather than duplicating entries across two
- * sections. `CertificateCard` is reused unchanged from Home, with the fuller
- * label set (`credentialId` / `expires` / `doesNotExpire` / `openPdf`) that
- * Home's compact preview intentionally leaves out.
+ * The certificates are filed into groups (web development, AI-assisted
+ * development) rather than shown as one flat grid: a visitor looking for the
+ * React training should not have to scan past the AI courses, and seven cards
+ * in a three-column grid left the last one alone. Within a group the order is
+ * still `getAllCertificates()`'s — featured first, then `order`, then newest.
+ * `CertificateCard` is reused unchanged from Home, with the fuller label set
+ * (`credentialId` / `expires` / `doesNotExpire` / `openPdf`) that Home's
+ * compact preview intentionally leaves out.
  */
 export default async function CertificatesPage() {
   const locale = await getLocale();
@@ -54,33 +71,56 @@ export default async function CertificatesPage() {
     skills: t('certificates.card.skills'),
   };
 
+  const groups = GROUP_ORDER.map((category) => ({
+    id: category,
+    label: t(`certificates.groups.${category}.title`),
+    description: t(`certificates.groups.${category}.description`),
+    items: certificates.filter((certificate) => certificate.category === category),
+  })).filter((group) => group.items.length > 0);
+
   return (
     <>
-      <CertificatesHero countLabel={countLabel} />
+      <CertificatesHero
+        countLabel={countLabel}
+        groups={groups.map(({ id, label, items }) => ({ id, label, count: items.length }))}
+      />
 
-      <Section spacing="compact" aria-labelledby="certificates-listing-title">
-        <Container>
-          <h2 id="certificates-listing-title" className="sr-only">
-            {t('metadata.certificates.title')}
-          </h2>
+      {groups.length > 0 ? (
+        groups.map((group, index) => (
+          <Section
+            key={group.id}
+            id={group.id}
+            surface={index % 2 === 1 ? 'muted' : 'transparent'}
+            aria-labelledby={`certificates-${group.id}-title`}
+          >
+            <Container>
+              <SectionHeading
+                id={`certificates-${group.id}-title`}
+                title={group.label}
+                description={group.description}
+              />
 
-          {certificates.length > 0 ? (
-            <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {certificates.map((certificate, index) => (
-                <Reveal key={certificate.id} as="li" index={index % 3}>
-                  <CertificateCard certificate={certificate} locale={locale} labels={labels} />
-                </Reveal>
-              ))}
-            </ul>
-          ) : (
+              <ul className={cn('mt-10 grid gap-6', columnsFor(group.items.length))}>
+                {group.items.map((certificate, itemIndex) => (
+                  <Reveal key={certificate.id} as="li" index={itemIndex % 4}>
+                    <CertificateCard certificate={certificate} locale={locale} labels={labels} />
+                  </Reveal>
+                ))}
+              </ul>
+            </Container>
+          </Section>
+        ))
+      ) : (
+        <Section spacing="compact">
+          <Container>
             <EmptyState
               icon="award"
               title={t('common.states.emptyTitle')}
               description={t('common.states.emptyDescription')}
             />
-          )}
-        </Container>
-      </Section>
+          </Container>
+        </Section>
+      )}
 
       <ContactCta />
     </>

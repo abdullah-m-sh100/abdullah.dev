@@ -1,8 +1,8 @@
 {
   "hero": {
     "eyebrow": "About",
-    "title": "The front-end developer behind the interfaces",
-    "description": "How I approach front-end work, the React and Next.js stack I rely on, and the experience behind it — three years of shipping production interfaces."
+    "title": "The developer behind the interface and the API",
+    "description": "How I approach full-stack work, the MERN stack I rely on, and the experience behind it — building interfaces, the APIs they run on, and the data layer underneath."
   },
   "intro": {
     "title": "Who I am",
@@ -10,7 +10,7 @@
   },
   "philosophy": {
     "eyebrow": "Philosophy",
-    "title": "Ideas into Interfaces, deliberately",
+    "title": "Ideas into web applications, deliberately",
     "description": "Four outcomes I hold every project to, regardless of stack or timeline."
   },
   "stats": {

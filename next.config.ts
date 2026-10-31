@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
     /*
      * 75 is the Next.js default and stays the site-wide norm. 85 exists for the
      * hero portrait only: it is the one image that paints large, above the fold
-     * and against a flat navy backdrop, where the banding a lower quality
+     * and against a flat Midnight backdrop, where the banding a lower quality
      * leaves in the gradient is actually visible.
      */
     qualities: [75, 85],
@@ -38,11 +38,11 @@ const nextConfig: NextConfig = {
   },
   /**
    * Baseline security headers only — deliberately no site-wide `Content-Security-Policy`.
-   * Next.js relies on inline bootstrap scripts (the RSC payload, `next-themes`'
-   * pre-hydration theme script) that a strict CSP would need a per-request nonce
+   * Next.js relies on inline bootstrap scripts (the RSC payload, the JSON-LD
+   * block in the root layout) that a strict CSP would need a per-request nonce
    * threaded through `next.config.ts`, the root layout and every third-party
-   * script to allow safely; getting that wrong silently breaks hydration or the
-   * theme switch. The headers below carry no such risk.
+   * script to allow safely; getting that wrong silently breaks hydration. The
+   * headers below carry no such risk.
    */
   async headers() {
     return [

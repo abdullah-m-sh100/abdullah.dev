@@ -42,17 +42,18 @@ export function ProjectShowcase({
     <article className="group relative grid items-center gap-8 lg:grid-cols-12 lg:gap-14">
       <Reveal
         variant={reversed ? 'slide-start' : 'slide-end'}
-        className={`lg:col-span-7 ${reversed ? 'lg:order-last' : ''}`}
+        className={`lg:col-span-6 ${reversed ? 'lg:order-last' : ''}`}
       >
         <ProjectCover
           image={project.coverImage}
           overrideSrc={project.image}
           locale={locale}
-          sizes="(min-width: 1024px) 58vw, 100vw"
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          className="shadow-card group-hover:border-border-strong group-hover:shadow-raised transition-[box-shadow,border-color] duration-(--duration-slow) ease-out"
         />
       </Reveal>
 
-      <Reveal index={1} className="lg:col-span-5">
+      <Reveal index={1} className="lg:col-span-6">
         <div className="flex flex-wrap items-center gap-2">
           <Badge variant="primary">{localize(project.category, locale)}</Badge>
           {project.featured ? (

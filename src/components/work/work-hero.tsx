@@ -17,13 +17,17 @@ type WorkHeroProps = {
  * Deliberately quieter than the Home hero: one decorative layer (the grid)
  * instead of three, no CTA pair, no interface panel. Home stays the site's
  * main visual entry point — this page's job is to get out of the way of the
- * listing below it.
+ *
+ * A Midnight band, like every page hero on the site: the guide weights Midnight
+ * at half the palette against Bone's 30%, and spending it on the header-and-hero
+ * field at the top of each page is what gets that balance without a dark mode.
+ * Copper becomes the accent inside it automatically.
  */
 export async function WorkHero({ countLabel }: WorkHeroProps) {
   const t = await getTranslations('work.hero');
 
   return (
-    <Section spacing="compact" className="relative isolate overflow-hidden" aria-labelledby="work-hero-title">
+    <Section tone="midnight" spacing="compact" className="relative isolate overflow-hidden" aria-labelledby="work-hero-title">
       <AnimatedGrid fade="top" className="opacity-60" />
 
       <Container className="relative">

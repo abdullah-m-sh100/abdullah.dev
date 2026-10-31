@@ -1,8 +1,8 @@
 {
   "hero": {
     "eyebrow": "Selected work",
-    "title": "Front-end projects and case studies",
-    "description": "A closer look at what I have built with React.js and Next.js — the problem each project solved, the technical decisions behind it, and what shipped to production."
+    "title": "Selected projects and case studies",
+    "description": "A closer look at what I have built — the problem each project solved, the technical decisions behind it, and what shipped to production. Each one lists the stack and the role I actually had."
   },
   "listing": {
     "countLabel": "{count, plural, one {# project} other {# projects}}"

@@ -14,7 +14,7 @@ Core site goals:
 - Provide a reliable contact form that sends submissions to Abdullah's email.
 - Support **Arabic and English**.
 - Support **RTL and LTR** automatically.
-- Support **Light Mode and Dark Mode**.
+- Present **one theme only** — there is deliberately no light/dark switch. See §5.
 - Keep the site fast, accessible, responsive, SEO-friendly, maintainable, and scalable.
 
 The primary brand message is:
@@ -31,9 +31,15 @@ Supporting messaging may include:
 
 ## 2. Source of Truth — Visual Identity
 
-The uploaded brand identity PDF is the design source of truth.
+**`brand-guidelines-flow.md` in the repository root is the design source of truth.**
+It supersedes the earlier "orbit / blue + teal" identity that previous versions
+of this file described; where anything below disagrees with it, that file wins.
 
 Do not invent a conflicting visual language.
+
+The identity is called **Flow**. Its central idea is a single path carrying data
+from the interface to the server to the database, and that path is the logo, the
+background motif, and the reason the palette is warm rather than technical.
 
 ### Brand positioning
 
@@ -41,229 +47,289 @@ Abdullah builds modern, high-performance web interfaces for startups, e-commerce
 
 ### Brand personality
 
-The interface should feel:
+The interface should feel, in the guide's own words — عصري · دافئ · واضح · موثوق · أنيق:
 
-- Clear
 - Modern
+- Warm
+- Clear
 - Reliable
-- Precise
-- Progressive
-- Calm
-- Human
-- Professional
+- Elegant
 
-Avoid visual noise, gimmicks, excessive animation, or a stereotypical “hacker/coder” aesthetic.
+The reference point is a well-set magazine, not a dashboard. Avoid visual noise,
+gimmicks, excessive animation, or a stereotypical “hacker/coder” aesthetic.
 
 ---
 
 ## 3. Brand Logo Rules
 
-The logo is a geometric **A** surrounded by a Saturn-inspired orbit.
+The logo is a thin **circle** enclosing an **S-curve that threads three nodes**.
 
-Meaning:
+Meaning — the three nodes are the three tiers of the stack:
 
-- `A` represents Abdullah and architecture.
-- Orbit represents the web ecosystem, movement, iteration, and connected experiences.
-- Orbital dot represents a digital node: users, data, and interaction.
+- Top node — the interface (Next.js).
+- Middle node — the server (Node.js / Express). Copper, and the largest.
+- Bottom node — the data (MongoDB).
+- The curve is the flow of data between them.
 
 ### Logo usage
 
-Use the existing approved logo assets only.
-
-Recommended asset names:
-
 ```text
-/public/brand/abdullah-logo-primary.svg
-/public/brand/abdullah-logo-stacked.svg
-/public/brand/abdullah-mark-orbit.svg
-/public/brand/abdullah-logo-white.svg
-/public/brand/abdullah-logo-mono.svg
+/public/brand/flow-logo-primary.svg    horizontal lockup, Bone ground
+/public/brand/flow-logo-reversed.svg   horizontal lockup, Midnight ground
+/public/brand/flow-logo-mono.svg       single colour: print, stamps, Copper ground
+/public/brand/flow-mark.svg            icon only, with the circle
+/public/brand/flow-mark-bare.svg       icon only, no circle — required below 32px
 ```
+
+In the app, `src/components/brand/logo.tsx` draws the same geometry from design
+tokens, so it inverts by ground automatically. Prefer it over an `<img>`.
+
+### Colour by ground
+
+- On Midnight: curve and middle node Copper `#E08A57`, outer nodes Bone.
+- On Bone: curve and middle node Burnt Copper `#9A4A24`, outer nodes Midnight.
+- On Copper: every element Midnight.
 
 ### Clear space
 
-Maintain generous spacing around the logo.
+At least a quarter of the mark's width on every side.
 
-Minimum guidelines:
+Minimum sizes:
 
-- Icon: minimum 24px digital.
-- Horizontal lockup: minimum 160px digital.
+- Icon: 24px digital. **Below 32px use the bare mark, without the circle.**
+- Horizontal lockup: 160px digital.
 - Use the full lockup when the brand name is not otherwise visible.
 
 ### Never
 
 - Rotate the logo.
 - Stretch or squash the logo.
-- Recolor it with unrelated colors.
-- Remove the orbital dot.
+- Change the curvature of the line.
+- Drop or resize a node.
+- Recolor it outside the three ground rules above.
 - Add glow/shadow effects to the master logo.
-- Place the logo over visually busy low-contrast backgrounds.
+- Place it over a busy image without a solid colour layer beneath it.
 
 ---
 
 ## 4. Brand Color System
 
-Use the following exact brand colors.
+Use these exact values. They are defined once, in `src/styles/tokens.css`.
 
 ```css
---brand-navy: #0F172A;
---brand-blue: #3B82F6;
---brand-teal: #14B8A6;
---brand-gray: #E5E7EB;
---brand-off-white: #F8FAFC;
+--brand-midnight:     #0F1B2D;  /* 50% */
+--brand-bone:         #F3EEE6;  /* 30% */
+--brand-copper:       #E08A57;  /* 12% */
+--brand-burnt-copper: #9A4A24;  /*  4% */
+--brand-sage:         #9DB5A5;  /*  4% */
+```
+
+Neutrals:
+
+```css
+--brand-mist:  #A9B6C6;  /* secondary text on Midnight */
+--brand-slate: #4A5A6E;  /* secondary text on Bone */
 ```
 
 ### Meaning
 
-- `#0F172A` Deep Navy — trust, focus, premium.
-- `#3B82F6` Blue — technology, progress.
-- `#14B8A6` Teal — creativity, motion.
-- `#E5E7EB` Soft Gray — structure, UI surfaces.
-- `#F8FAFC` Off White — space, clarity.
+- `#0F1B2D` Midnight — the base, and the text colour on light grounds.
+- `#F3EEE6` Bone — the page, and the text colour on dark grounds.
+- `#E08A57` Copper — the signature accent **on dark grounds**: the mark, buttons.
+- `#9A4A24` Burnt Copper — the same role **on light grounds**.
+- `#9DB5A5` Sage — status and quiet details.
 
-### Recommended light-theme visual balance
+### The copper rule
 
-- 55% Off White
-- 25% Deep Navy
-- 12% Blue
-- 8% Teal
+> النحاسي هو النغمة الدافئة الوحيدة. استخدمه على عنصر بؤري واحد في كل شاشة.
+
+Copper is the only warm tone in the system. Use it on **one focal element per
+screen** — everything else stays Midnight, Bone or Sage. In practice:
+
+- The primary CTA is copper. Decorative icon chips are **Sage**, not copper.
+- `--primary` resolves to Burnt Copper on Bone and Copper on Midnight, so a
+  single `Button` is correct on either ground with no variant.
+- The Home hero is the one documented exception: its emphasised headline phrase
+  and its primary CTA are both copper, read as a single focal cluster. The
+  reasoning is written at that call site.
 
 ### Color behavior
 
-- Deep Navy is suitable for hero sections, navigation, dark surfaces, and high-emphasis text.
-- Off White is the default reading surface in light mode.
-- Blue is the primary interaction color.
-- Teal is the secondary accent.
-- Blue-to-Teal gradients must be subtle and used only for emphasis.
-- Avoid using Blue or Teal for small body text on light backgrounds when contrast becomes weak.
+- Midnight carries whole dark **bands** — the header, every page hero, the
+  closing CTA, the footer — plus body text on Bone.
+- Bone is the page surface everywhere else.
+- Never use brand Copper `#E08A57` as text or a fill on a light ground: it
+  reaches only ~2.3:1 there. That is what Burnt Copper exists for.
+- Never use Sage `#9DB5A5` as text on a light ground either; `--secondary`
+  already darkens it to `#3F6B52` for that case.
+- There are no blue-to-teal gradients, and no blue or teal in the palette.
+
+### Contrast
+
+Every pairing is measured, and the figures are recorded at the top of
+`tokens.css`. Text clears WCAG 2.2 AA (4.5:1) on all four surfaces of its
+ground; control boundaries clear 1.4.11 non-text contrast (3:1), which is why
+`--border-control` exists alongside `--border` and `--border-strong`.
+
+The guide's own stated ratios are rounded slightly optimistically — trust the
+measured values in `tokens.css` over the ones in the guide.
 
 ---
 
 ## 5. Theme System
 
-The website must support:
+**There is one theme. Do not add a light/dark switch.**
 
-- Light theme
-- Dark theme
-- System theme
+The site is Bone-on-Midnight by composition, not by preference: the guide gives
+Bone the page ("الخلفية الفاتحة، الصفحات، البطاقات") and Midnight the base and
+the text on light ("الأساس، النص على الفاتح"). So Midnight arrives as whole
+inverted bands rather than as a second theme, and the balance the guide asks for
+comes out of the layout instead of a toggle.
 
-Use `next-themes` or an equally robust client-safe approach.
+Concretely, that means:
 
-The theme switch must:
+- No `next-themes`, no theme provider, no `prefers-color-scheme` branch, no
+  `.dark` class, no `dark:` variants, and no `suppressHydrationWarning` on
+  `<html>` — nothing writes to the document before hydration any more.
+- One `themeColor` in the root layout: Midnight, matching the header band.
+- No theme strings in `messages/`.
 
-- Work without visible flicker.
-- Persist user preference.
-- Respect the system preference when no explicit choice exists.
-- Use proper ARIA labels.
-- Be keyboard accessible.
-
-### Light theme
-
-Recommended base tokens:
+### The Bone ground — the default
 
 ```css
---background: #F8FAFC;
---foreground: #0F172A;
---surface: #FFFFFF;
---surface-muted: #F1F5F9;
---border: #E5E7EB;
---primary: #3B82F6;
---secondary: #14B8A6;
+--background: #F3EEE6;
+--foreground: #0F1B2D;
+--surface: #FAF7F2;
+--surface-muted: #EAE2D6;
+--surface-sunken: #E7DECF;
+--border: #DDD2C1;
+--border-control: #98856B;   /* inputs, secondary buttons: needs 3:1 */
+--muted-foreground: #4A5A6E; /* Slate */
+--primary: #9A4A24;          /* Burnt Copper */
+--secondary: #3F6B52;        /* Sage, darkened for text */
 ```
 
-### Dark theme
+### Midnight bands
 
-Create a dark palette derived from the brand, not a random black theme.
-
-Suggested baseline:
+Apply with `<Section tone="midnight">`, or the `.tone-midnight` class plus
+`bg-background text-foreground` on an element that is its own landmark (the
+header and footer do this).
 
 ```css
---background: #07101F;
---foreground: #F8FAFC;
---surface: #0F172A;
---surface-muted: #162033;
---border: #263348;
---primary: #3B82F6;
---secondary: #14B8A6;
+--background: #0F1B2D;
+--foreground: #F3EEE6;
+--surface: #16243A;
+--surface-muted: #1C2C44;
+--border: #2A3A52;
+--border-control: #5F7490;
+--muted-foreground: #A9B6C6; /* Mist */
+--primary: #E08A57;          /* Copper */
+--secondary: #9DB5A5;        /* Sage, at its brand value */
 ```
 
-Dark mode should preserve clear contrast and premium calmness.
+The scope **restates the same semantic token names** rather than adding parallel
+ones. That is the whole design: every component inside a band keeps its own
+classes and simply resolves to the dark set. Never build an inverted variant of
+a component, and never hard-code a brand hex in a component to "fix" a band.
+
+Two rules when editing `tokens.css`:
+
+1. Anything added to the `:root` block must be answered in `.tone-midnight`.
+2. `.tone-midnight` declares **custom properties only**. `tokens.css` is
+   imported unlayered, so a real declaration there (a `background-color`, say)
+   would outrank every Tailwind utility on the same element.
+
+Which bands are Midnight: the header, every page hero, the Home closing CTA,
+and the footer. Keep it to those — a Midnight band surrounded by Midnight bands
+stops reading as emphasis.
 
 ---
 
 ## 6. Typography
 
-### English / Latin
+Four faces, each with one job. All four are free from Google Fonts and loaded
+through `next/font` in `src/app/fonts.ts`.
 
-Primary font:
+| Role | Face | Weights |
+|---|---|---|
+| Latin headings | **Fraunces** | 600, tracking -0.02em |
+| Arabic headings | **El Messiri** | 600 / 700 |
+| Body, both scripts | **Tajawal** | 400 / 500 / 700 |
+| Code, technical lists, small labels | **Space Mono** | 400 / 700 |
 
-```text
-Inter
-```
+Notes that matter when editing:
 
-Recommended weights:
+- Tajawal sets the body in **both** languages. That is deliberate — it keeps a
+  bilingual paragraph from changing texture mid-sentence.
+- Fraunces and El Messiri are variable; Tajawal and Space Mono are static and
+  need an explicit `weight` array.
+- Heading faces swap on `html[lang='ar']` in the base layer of `globals.css`.
+  For display type on something that is *not* a heading element, use the
+  `font-brand-display` utility, which handles the same swap. A plain
+  `font-display` utility cannot: cascade layers outrank specificity, so an
+  `html[lang='ar']` override in another layer would lose.
+- Space Mono has no Arabic glyphs, so `.text-label` falls back to the body face
+  under `html[lang='ar']`.
 
-- Headings: 700–800
-- Subheadings: 600
-- Body: 400–500
-- Labels: 600
+### Type scale
 
-### Arabic
+- Display: 36→72px fluid
+- H1: 30→56px
+- H2: 24→40px
+- Body: 17px (the guide's band is 16–18px; Tajawal runs small on its em)
+- Labels: 12px, uppercase, +0.14em, Space Mono
+- Nothing below 11px, ever
 
-Primary Arabic font:
+All steps are fluid `clamp()` in the `@theme` block, and their tracking and
+leading point at the rhythm tokens, so Arabic re-tunes automatically — there is
+no second Arabic type scale.
 
-```text
-Noto Sans Arabic
-```
-
-Use `next/font` whenever possible.
-
-### Suggested type scale
-
-- Display: 64–72px desktop
-- H1: 48–56px desktop
-- H2: 32–40px
-- Body: 16–18px
-- Caption: 12–14px
-
-Use fluid responsive typography with `clamp()` where practical.
-
-Do not blindly mirror English font sizes for Arabic. Tune line height and spacing for Arabic readability.
+Arabic takes **zero letter-spacing** at every step. Tracking a connected script
+breaks the joins. Arabic body leading is 1.8, inside the guide's 1.6–1.8 band.
 
 ---
 
 ## 7. Visual Language
 
-The website must feel like a polished product UI.
+The website should read like a well-set magazine that happens to be a product UI.
 
 Use:
 
-- Partial orbit curves.
+- The flow line — one S-curve threading three nodes.
 - Fine grid lines.
-- Soft gradients.
-- Clean cards.
-- Subtle code-inspired micro-details.
-- Strong alignment.
-- Generous whitespace.
+- Clean cards with 1.5px hairlines.
+- Generous whitespace and strong alignment.
 - Rounded line icons.
 - Calm natural-light imagery when photography is used.
 
-### Orbit motif
+### Flow motif
 
-Use partial elliptical strokes as:
+`src/components/effects/flow-background.tsx`. Use it for background decoration,
+section framing and motion cues.
 
-- Section dividers.
-- Background decoration.
-- Motion cues.
-- Hover details.
+- **At most one per viewport**, behind content. Never section-by-section.
+- The travelling pulse is reserved for the Home hero and the closing CTA; pass
+  `animated={false}` anywhere else.
+- Its `d` attribute is duplicated by the `offset-path` on `.flow-pulse` in
+  `globals.css`, because an `offset-path` cannot reference another element's
+  geometry. **Change both together** or the pulse silently leaves the line.
 
-Never overuse the motif.
+### Shape
+
+Per the guide:
+
+- Cards and panels: 14–28px radii. The tokens sit inside that band —
+  `sm` 12, `md` 16, `lg` 20, `xl` 28.
+- Buttons: fully rounded (`rounded-pill`), minimum height 44px. Every `Button`
+  size clears that, so there is no size that is not a legal touch target.
+- **1.5px hairlines instead of heavy shadows** — the `border-hairline` utility.
+  Shadow tokens are deliberately faint: they pin an element to the page, they
+  are never what separates it from it.
+- Site maximum width 1280px.
 
 ### Grid
 
-Use an **8pt spacing system**.
-
-Spacing values should mostly follow:
+Use an **8pt spacing system**:
 
 ```text
 8, 16, 24, 32, 40, 48, 64, 80, 96, 120
@@ -271,69 +337,63 @@ Spacing values should mostly follow:
 
 ### Icons
 
-Use a consistent rounded line icon family such as Lucide.
-
-Recommended stroke width:
-
-```text
-1.5–2px
-```
+Lucide, via the explicit registry in `src/lib/icons.ts` — only icons listed
+there are bundled. Stroke width 1.5–2px.
 
 ### Avoid
 
-- Neon cyberpunk aesthetics.
-- Heavy 3D scenes.
-- Excessive code symbols.
-- Overuse of glassmorphism.
-- Excessive blur.
-- Too many gradients.
-- Visual clutter.
-- Flashy or distracting animations.
+- Blue, teal, or any hue outside the five brand colours.
+- Gradients as emphasis. The only gradients left are the near-subliminal page
+  wash and the two soft glow layers.
+- Neon/cyberpunk aesthetics, heavy 3D, excessive code symbols.
+- Glassmorphism and heavy blur.
+- Visual clutter, flashy or distracting animation.
 
 ---
 
 ## 8. UI Design Tokens
 
-Use reusable CSS/theme tokens.
+All tokens live in `src/styles/tokens.css` and are exposed to Tailwind through
+the `@theme inline` block in `src/app/globals.css`. `inline` is required: it
+keeps the variables live so they re-resolve inside a Midnight band. Resolving
+them at build time would freeze every component to the Bone palette.
 
-Recommended defaults:
+Components consume **semantic** tokens (`bg-surface`, `text-muted-foreground`,
+`border-border`). Raw `--brand-*` values belong in `tokens.css` and in
+decorative layers and scrims only.
 
 ```text
-Primary card radius: 14–20px
-General radius token: 18px
+Card/panel radius: 14–28px (--radius-md 16, --radius-lg 20, --radius-xl 28)
+Button radius: full (--radius-pill)
+Hairline: 1.5px (--hairline)
 Grid unit: 8px
 Transition duration: 180–320ms
 Default motion target: 240ms
-Focus ring: always visible for keyboard users
+Focus ring: always visible, 2px, --ring (Burnt Copper / Copper by ground)
 ```
 
 ### CTAs
 
 Primary CTA:
 
-- Blue fill.
-- White text.
-- Clear hover and focus state.
+- `--primary` fill: Burnt Copper on Bone, Copper on Midnight.
+- `--primary-foreground` label: white on Bone, Midnight on Copper.
+- One per screen — it is usually the screen's single copper element.
 
 Secondary CTA:
 
-- Transparent background.
-- Navy or theme-aware border.
-- High contrast.
+- Transparent, 1.5px `--border-control` border, `--foreground` label.
+- `--border-control` and not `--border-strong`, because here the border *is* the
+  affordance and so owes 3:1 against its surface.
 
 ### Cards
 
-Light theme:
-
-- White or Off White.
-- Subtle Soft Gray border.
-
-Dark theme:
-
-- Deep Navy derived surface.
-- Slightly lighter border.
-
-Cards should not rely on shadows alone to create hierarchy.
+- `--surface` or `--surface-elevated`, with a 1.5px `--border` hairline.
+- Hierarchy comes from the hairline and the surface step, never from shadow
+  alone. There is no surface gradient: Bone already gives a card a real step to
+  sit on.
+- `muted` stays flat by design — it recedes into the page rather than sitting
+  on it.
 
 ---
 
@@ -350,12 +410,14 @@ TypeScript
 App Router
 Tailwind CSS
 next-intl
-next-themes
 Lucide React
 Zod
-React Hook Form
 Resend or a robust server-side email provider
 ```
+
+`next-themes` was removed with the theme switch — do not reintroduce it. The
+contact form is uncontrolled and reads `FormData` on submit, so React Hook Form
+is not a dependency either.
 
 Use package versions compatible with the selected Next.js release.
 
@@ -810,8 +872,12 @@ Contact
 Header controls:
 
 - Language switcher.
-- Theme switcher.
 - Optional contact CTA.
+
+There is no theme switcher. The header is a Midnight band and is solid at every
+scroll position — it inverts its own text to Bone, so a transparent header would
+put Bone type onto the Bone page on any route whose hero it is not covering.
+Scrolling adds a hairline and a shadow, not a background.
 
 Mobile:
 
@@ -834,8 +900,10 @@ Recommended structure:
 - Supporting paragraph.
 - Primary CTA: View my work.
 - Secondary CTA: Contact me.
-- Optional compact code-inspired card.
-- Orbit artwork / partial ellipse.
+- The portrait.
+- The flow line, behind the composition at low opacity.
+
+Every page hero is a Midnight band, the Home one included — see §5.
 
 Messaging direction:
 
@@ -910,7 +978,7 @@ src/
   components/
     brand/
       logo.tsx
-      orbit-decoration.tsx
+      flow-decoration.tsx
     common/
       container.tsx
       section-heading.tsx
@@ -923,7 +991,6 @@ src/
       desktop-nav.tsx
       mobile-nav.tsx
       language-switcher.tsx
-      theme-switcher.tsx
     home/
       hero.tsx
       about-preview.tsx
@@ -1030,7 +1097,7 @@ Use:
 
 - Fade/translate reveals.
 - Soft card hover movement.
-- Orbit line motion.
+- The flow pulse — one packet travelling the line, Home hero and closing CTA only.
 - Underline/link transitions.
 - Subtle image scale on hover.
 
@@ -1277,6 +1344,10 @@ Do not depend on array position when a stable sort field exists.
 
 ## 34. Footer
 
+The footer is the last Midnight band on the page, which is what lets it close
+the document rather than trail off: the page opens dark at the header and hero,
+reads on Bone, and lands dark again here.
+
 Footer should include:
 
 - Compact logo/brand mark.
@@ -1323,7 +1394,6 @@ Priority tests:
 - Contact validation schema.
 - Contact API/server action.
 - Language switching.
-- Theme switching persistence.
 - Project data sorting.
 
 Recommended tools:
@@ -1337,12 +1407,11 @@ Suggested Playwright flows:
 1. Open Home.
 2. Change language to Arabic.
 3. Confirm RTL.
-4. Change theme.
-5. Navigate to Work.
-6. Open a project.
-7. Navigate to Contact.
-8. Submit invalid data.
-9. Submit valid data in mocked/test environment.
+4. Navigate to Work.
+5. Open a project.
+6. Navigate to Contact.
+7. Submit invalid data.
+8. Submit valid data in mocked/test environment.
 
 ---
 
@@ -1417,20 +1486,23 @@ Do not translate technical framework names.
 
 ### A. Header
 
+A Midnight band, solid at every scroll position.
+
 - Brand mark / compact logo.
 - Main navigation.
 - Language switcher.
-- Theme switcher.
 - Contact CTA on desktop when space allows.
 
 ### B. Hero
 
-- Role eyebrow.
-- Main headline.
+A Midnight band, continuous with the header above it.
+
+- Availability eyebrow.
+- Main headline, with its emphasised phrase in copper.
 - Supporting text.
 - Primary and secondary CTA.
-- Visual orbit element.
-- Optional code card.
+- The portrait.
+- The flow line, behind the composition at low opacity.
 
 ### C. About Preview
 
@@ -1593,19 +1665,19 @@ The website is considered complete only when all of the following are satisfied:
 - English works.
 - RTL works.
 - LTR works.
-- Light theme works.
-- Dark theme works.
-- Theme preference persists.
 - Language preference persists.
+- There is exactly one theme, and no theme control anywhere in the UI.
 
 ### Visual
 
-- Brand colors are used consistently.
-- Typography follows Inter + Noto Sans Arabic.
-- Logo rules are respected.
-- Orbit motif is present but restrained.
+- Brand colors are used consistently, and nothing outside the five appears.
+- Copper lands on one focal element per screen.
+- Typography follows Fraunces + El Messiri + Tajawal + Space Mono.
+- Logo rules are respected, including the bare mark below 32px.
+- The flow motif is present but restrained — at most one per viewport.
+- Midnight bands and Bone pages alternate as described in §5.
 - The site feels like a polished product interface.
-- No neon/cyberpunk aesthetic.
+- No neon/cyberpunk aesthetic, and no blue or teal.
 - Layout is responsive.
 
 ### Quality
@@ -1639,10 +1711,9 @@ When asked to implement this website, follow this order unless the existing repo
 
 1. Define brand design tokens.
 2. Configure fonts.
-3. Configure theme.
-4. Configure i18n.
-5. Create reusable layout primitives.
-6. Create Header/Footer.
+3. Configure i18n.
+4. Create reusable layout primitives.
+5. Create Header/Footer.
 
 ### Phase 3 — Content Layer
 
@@ -1692,7 +1763,7 @@ npm run lint
 npm run build
 ```
 
-Then verify both languages, both themes, mobile and desktop layouts, and the contact form.
+Then verify both languages, mobile and desktop layouts, and the contact form.
 
 ---
 
@@ -1703,8 +1774,8 @@ When implementing future features:
 1. Preserve the visual identity.
 2. Preserve bilingual support.
 3. Preserve RTL/LTR support.
-4. Preserve dark/light support.
-5. Reuse design tokens.
+4. Preserve the single-theme rule — do not reintroduce a light/dark switch.
+5. Reuse design tokens; never hard-code a brand hex in a component.
 6. Do not duplicate content unnecessarily.
 7. Keep editable content separate from components.
 8. Prefer Server Components.
@@ -1719,42 +1790,49 @@ When implementing future features:
 
 ```text
 Brand: Abdullah
+Identity: Flow
 Role: Front-End Developer
 Specialization: React.js & Next.js
 Core message: Ideas into Interfaces.
 
 Colors:
-Navy     #0F172A
-Blue     #3B82F6
-Teal     #14B8A6
-Gray     #E5E7EB
-OffWhite #F8FAFC
+Midnight      #0F1B2D   50%  base, text on light, dark bands
+Bone          #F3EEE6   30%  the page, text on dark
+Copper        #E08A57   12%  accent on dark grounds
+Burnt Copper  #9A4A24    4%  accent on light grounds
+Sage          #9DB5A5    4%  status and quiet details
+Mist          #A9B6C6        secondary text on Midnight
+Slate         #4A5A6E        secondary text on Bone
 
-English font: Inter
-Arabic font: Noto Sans Arabic
+Fonts:
+Latin headings   Fraunces 600, -0.02em
+Arabic headings  El Messiri 600/700
+Body (both)      Tajawal 400/500/700
+Code and labels  Space Mono 400/700
+
+Theme:
+One theme. Bone pages, Midnight bands. No light/dark switch.
 
 Visual traits:
-Clear
 Modern
+Warm
+Clear
 Reliable
-Precise
-Progressive
-Calm
-Product-focused
+Elegant
 
 Motifs:
-Orbit curves
+One flow line: S-curve threading three nodes
 Fine grid
-Soft blue→teal gradient
-Rounded cards
-Clean line icons
-Intentional whitespace
+1.5px hairlines instead of heavy shadows
+Pill buttons, 44px minimum
+14-28px panel radii
 
 Avoid:
+Blue and teal
+Copper on more than one focal element per screen
 Neon cyberpunk
 Heavy 3D
 Visual clutter
-Excessive code symbols
 Over-animation
 ```
 
@@ -1766,12 +1844,12 @@ The final result should look and feel like a premium personal product website fo
 
 The strongest visual cues should be:
 
-- Deep Navy + Off White contrast.
-- Blue and Teal accents.
+- Midnight + Bone contrast, alternating as whole bands.
+- A single copper focal point per screen, with Sage for the quiet details.
+- Fraunces and El Messiri headings against Tajawal text.
 - Geometric spacing.
-- Orbit-inspired details.
-- Strong typography.
-- Refined cards.
+- Flow-line details.
+- 1.5px hairlines and pill buttons.
 - Smooth restrained transitions.
 - Excellent bilingual presentation.
 

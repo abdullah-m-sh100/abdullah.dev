@@ -1,16 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Abdullah — Front-End Developer">
-  <defs>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#3B82F6"/>
-      <stop offset="100%" stop-color="#14B8A6"/>
-    </linearGradient>
-  </defs>
-  <rect width="1200" height="630" fill="#0F172A"/>
-  <ellipse cx="960" cy="315" rx="330" ry="132" transform="rotate(-22 960 315)" fill="none" stroke="url(#accent)" stroke-width="3" opacity="0.5"/>
-  <ellipse cx="960" cy="315" rx="230" ry="92" transform="rotate(-22 960 315)" fill="none" stroke="#3B82F6" stroke-width="2" opacity="0.3"/>
-  <circle cx="1263" cy="191" r="10" fill="#14B8A6"/>
-  <text x="96" y="286" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="42" font-weight="600" fill="#94A3B8" letter-spacing="1">FRONT-END DEVELOPER</text>
-  <text x="96" y="378" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="76" font-weight="800" fill="#F8FAFC" letter-spacing="-2">Ideas into Interfaces.</text>
-  <text x="96" y="450" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="34" font-weight="500" fill="#CBD5E1">React.js &amp; Next.js — Abdullah</text>
-  <rect x="96" y="492" width="132" height="5" rx="2.5" fill="url(#accent)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Abdullah — Full-Stack Developer, MERN Stack">
+  <rect width="1200" height="630" fill="#0F1B2D"/>
+
+  <!--
+    The flow mark, enlarged to final coordinates rather than drawn at 48 units
+    and scaled: a transform would multiply the stroke widths too, and the thin
+    enclosing circle the guide calls for would come out as a heavy 9px ring.
+    Circle centre (990, 300), radius 130 — its left edge sits at x=860, which
+    keeps a 128px gap from the longest line of type below.
+  -->
+  <g>
+    <circle cx="990" cy="300" r="130" fill="none" stroke="#E08A57" stroke-width="2.5" opacity="0.5"/>
+    <path d="M 949.7 231.9 C 996.2 244.3, 1014.7 272.1, 990 300 C 965.2 327.8, 983.8 355.7, 1030.2 368.1"
+          fill="none" stroke="#E08A57" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="949.7" cy="231.9" r="13.6" fill="#F3EEE6"/>
+    <circle cx="990" cy="300" r="19.8" fill="#E08A57"/>
+    <circle cx="1030.2" cy="368.1" r="13.6" fill="#F3EEE6"/>
+  </g>
+
+  <text x="96" y="232" font-family="'Space Mono', ui-monospace, Menlo, monospace" font-size="26" font-weight="700" fill="#A9B6C6" letter-spacing="3.6">ABDULLAH — FULL-STACK DEVELOPER</text>
+
+  <text x="96" y="330" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="72" font-weight="600" fill="#F3EEE6" letter-spacing="-1.4">Ideas into</text>
+  <text x="96" y="408" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="72" font-weight="600" fill="#F3EEE6" letter-spacing="-1.4">Web Applications.</text>
+
+  <text x="96" y="478" font-family="Tajawal, ui-sans-serif, system-ui, sans-serif" font-size="28" font-weight="500" fill="#A9B6C6">MongoDB &#183; Express.js &#183; React.js &#183; Node.js</text>
+
+  <rect x="96" y="516" width="132" height="4" rx="2" fill="#E08A57"/>
 </svg>

@@ -40,7 +40,14 @@ export default async function WorkPage() {
   const projects = getAllProjects();
 
   const countLabel = t('work.listing.countLabel', { count: projects.length });
-  const labels = { technologies: t('common.labels.technologies') };
+  const labels = {
+    technologies: t('common.labels.technologies'),
+    caseStudy: t('home.featuredWork.caseStudy'),
+  };
+  // The newest project leads at full width; the rest sit in a grid beneath it.
+  // With four projects that is one lead and three cards, a clean row where a
+  // plain three-column grid left a single orphan in a second row.
+  const [lead, ...rest] = projects;
 
   return (
     <>
@@ -52,14 +59,22 @@ export default async function WorkPage() {
             {t('metadata.work.title')}
           </h2>
 
-          {projects.length > 0 ? (
-            <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {projects.map((project, index) => (
-                <Reveal key={project.id} as="li" index={index % 3}>
-                  <ProjectCard project={project} locale={locale} labels={labels} />
-                </Reveal>
-              ))}
-            </ul>
+          {lead ? (
+            <div className="flex flex-col gap-6">
+              <Reveal>
+                <ProjectCard project={lead} locale={locale} labels={labels} layout="feature" />
+              </Reveal>
+
+              {rest.length > 0 ? (
+                <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {rest.map((project, index) => (
+                    <Reveal key={project.id} as="li" index={index % 3}>
+                      <ProjectCard project={project} locale={locale} labels={labels} />
+                    </Reveal>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
           ) : (
             <EmptyState
               icon="briefcase"

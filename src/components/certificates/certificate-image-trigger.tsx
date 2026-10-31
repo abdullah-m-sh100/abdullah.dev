@@ -38,6 +38,10 @@ const FOCUSABLE =
  * open and restored to the trigger on close. See `MobileNav` for why each of
  * those is implemented the way it is.
  *
+ * The thumbnail is `object-contain` inside a 4:3 mat: certificates arrive in
+ * both landscape and portrait, and a certificate is only useful if it can be
+ * read, so the whole document is shown rather than a cropped strip of it.
+ *
  * The thumbnail keeps the button's accessible name (`viewLabel` + `title`)
  * rather than the image's own descriptive alt text, so the two aren't
  * announced back to back; the full image inside the dialog keeps the real
@@ -184,15 +188,15 @@ export function CertificateImageTrigger({
         aria-controls={dialogId}
         aria-label={`${viewLabel}: ${title}`}
         onClick={() => setIsOpen(true)}
-        className="group border-border bg-surface-muted relative flex h-28 w-full items-center justify-center overflow-hidden rounded-t-lg border-b"
+        className="group border-border bg-surface-muted relative flex aspect-4/3 w-full items-center justify-center overflow-hidden border-b"
       >
         <Image
           src={image.src}
           alt=""
           width={image.width}
           height={image.height}
-          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="size-full object-cover transition-transform duration-(--duration-slow) ease-out motion-safe:group-hover:scale-[1.03]"
+          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+          className="size-full object-contain p-4 transition-transform duration-(--duration-slow) ease-out motion-safe:group-hover:scale-[1.03]"
         />
         <span
           aria-hidden="true"
